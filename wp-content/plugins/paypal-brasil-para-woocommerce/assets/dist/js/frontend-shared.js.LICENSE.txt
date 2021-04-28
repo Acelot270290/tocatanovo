@@ -1,0 +1,13 @@
+/*! ./src/frontend/frontend-shared.ts */
+
+/*! exports provided: PaypalPayments */
+
+/*! no static exports found */
+
+/*!*****************************************!*\
+  !*** ./src/frontend/frontend-shared.ts ***!
+  \*****************************************/
+
+/*!***********************************************!*\
+  !*** multi ./src/frontend/frontend-shared.ts ***!
+  \***********************************************/

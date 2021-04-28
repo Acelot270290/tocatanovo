@@ -1,0 +1,304 @@
+04-22-2021 @ 01:21:18 - called scheduled_subscription_payment(). Order: 11799
+04-22-2021 @ 01:21:18 - Making payment for order 11799 with the following data: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<payment>
+  <preApprovalCode>8A53890C3D3D076EE4D13FA29B8DA6CC</preApprovalCode>
+  <reference><![CDATA[WC-11799]]></reference>
+  <senderHash>9e08930741710831c8b000ea75042b7d1012cc1394b689e7f04268e6903ca5c1</senderHash>
+  <senderIp>2804:14c:101:ba92:c460:cd74:5137:f979</senderIp>
+  <items>
+    <item>
+      <id>1</id>
+      <description><![CDATA[Plano Mensal - Catão de Crédito]]></description>
+      <amount>34.99</amount>
+      <quantity>1</quantity>
+    </item>
+  </items>
+</payment>
+
+04-22-2021 @ 01:21:21 - Subscription Payment Response: Array
+(
+    [headers] => Requests_Utility_CaseInsensitiveDictionary Object
+        (
+            [data:protected] => Array
+                (
+                    [date] => Thu, 22 Apr 2021 01:21:20 GMT
+                    [content-type] => application/vnd.pagseguro.com.br.v3+xml;charset=ISO-8859-1
+                    [strict-transport-security] => max-age=31536000
+                    [vary] => User-Agent
+                    [set-cookie] => TS018765ea=01ed0a5ec20afb8feb82eb49fa3e211d004ba471b0e5d08cebfd4fb7be084d22a52d5921541d9450af33adffe9956111d97489bc2c; Max-Age=500; Path=/; Domain=.ws.pagseguro.uol.com.br
+                )
+
+        )
+
+    [body] => <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?><result><transactionCode>C55F7451ACEE4296A4599707BA9CE6B9</transactionCode><date>2021-04-21T22:21:21-03:00</date></result>
+    [response] => Array
+        (
+            [code] => 200
+            [message] => OK
+        )
+
+    [cookies] => Array
+        (
+            [0] => WP_Http_Cookie Object
+                (
+                    [name] => TS018765ea
+                    [value] => 01ed0a5ec20afb8feb82eb49fa3e211d004ba471b0e5d08cebfd4fb7be084d22a52d5921541d9450af33adffe9956111d97489bc2c
+                    [expires] => 
+                    [path] => /
+                    [domain] => ws.pagseguro.uol.com.br
+                    [host_only] => 
+                )
+
+        )
+
+    [filename] => 
+    [http_response] => WP_HTTP_Requests_Response Object
+        (
+            [response:protected] => Requests_Response Object
+                (
+                    [body] => <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?><result><transactionCode>C55F7451ACEE4296A4599707BA9CE6B9</transactionCode><date>2021-04-21T22:21:21-03:00</date></result>
+                    [raw] => HTTP/1.1 200 OK
+Date: Thu, 22 Apr 2021 01:21:20 GMT
+Content-Type: application/vnd.pagseguro.com.br.v3+xml;charset=ISO-8859-1
+Strict-Transport-Security: max-age=31536000
+Vary: User-Agent
+Connection: close
+Set-Cookie: TS018765ea=01ed0a5ec20afb8feb82eb49fa3e211d004ba471b0e5d08cebfd4fb7be084d22a52d5921541d9450af33adffe9956111d97489bc2c; Max-Age=500; Path=/; Domain=.ws.pagseguro.uol.com.br
+Transfer-Encoding: chunked
+
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?><result><transactionCode>C55F7451ACEE4296A4599707BA9CE6B9</transactionCode><date>2021-04-21T22:21:21-03:00</date></result>
+                    [headers] => Requests_Response_Headers Object
+                        (
+                            [data:protected] => Array
+                                (
+                                    [date] => Array
+                                        (
+                                            [0] => Thu, 22 Apr 2021 01:21:20 GMT
+                                        )
+
+                                    [content-type] => Array
+                                        (
+                                            [0] => application/vnd.pagseguro.com.br.v3+xml;charset=ISO-8859-1
+                                        )
+
+                                    [strict-transport-security] => Array
+                                        (
+                                            [0] => max-age=31536000
+                                        )
+
+                                    [vary] => Array
+                                        (
+                                            [0] => User-Agent
+                                        )
+
+                                    [set-cookie] => Array
+                                        (
+                                            [0] => TS018765ea=01ed0a5ec20afb8feb82eb49fa3e211d004ba471b0e5d08cebfd4fb7be084d22a52d5921541d9450af33adffe9956111d97489bc2c; Max-Age=500; Path=/; Domain=.ws.pagseguro.uol.com.br
+                                        )
+
+                                )
+
+                        )
+
+                    [status_code] => 200
+                    [protocol_version] => 1.1
+                    [success] => 1
+                    [redirects] => 0
+                    [url] => https://ws.pagseguro.uol.com.br/pre-approvals/payment?email=tocattabrasileira@gmail.com&token=2312f36f-2e04-4c80-baf9-31950fd8842f2a0b6f6047f48f183ee3031e53cfbf925de3-dc2d-4cb8-a6cd-5a614a19be7a
+                    [history] => Array
+                        (
+                        )
+
+                    [cookies] => Requests_Cookie_Jar Object
+                        (
+                            [cookies:protected] => Array
+                                (
+                                    [TS018765ea] => Requests_Cookie Object
+                                        (
+                                            [name] => TS018765ea
+                                            [value] => 01ed0a5ec20afb8feb82eb49fa3e211d004ba471b0e5d08cebfd4fb7be084d22a52d5921541d9450af33adffe9956111d97489bc2c
+                                            [attributes] => Requests_Utility_CaseInsensitiveDictionary Object
+                                                (
+                                                    [data:protected] => Array
+                                                        (
+                                                            [max-age] => 1619054981
+                                                            [path] => /
+                                                            [domain] => ws.pagseguro.uol.com.br
+                                                        )
+
+                                                )
+
+                                            [flags] => Array
+                                                (
+                                                    [creation] => 1619054481
+                                                    [last-access] => 1619054481
+                                                    [persistent] => 
+                                                    [host-only] => 
+                                                )
+
+                                            [reference_time] => 1619054481
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [filename:protected] => 
+            [data] => 
+            [headers] => 
+            [status] => 
+        )
+
+)
+
+04-22-2021 @ 01:21:21 - Payment added to the plan successfully!
+04-22-2021 @ 01:21:22 - PagSeguro payment code for order 11799 is: C55F7451ACEE4296A4599707BA9CE6B9
+04-22-2021 @ 01:21:26 - Checking IPN request...:Array
+(
+    [notificationCode] => DF336E-DE2F592F5977-F4440D9F907C-2BEFD6
+    [notificationType] => transaction
+)
+
+04-22-2021 @ 01:21:27 - PagSeguro IPN is valid! The return is: SimpleXMLElement Object
+(
+    [date] => 2021-04-21T22:21:19.000-03:00
+    [code] => C55F7451-ACEE-4296-A459-9707BA9CE6B9
+    [reference] => WC-11799
+    [type] => 11
+    [status] => 7
+    [cancellationSource] => EXTERNAL
+    [lastEventDate] => 2021-04-21T22:21:25.000-03:00
+    [paymentMethod] => SimpleXMLElement Object
+        (
+            [type] => 1
+            [code] => 102
+        )
+
+    [grossAmount] => 34.99
+    [discountAmount] => 0.00
+    [feeAmount] => 1.40
+    [netAmount] => 33.59
+    [installmentCount] => 1
+    [itemCount] => 1
+    [items] => SimpleXMLElement Object
+        (
+            [item] => SimpleXMLElement Object
+                (
+                    [id] => 1
+                    [description] => Plano Mensal - Catão de Crédito
+                    [quantity] => 1
+                    [amount] => 34.99
+                )
+
+        )
+
+    [sender] => SimpleXMLElement Object
+        (
+            [name] => SAMUEL PANTUZO
+            [email] => samuelhp@gmail.com
+            [phone] => SimpleXMLElement Object
+                (
+                    [areaCode] => 11
+                    [number] => 963911743
+                )
+
+        )
+
+    [shipping] => SimpleXMLElement Object
+        (
+            [address] => SimpleXMLElement Object
+                (
+                    [street] => Rua Taperoa
+                    [number] => 94
+                    [complement] => SimpleXMLElement Object
+                        (
+                        )
+
+                    [district] => Brooklin
+                    [city] => SÃ£o Paulo
+                    [state] => SP
+                    [country] => BRA
+                    [postalCode] => 04571060
+                )
+
+            [type] => 3
+            [cost] => 0.00
+        )
+
+)
+
+04-22-2021 @ 01:21:27 - PagSeguro payment status for order 11799 is: 7
+04-22-2021 @ 04:13:06 - Checking IPN request...:Array
+(
+    [notificationCode] => 01BC10-1200050005FA-F7745E4F97AF-E97EDD
+    [notificationType] => transaction
+)
+
+04-22-2021 @ 04:13:07 - PagSeguro IPN is valid! The return is: SimpleXMLElement Object
+(
+    [date] => 2021-04-08T09:04:16.000-03:00
+    [code] => 0D539C83-F8FA-4855-86F1-A96D2616B189
+    [reference] => WC-11435
+    [type] => 11
+    [status] => 4
+    [lastEventDate] => 2021-04-22T01:13:03.000-03:00
+    [paymentMethod] => SimpleXMLElement Object
+        (
+            [type] => 1
+            [code] => 102
+        )
+
+    [grossAmount] => 167.94
+    [discountAmount] => 0.00
+    [feeAmount] => 6.70
+    [netAmount] => 161.24
+    [escrowEndDate] => 2021-04-22T01:00:00.000-03:00
+    [installmentCount] => 1
+    [itemCount] => 1
+    [items] => SimpleXMLElement Object
+        (
+            [item] => SimpleXMLElement Object
+                (
+                    [id] => 1
+                    [description] => Plano Semestral - Cartão de Crédito
+                    [quantity] => 1
+                    [amount] => 167.94
+                )
+
+        )
+
+    [sender] => SimpleXMLElement Object
+        (
+            [name] => Iracema Cristina Shoenherr dos Santos
+            [email] => crisshoenherr@hotmail.com.br
+            [phone] => SimpleXMLElement Object
+                (
+                    [areaCode] => 41
+                    [number] => 998673786
+                )
+
+        )
+
+    [shipping] => SimpleXMLElement Object
+        (
+            [address] => SimpleXMLElement Object
+                (
+                    [street] => Rua Francisco Derosso
+                    [number] => 6530
+                    [complement] => D 33
+                    [district] => Alto Boqueirão
+                    [city] => Curitiba
+                    [state] => PR
+                    [country] => BRA
+                    [postalCode] => 81770000
+                )
+
+            [type] => 3
+            [cost] => 0.00
+        )
+
+)
+
+04-22-2021 @ 04:13:07 - PagSeguro payment status for order 11435 is: 4

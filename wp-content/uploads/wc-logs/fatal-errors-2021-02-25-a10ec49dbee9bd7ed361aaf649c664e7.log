@@ -1,0 +1,4 @@
+2021-02-25T01:24:26+00:00 CRITICAL require(): Failed opening required '/home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/themes/eduma/inc/libs/down_image_size.php' (include_path='.:/opt/alt/php74/usr/share/pear'), em /home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/themes/eduma/functions.php, na linha 528
+
+2021-02-25T01:24:42+00:00 CRITICAL require(): Failed opening required '/home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/themes/eduma/inc/libs/down_image_size.php' (include_path='.:/opt/alt/php74/usr/share/pear'), em /home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/themes/eduma/functions.php, na linha 528
+

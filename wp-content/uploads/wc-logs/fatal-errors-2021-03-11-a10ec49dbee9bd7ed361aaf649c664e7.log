@@ -1,0 +1,8 @@
+2021-03-11T17:32:41+00:00 CRITICAL Uncaught Error: Class 'Elementor\Widget_image' not found in /home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/plugins/elementor/includes/managers/widgets.php:85
+Stack trace:
+#0 /home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/plugins/elementor/includes/managers/widgets.php(235): Elementor\Widgets_Manager->init_widgets()
+#1 /home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/plugins/elementor/includes/elements/column.php(1032): Elementor\Widgets_Manager->get_widget_types('shortcode')
+#2 /home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/plugins/elementor/includes/base/element-base.php(916): Elementor\Element_Column->_get_default_child_type(Array)
+#3 /home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/plugins/elementor/includes/base/element-base.php(353): Elementor\Element_Base->get_child_type(Array)
+#4 /home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/plugins/elementor/includes/base/e, em /home/u635961131/domains/tocatabrasileira.com.br/public_html/wp-content/plugins/elementor/includes/managers/widgets.php, na linha 85
+

@@ -1,0 +1,148 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ARMember - Pagseguro payment gateway Addon v1.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2020-06-19 07:24:04+0000\n"
+"Last-Translator: admin <testrepute123@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: armemberpagseguro.php:252
+#: armemberpagseguro.php:310
+#@ ARM_PAGSEGURO
+msgid "Pagseguro"
+msgstr "Pagseguro"
+
+#: armemberpagseguro.php:263
+#@ ARM_PAGSEGURO
+msgid "Pagseguro For ARMember plugin requires ARMember Plugin installed and active."
+msgstr "Pagseguro For ARMember plugin requires ARMember Plugin installed and active."
+
+#: armemberpagseguro.php:398
+#@ ARM_PAGSEGURO
+msgid "Payment Fail (Pagseguro)"
+msgstr "Payment Fail (Pagseguro)"
+
+#: armemberpagseguro.php:439
+#@ ARM_PAGSEGURO
+msgid "Payment Mode"
+msgstr "Payment Mode"
+
+#: armemberpagseguro.php:442
+#@ ARM_PAGSEGURO
+msgid "Sandbox"
+msgstr "Sandbox"
+
+#: armemberpagseguro.php:444
+#@ ARM_PAGSEGURO
+msgid "Production"
+msgstr "Production"
+
+#: armemberpagseguro.php:457
+#@ ARM_PAGSEGURO
+msgid "Sandbox Email"
+msgstr "Sandbox Email"
+
+#: armemberpagseguro.php:463
+#@ ARM_PAGSEGURO
+msgid "Sandbox Token"
+msgstr "Sandbox Token"
+
+#: armemberpagseguro.php:498
+#@ ARM_PAGSEGURO
+msgid "Production Email"
+msgstr "Production Email"
+
+#: armemberpagseguro.php:504
+#@ ARM_PAGSEGURO
+msgid "Production Token"
+msgstr "Production Token"
+
+#: armemberpagseguro.php:367
+#@ ARM_PAGSEGURO
+msgid "Pagseguro (if Pagseguro payment gateway is enabled)"
+msgstr "Pagseguro (if Pagseguro payment gateway is enabled)"
+
+#: armemberpagseguro.php:369
+#@ ARM_PAGSEGURO
+msgid "Subscription with Trial period will not be applied in Pagseguro."
+msgstr "Subscription with Trial period will not be applied in Pagseguro."
+
+#: armemberpagseguro.php:370
+#@ ARM_PAGSEGURO
+msgid "Pagseguro does not support billing cycle in Days. Also you can set billing cycle only for 1 Month, 2 Month, 3 Month and 1 Year."
+msgstr "Pagseguro does not support billing cycle in Days. Also you can set billing cycle only for 1 Month, 2 Month, 3 Month and 1 Year."
+
+#: armemberpagseguro.php:776
+#: armemberpagseguro.php:1208
+#@ ARM_PAGSEGURO
+msgid "Payment through Pagseguro is not supported using auto debit payment for selected plan."
+msgstr "Payment through Pagseguro is not supported using auto debit payment for selected plan."
+
+#: armemberpagseguro.php:291
+#: armemberpagseguro.php:301
+#@ ARM_PAGSEGURO
+msgid "document"
+msgstr "document"
+
+#: armemberpagseguro.php:300
+#@ ARM_PAGSEGURO
+msgid "Please make sure you have set following notification URL in your pagseguro account."
+msgstr "Please make sure you have set following notification URL in your pagseguro account."
+
+#: armemberpagseguro.php:301
+#@ ARM_PAGSEGURO
+msgid "To get more information about how to set notification URL in your pagseguro account, please refer this"
+msgstr "To get more information about how to set notification URL in your pagseguro account, please refer this"
+
+#: armemberpagseguro.php:371
+#@ ARM_PAGSEGURO
+msgid "Pagseguro does not support infinite recurring time."
+msgstr "Pagseguro does not support infinite recurring time."
+
+#: armemberpagseguro.php:704
+#: armemberpagseguro.php:808
+#: armemberpagseguro.php:1231
+#: armemberpagseguro.php:1270
+#@ ARM_PAGSEGURO
+msgid "Sorry something went wrong while processing payment with Pagseguro"
+msgstr "Sorry something went wrong while processing payment with Pagseguro"
+
+#: armemberpagseguro.php:783
+#@ ARM_PAGSEGURO
+msgid "Payment through Pagseguro is not supported using auto debit payment with coupan for selected plan."
+msgstr "Payment through Pagseguro is not supported using auto debit payment with coupan for selected plan."
+
+#: armemberpagseguro.php:2632
+#@ ARM_PAGSEGURO
+msgid "An Unexpected HTTP Error occurred during the API request.</p> <p><a href=\"?\" onclick=\"document.location.reload(); return false;\">Try again</a>"
+msgstr "An Unexpected HTTP Error occurred during the API request.</p> <p><a href=\"?\" onclick=\"document.location.reload(); return false;\">Try again</a>"
+
+#: armemberpagseguro.php:2637
+#@ ARM_PAGSEGURO
+msgid "An unknown error occurred"
+msgstr "An unknown error occurred"
+
+#: armemberpagseguro.php:266
+#@ ARM_PAGSEGURO
+msgid "Pagseguro For ARMember plugin requires ARMember plugin installed with version 3.0 or higher."
+msgstr "Pagseguro For ARMember plugin requires ARMember plugin installed with version 3.0 or higher."
+
+#: armemberpagseguro.php:291
+#@ ARM_PAGSEGURO
+msgid "You can find Token in your pagseguro account. To get more details, Please refer this"
+msgstr "You can find Token in your pagseguro account. To get more details, Please refer this"
+

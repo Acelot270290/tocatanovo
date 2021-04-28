@@ -1,0 +1,17 @@
+/*! ./src/frontend/frontend-plus/frontend-plus.scss */
+
+/*! ./src/frontend/frontend-plus/frontend-plus.ts */
+
+/*! no static exports found */
+
+/*!*****************************************************!*\
+  !*** ./src/frontend/frontend-plus/frontend-plus.ts ***!
+  \*****************************************************/
+
+/*!*******************************************************!*\
+  !*** ./src/frontend/frontend-plus/frontend-plus.scss ***!
+  \*******************************************************/
+
+/*!***********************************************************************************************************!*\
+  !*** multi ./src/frontend/frontend-plus/frontend-plus.ts ./src/frontend/frontend-plus/frontend-plus.scss ***!
+  \***********************************************************************************************************/

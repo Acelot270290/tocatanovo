@@ -1,0 +1,35 @@
+/*! ../frontend-shared */
+
+/*! ./frontend-shortcut-api */
+
+/*! ./src/frontend/frontend-shortcut/frontend-shortcut.scss */
+
+/*! ./src/frontend/frontend-shortcut/frontend-shortcut.ts */
+
+/*! exports provided: PaypalPayments */
+
+/*! exports provided: paymentShortcut */
+
+/*! no exports provided */
+
+/*! no static exports found */
+
+/*!*****************************************!*\
+  !*** ./src/frontend/frontend-shared.ts ***!
+  \*****************************************/
+
+/*!*************************************************************!*\
+  !*** ./src/frontend/frontend-shortcut/frontend-shortcut.ts ***!
+  \*************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./src/frontend/frontend-shortcut/frontend-shortcut.scss ***!
+  \***************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./src/frontend/frontend-shortcut/frontend-shortcut-api.ts ***!
+  \*****************************************************************/
+
+/*!***************************************************************************************************************************!*\
+  !*** multi ./src/frontend/frontend-shortcut/frontend-shortcut.ts ./src/frontend/frontend-shortcut/frontend-shortcut.scss ***!
+  \***************************************************************************************************************************/

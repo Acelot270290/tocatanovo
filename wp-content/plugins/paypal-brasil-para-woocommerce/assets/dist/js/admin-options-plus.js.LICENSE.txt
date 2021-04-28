@@ -1,0 +1,23 @@
+/*! ./src/admin-options/admin-options-plus/admin-options-plus.scss */
+
+/*! ./src/admin-options/admin-options-plus/admin-options-plus.ts */
+
+/*! exports provided: default */
+
+/*! no static exports found */
+
+/*! vue */
+
+/*! vue-class-component */
+
+/*!********************************************************************!*\
+  !*** ./src/admin-options/admin-options-plus/admin-options-plus.ts ***!
+  \********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./src/admin-options/admin-options-plus/admin-options-plus.scss ***!
+  \**********************************************************************/
+
+/*!*****************************************************************************************************************************************!*\
+  !*** multi ./src/admin-options/admin-options-plus/admin-options-plus.ts ./src/admin-options/admin-options-plus/admin-options-plus.scss ***!
+  \*****************************************************************************************************************************************/

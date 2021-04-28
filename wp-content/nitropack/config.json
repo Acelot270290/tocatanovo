@@ -1,0 +1,36 @@
+{
+    "www.tocatabrasileira.com.br": {
+        "siteId": "oLIdDNJKlntQIMzgWbSbcpaVTAaIlonh",
+        "siteSecret": "HFDadLALm6zDbtj6ktR4VUaYfZgKm4U85iZGK96IcS05uPu9heg2OacQpitLgCW9",
+        "blogId": 1,
+        "compression": false,
+        "webhookToken": "21c8930a86fe0f31a85273c459ce8a45",
+        "home_url": "https:\/\/www.tocatabrasileira.com.br",
+        "admin_url": "https:\/\/www.tocatabrasileira.com.br\/wp-admin\/",
+        "hosting": "unknown",
+        "alwaysBuffer": true,
+        "isEzoicActive": false,
+        "isLateIntegrationInitRequired": false,
+        "isDlmActive": false,
+        "dlm_downloading_url": null,
+        "dlm_download_endpoint": null,
+        "pluginVersion": "1.5.2"
+    },
+    "localhost\/tocata\/novo": {
+        "siteId": "oLIdDNJKlntQIMzgWbSbcpaVTAaIlonh",
+        "siteSecret": "HFDadLALm6zDbtj6ktR4VUaYfZgKm4U85iZGK96IcS05uPu9heg2OacQpitLgCW9",
+        "blogId": 1,
+        "compression": true,
+        "webhookToken": "21c8930a86fe0f31a85273c459ce8a45",
+        "home_url": "http:\/\/localhost\/tocata\/novo",
+        "admin_url": "https:\/\/localhost\/tocata\/novo\/wp-admin\/",
+        "hosting": "unknown",
+        "alwaysBuffer": true,
+        "isEzoicActive": false,
+        "isLateIntegrationInitRequired": false,
+        "isDlmActive": false,
+        "dlm_downloading_url": null,
+        "dlm_download_endpoint": null,
+        "pluginVersion": "1.5.2"
+    }
+}

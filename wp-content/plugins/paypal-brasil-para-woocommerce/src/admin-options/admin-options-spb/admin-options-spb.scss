@@ -1,0 +1,106 @@
+.admin-options-container {
+
+  .banner {
+    width: 100%;
+    max-width: 720px;
+  }
+
+  .preview-container {
+    width: 100%;
+    background-color: #fff;
+    max-width: 400px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    img.preview {
+      max-width: 260px;
+      width: 100%;
+    }
+  }
+
+  .state-success {
+    color: #00bb00;
+  }
+
+  .state-error {
+    color: #de0000;
+  }
+
+  .state-loading {
+    color: #0085ba;
+
+    .dashicons {
+      animation-name: spin;
+      animation-duration: 750ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+  }
+
+  .reference-options-label {
+    display: block;
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.reference-options-label-wrong {
+      border: 1px solid red;
+      padding: 10px;
+      border-radius: 3px;
+    }
+  }
+
+  .reference-options {
+    &.reference-options-true {
+      color: green;
+    }
+
+    &.reference-options-false {
+      color: red;
+    }
+  }
+
+}
+
+@-ms-keyframes spin {
+  from {
+    -ms-transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

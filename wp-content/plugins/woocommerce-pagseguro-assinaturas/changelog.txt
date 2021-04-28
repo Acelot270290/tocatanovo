@@ -1,0 +1,73 @@
+Version 2.0.0
+- removed check to verify preaproval during checkout. Let's WC update order via notification.
+- fixed bug: initial orders not being sent to Pagseguro
+- added order action to manually force intial payment
+- added filter to hide birthdate, phone and cpf from credit cart form and use fields form Brazilian Market on WooCommerce plugin.
+- added compatibility for updating payment method with Pagseguro.
+
+Version 1.6.3
+- allow card expiry date to be entered either as MM/AA or MM/AAAA
+
+Version 1.6.2
+- small change on how transaction code is saved
+
+Version 1.6.1
+- small compatibility changes
+- improvement on how notifications are handled
+- added pagseguro tracker to subscription
+
+Version 1.6
+- added senderHash and senderIP to recurring payment request.
+- now using woo's get_customer_ip() function.
+- improved IPN hander to avoid multiple from being processed.
+
+Version 1.5.2
+- bug: small bug in functinon that handles remote ip address.
+
+Version 1.5.1
+- bug: updated function that handles remote ip address.
+
+Version 1.5
+- added support for subscription cancellation.
+- better way to get visitor IP address for Pagseguro requests.
+
+Version 1.4
+- added support for bimonthly, trimonthly and semiannually plans.
+- phone, CPF and birth date are now in the credit card form.
+- added support for notifications, which must be confiured manually on the Pagseguro account.
+
+Version 1.3.6
+- shipping was not being added to order.
+- tested plugin with products and subscriptions on checkout. Only works with subscriptions with the same recurrence.
+
+Version 1.3.52
+- modified if to prevent charge if pre-approval status is not active.
+
+Version 1.3.51
+- started using wc_set_time_limit on status checks during chekout.
+- reduced number of status checks to 3.
+
+Version 1.3.5
+- added sender IP to pre-approval xml.
+- reduced number of status checks on pre-approvals.
+
+Version 1.3.4
+- bug fix with on-hold order.
+
+Version 1.3.3
+- updated logic to allow for free trial period, even if pre-approval is pending.
+
+Version 1.3.2
+- updated logic to allow for free trial order to be completed.
+
+Version 1.3.1
+- updated translation files
+
+Version 1.3
+- small bugs with ->id vs. ->get_id();
+- added logic for dealing with pagseguro delay on activating pre-approval;
+- added cron event to force payment on parent order once pre-approval is activate;
+
+Version 1.2.1
+ - small changes for compatibility with WooCommerce Pagseguro from Claudio sanches.
+ - fixed issue with gateway appearing for purchase of products on checkout.

@@ -1,0 +1,131 @@
+.thim-fancy-table {
+    border: 1px solid #DDD;
+    overflow: hidden;
+    .tft-horizontal-scroll {
+        overflow-x: auto;
+        height: 16px;
+        border-left: 1px solid #DDD;
+        margin-top: -2px;
+        > div {
+            height: 1px;
+        }
+    }
+}
+
+.thim-fancy-table {
+    margin-bottom: 20px;
+    table {
+        text-align: center;
+        table-layout: fixed;
+        border: none;
+        margin-bottom: 0;
+        background: #FFF;
+        position: relative;
+        opacity: 0;
+        td, th {
+            width: auto;
+        }
+        thead {
+            th {
+                white-space: nowrap;
+                &.course-item-user {
+                    width: 250px;
+                    vertical-align: bottom;
+                    background: #FFF;
+                    position: relative;
+                    z-index: 10;
+                }
+                &.user-grade {
+                    width: 100px;
+                    background: #FFF;
+                }
+                &.course-item-header {
+                    white-space: nowrap;
+                    text-align: left;
+                    padding: 0;
+                    font-weight: normal;
+                    background: #edfaff;
+                    width: 70px;
+                    overflow-x: auto;
+                    font-size: 12px;
+                    div {
+                        transform: rotate(-90deg) translate(-150px, 3px);
+                        width: 50px;
+                    }
+                }
+            }
+        }
+
+        tbody {
+            td, th {
+                &.course-item-user {
+                    font-weight: normal;
+                    background: #edfaff;
+                }
+                &.course-item-data {
+                    text-align: left;
+                    font-size: 12px;
+                    &.passed {
+                        color: #00a0d2;
+                    }
+                }
+            }
+        }
+        .fixed {
+            position: relative;
+            z-index: 10;
+            background: #FFF;
+        }
+    }
+    &.ready{
+        table{
+            opacity: 1;
+        }
+    }
+}
+
+.gradebook-list {
+    margin-bottom: 20px;
+    td, th {
+        background: #FFF;
+    }
+    .fixed-column {
+
+    }
+    thead {
+        .fixed-column {
+            vertical-align: bottom;
+        }
+    }
+    tbody {
+        .fixed-column {
+            font-weight: normal;
+        }
+    }
+}
+
+.gradebook-top-nav {
+    margin-bottom: 20px;
+}
+
+
+/* progress bar */
+.gradebook-export.progress {
+	height: 20px;
+}
+
+.gradebook-export.progress-wrap {
+	width: 100%;
+	background: #ddd;
+	margin: 20px 0;
+	position: relative;
+	display: none;
+	.progress-bar {
+		background: #f80;
+		width: 0%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		text-align: center;
+	}
+}

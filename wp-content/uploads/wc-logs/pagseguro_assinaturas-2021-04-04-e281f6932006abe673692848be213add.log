@@ -1,0 +1,75 @@
+04-04-2021 @ 04:51:31 - Checking IPN request...:Array
+(
+    [notificationCode] => B3CC12-629917991723-DCC48F1F9713-6F5D1B
+    [notificationType] => transaction
+)
+
+04-04-2021 @ 04:51:32 - PagSeguro IPN is valid! The return is: SimpleXMLElement Object
+(
+    [date] => 2021-03-21T11:49:31.000-03:00
+    [code] => 753A455B-A6D0-40C7-BEF2-8B6F503CD97E
+    [reference] => WC-11244
+    [type] => 11
+    [status] => 4
+    [lastEventDate] => 2021-04-04T01:51:27.000-03:00
+    [paymentMethod] => SimpleXMLElement Object
+        (
+            [type] => 1
+            [code] => 102
+        )
+
+    [grossAmount] => 34.99
+    [discountAmount] => 0.00
+    [feeAmount] => 1.40
+    [netAmount] => 33.59
+    [escrowEndDate] => 2021-04-04T01:00:00.000-03:00
+    [installmentCount] => 1
+    [itemCount] => 1
+    [items] => SimpleXMLElement Object
+        (
+            [item] => SimpleXMLElement Object
+                (
+                    [id] => 1
+                    [description] => Plano Mensal - Catão de Crédito
+                    [quantity] => 1
+                    [amount] => 34.99
+                )
+
+        )
+
+    [sender] => SimpleXMLElement Object
+        (
+            [name] => João Pinheiro
+            [email] => falecomjoaofernando@gmail.com
+            [phone] => SimpleXMLElement Object
+                (
+                    [areaCode] => 21
+                    [number] => 997025873
+                )
+
+        )
+
+    [shipping] => SimpleXMLElement Object
+        (
+            [address] => SimpleXMLElement Object
+                (
+                    [street] => Estrada Adelmar Tavares
+                    [number] => 405
+                    [complement] => SimpleXMLElement Object
+                        (
+                        )
+
+                    [district] => Parque do Imbuí
+                    [city] => Teresópolis
+                    [state] => RJ
+                    [country] => BRA
+                    [postalCode] => 25970260
+                )
+
+            [type] => 3
+            [cost] => 0.00
+        )
+
+)
+
+04-04-2021 @ 04:51:32 - PagSeguro payment status for order 11244 is: 4

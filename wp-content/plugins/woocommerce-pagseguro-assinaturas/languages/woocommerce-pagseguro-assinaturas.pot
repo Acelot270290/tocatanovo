@@ -1,0 +1,948 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: WooCommerce PagSeguro - Assinaturas\n"
+"POT-Creation-Date: 2018-10-03 21:57-0400\n"
+"PO-Revision-Date: 2018-10-03 21:57-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: woocommerce-pagseguro-assinaturas.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/admin/views/html-notice-currency-not-supported.php:15
+#: includes/admin/views/html-notice-email-missing.php:15
+#: includes/admin/views/html-notice-token-missing.php:15
+msgid "PagSeguro Disabled"
+msgstr ""
+
+#: includes/admin/views/html-notice-currency-not-supported.php:15
+#, php-format
+msgid ""
+"Currency <code>%s</code> is not supported. Works only with Brazilian Real."
+msgstr ""
+
+#: includes/admin/views/html-notice-email-missing.php:15
+msgid "You should inform your email address."
+msgstr ""
+
+#: includes/admin/views/html-notice-missing-ecfb.php:22
+#: includes/admin/views/html-notice-missing-woocommerce.php:22
+msgid "WooCommerce PagSeguro"
+msgstr ""
+
+#: includes/admin/views/html-notice-missing-ecfb.php:22
+msgid ""
+"depends on the last version of Extra Checkout Fields for Brazil to work!"
+msgstr ""
+
+#: includes/admin/views/html-notice-missing-ecfb.php:25
+msgid "Active Extra Checkout Fields for Brazil"
+msgstr ""
+
+#: includes/admin/views/html-notice-missing-ecfb.php:33
+msgid "Install Extra Checkout Fields for Brazil"
+msgstr ""
+
+#: includes/admin/views/html-notice-missing-woocommerce.php:22
+msgid "depends on the last version of WooCommerce to work!"
+msgstr ""
+
+#: includes/admin/views/html-notice-missing-woocommerce.php:25
+msgid "Active WooCommerce"
+msgstr ""
+
+#: includes/admin/views/html-notice-missing-woocommerce.php:33
+msgid "Install WooCommerce"
+msgstr ""
+
+#: includes/admin/views/html-notice-token-missing.php:15
+msgid "You should inform your token."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:154
+#, php-format
+msgid "Order %s"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:443
+msgid "WP_Error in creating a plan."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:453
+#: includes/pagseguro-assinaturas-api.php:552
+#: includes/pagseguro-assinaturas-api.php:651
+msgid ""
+"You are not allowed to use the PagSeguro Transparent Checkout. Looks like "
+"you neglected to installation guide of this plugin. This is not pretty, do "
+"you know?"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:489
+#: includes/pagseguro-assinaturas-api.php:509
+#: includes/pagseguro-assinaturas-api.php:588
+#: includes/pagseguro-assinaturas-api.php:608
+#: includes/pagseguro-assinaturas-api.php:687
+#: includes/pagseguro-assinaturas-api.php:708
+#: includes/pagseguro-assinaturas-api.php:778
+#: includes/pagseguro-assinaturas-api.php:798
+#: includes/pagseguro-assinaturas-api.php:906
+msgid "PagSeguro"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:509
+#: includes/pagseguro-assinaturas-api.php:608
+#: includes/pagseguro-assinaturas-api.php:708
+#: includes/pagseguro-assinaturas-api.php:798
+#: includes/pagseguro-assinaturas-api.php:906
+msgid ""
+"An error has occurred while processing your payment, please try again. Or "
+"contact us for assistance."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:542
+#: includes/pagseguro-assinaturas-api.php:641
+msgid "WP_Error in adding customer to plan."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:925
+#, php-format
+msgid "Suspending Subscription (%s) for order: %s"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:954
+#, php-format
+msgid "Cancelling Subscription (%s) for order: %s"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:977
+msgid "Email invalid value."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:978
+msgid "The accounts of the vendor and buyer can not be related to each other."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:979
+msgid "Method of payment currently unavailable."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:980
+msgid "Invalid payment method."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:981
+msgid "Error fetching vendor data from the system."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:982
+msgid "Payment Method unavailable."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:983
+msgid "Unregistered buyer is not allowed."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:984
+msgid "senderName cannot be blank."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:985
+msgid "senderEmail cannot be blank."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:986
+msgid "senderName mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:987
+msgid "senderEmail mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:988
+msgid "receiverEmail invalid length: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:989
+msgid "redirectURL invalid length: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:990
+msgid "redirectURL invalid value: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:991
+msgid "reference invalid length: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:992
+msgid "senderAreaCode invalid value: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:993
+#: includes/pagseguro-assinaturas-api.php:1062
+msgid "senderPhone invalid value: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:994
+msgid "Item quantity out of range: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:995
+msgid "Item amount is required. (e.g. \"12.00\")"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:996
+msgid "maxAge invalid pattern: {0}. Must be an integer."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:997
+msgid "maxAge out of range: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:998
+msgid "maxUses invalid pattern: {0}. Must be an integer."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:999
+msgid "maxUses out of range: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1000
+msgid "abandonURL/reviewURL invalid length: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1001
+msgid "abandonURL/reviewURL invalid value: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1002
+msgid "preApprovalInitialDate invalid value."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1003
+msgid "preApprovalFinalDate invalid value."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1004
+#: includes/pagseguro-assinaturas-api.php:1024
+msgid "seller has no credit card payment option."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1005
+msgid "preApproval data is required."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1006
+msgid ""
+"You must configure a transactions notifications (Notificação de Transações) "
+"URL before using this service."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1007
+msgid "pre-approval cannot be paid twice on the same day."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1008
+msgid "initialDate must be lower than allowed limit."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1009
+msgid "initialDate must not be older than 180 days."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1010
+msgid "initialDate must be lower than or equal finalDate."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1011
+msgid "search interval must be lower than or equal 30 days."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1012
+msgid "finalDate must be lower than allowed limit."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1013
+msgid ""
+"initialDate invalid format use \"yyyy-MM-ddTHH:mm\" (eg. 2010-01-27T17:25)."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1014
+msgid ""
+"finalDate invalid format use \"yyyy-MM-ddTHH:mm\" (eg. 2010-01-27T17:25).  | "
+"13013 | page invalid value."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1015
+msgid "maxPageResults invalid value (must be between 1 and 1000)."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1016
+msgid "initialDate and finalDate are required on searching by interval."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1017
+msgid "interval must be between 1 and 30."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1018
+msgid "notification interval is required."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1019
+msgid "page is greater than the total number of pages returned."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1020
+msgid "Invalid minimum reference length (1-255)"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1021
+msgid "Invalid maximum reference length (1-255)"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1022
+msgid "pre-approval not found."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1023
+msgid ""
+"invalid pre-approval status to execute the requested operation. Pre-approval "
+"status is {0}."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1025
+msgid "pre-approval is not allowed for this seller {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1026
+msgid ""
+"invalid receiver for checkout: {0} verify receiver's account status and if "
+"it is a seller's account."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1027
+msgid "preApproval.paymentMethod isn't {0} must be the same from pre-approval."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1028
+msgid "Due days format is invalid: {0}."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1029
+msgid "Due days value is invalid: {0}. Any value from 1 to 120 is allowed."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1030
+msgid "Due days must be smaller than expiration days."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1031
+msgid "Expiration days format is invalid: {0}."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1032
+msgid "Expiration value is invalid: {0}. Any value from 1 to 120 is allowed."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1033
+msgid "Plan not found."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1034
+msgid "Hash is mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1035
+msgid "Documents required."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1036
+msgid "Invalid document quantity."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1037
+msgid "Payment method type is mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1038
+msgid "Payment method type is invalid."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1039
+msgid "Phone is mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1040
+msgid "Address is mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1041
+msgid "Sender is mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1042
+msgid "Payment method is mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1043
+msgid "Credit card is mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1044
+msgid "Credit card holder is mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1045
+msgid "Credit card token is invalid."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1046
+msgid "Expiration date reached."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1047
+msgid "Use limit exceeded."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1048
+msgid "Pre-approval is suspended."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1049
+msgid "pre-approval payment order not found."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1050
+msgid ""
+"invalid pre-approval payment order status to execute the requested "
+"operation. Pre-approval payment order status is {0}."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1051
+msgid "Pre-approval is already {0}."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1052
+msgid "Sender hash or IP is required."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1053
+msgid "There can be no new subscriptions to an inactive plan."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1054
+msgid "postalCode invalid Value: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1055
+msgid "addressStreet invalid length: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1056
+msgid "addressNumber invalid length: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1057
+msgid "addressComplement invalid length: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1058
+msgid "addressDistrict invalid length: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1059
+msgid "addressCity invalid length: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1060
+msgid ""
+"addressState invalid value: {0} must fit the pattern: \\w{2} (e. g. \"SP\")"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1061
+msgid "addressCountry invalid length: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1063
+msgid "addressCountry invalid pattern: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1064
+msgid "postal code can not be empty"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1065
+msgid "address number can not be empty"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1066
+msgid "address district can not be empty"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1067
+msgid "address country can not be empty"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1068
+msgid "address city can not be empty"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1069
+msgid "The IP address does not follow a valid pattern"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1070
+msgid "address street can not be empty"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1071
+msgid "credit card token is required."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1072
+msgid "credit card holder name is required."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1073
+msgid "credit card holder birthdate is required."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1074
+msgid "credit card holder birthdate invalid value: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1075
+msgid "Discount value cannot be blank."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1076
+msgid ""
+"Discount value out of range. For DISCOUNT_PERCENT type the value must be "
+"greater than or equal to 0.00 and less than or equal to 100.00."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1077
+msgid "not found next payment for this preApproval."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1078
+msgid "Status cannot be blank."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1079
+msgid "Discount type is mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1080
+msgid ""
+"Discount type invalid value. Valid values are: DISCOUNT_AMOUNT and "
+"DISCOUNT_PERCENT."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1081
+msgid ""
+"Discount value out of range. For DISCOUNT_AMOUNT type the value must be "
+"greater than or equal to 0.00 and less than or equal to the maximum amount "
+"of the correspondin payment."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1082
+msgid "Discount value is mandatory."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1083
+msgid "address state is required."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1084
+msgid "document type is required."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1085
+msgid "document type is invalid: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1086
+msgid "document value is required."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1087
+msgid "document value is invalid: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1088
+msgid "cpf is invalid: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1089
+msgid "cnpj is invalid: {0}"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-api.php:1096
+msgid ""
+"An error has occurred while processing your payment, please review your data "
+"and try again. Or contact us for assistance."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:24
+#: includes/pagseguro-assinaturas-gateway.php:184
+msgid "PagSeguro Recorrente"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:25
+msgid "Accept payments by credit card using the PagSeguro Recorrente."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:26
+msgid "Proceed to payment"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:162
+msgid "System Status &gt; Logs"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:174
+msgid "Enable/Disable"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:176
+msgid "Enable PagSeguro Recorrente"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:180
+msgid "Title"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:182
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:187
+msgid "Description"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:189
+msgid "This controls the description which the user sees during checkout."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:190
+msgid "Pay via PagSeguro"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:193
+msgid "Integration"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:198
+msgid "PagSeguro Sandbox"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:200
+msgid "Enable PagSeguro Sandbox"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:203
+msgid "PagSeguro Sandbox can be used to test the payments."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:206
+msgid "PagSeguro Email"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:208
+msgid ""
+"Please enter your PagSeguro email address. This is needed in order to take "
+"payment."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:213
+msgid "PagSeguro Token"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:215
+#, php-format
+msgid ""
+"Please enter your PagSeguro token. This is needed to process the payment and "
+"notifications. Is possible generate a new token %s."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:215
+#: includes/pagseguro-assinaturas-gateway.php:240
+#: includes/pagseguro-assinaturas-gateway.php:246
+msgid "here"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:220
+msgid "Weekly Plan"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:222
+msgid "Weekly Plan Code (personalizado)."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:222
+#: includes/pagseguro-assinaturas-gateway.php:228
+#: includes/pagseguro-assinaturas-gateway.php:234
+#: includes/pagseguro-assinaturas-gateway.php:252
+#: includes/pagseguro-assinaturas-gateway.php:258
+#: includes/pagseguro-assinaturas-gateway.php:264
+msgid ""
+"You can specify the code here, or let the plugin automatically create one "
+"for you."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:226
+msgid "Monthly Plan"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:228
+msgid "Monthly Plan Code (personalizado)."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:232
+msgid "Yearly Plan"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:234
+msgid "Yearly Plan Code (personalizado)."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:238
+msgid "PagSeguro Sandbox Email"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:240
+#, php-format
+msgid ""
+"Please enter your PagSeguro sandbox email address. You can get your sandbox "
+"email %s."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:244
+msgid "PagSeguro Sandbox Token"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:246
+#, php-format
+msgid ""
+"Please enter your PagSeguro sandbox token. You can get your sandbox token %s."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:250
+msgid "Sandbox Weekly Plan"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:252
+msgid "Weekly Plan Code on Sandbox (personalizado)."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:256
+msgid "Sandbox Monthly Plan"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:258
+msgid "Monthly Plan Code on Sandbox (personalizado)."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:262
+msgid "Sandbox Yearly Plan"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:264
+msgid "Yearly Plan Code on Sandbox (personalizado)."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:269
+msgid "Integration Behavior"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:274
+msgid "Send only the order total"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:276
+msgid ""
+"If this option is enabled will only send the order total, not the list of "
+"items."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:280
+msgid "Invoice Prefix"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:282
+msgid ""
+"Please enter a prefix for your invoice numbers. If you use your PagSeguro "
+"account for multiple stores ensure this prefix is unqiue as PagSeguro will "
+"not allow orders with the same invoice number."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:287
+msgid "Gateway Testing"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:292
+msgid "Debug Log"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:294
+msgid "Enable logging"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:296
+#, php-format
+msgid "Log PagSeguro events, such as API requests, inside %s"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:332
+msgid "Ocorreu um error. Por favor, atualize a página"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:333
+msgid "interest free"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:334
+msgid "Invalid credit card number."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:335
+msgid "Invalid expiry date, please use the MM / YYYY date format."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:336
+msgid "Please check the expiry date and use a valid format as MM / YYYY."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:337
+msgid ""
+"Unable to process the data from your credit card on the PagSeguro, please "
+"try again or contact us for assistance."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:338
+msgid "Select a number of installments."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:447
+msgid "PagSeguro: Payment approved."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:454
+msgid ""
+"PagSeguro: The buyer initiated the transaction, but so far the PagSeguro not "
+"received any payment information."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:472
+#, php-format
+msgid "Pagseguro Transaction Failed (%s)"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:488
+msgid ""
+"Sorry, the minimum allowed order total is 0.01 to use this payment method."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:495
+msgid "Subscription on Pagseguro not found"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:505
+#, php-format
+msgid "Payment complete (%s)"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:514
+msgid "Error trying to make payment for order"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:539
+#, php-format
+msgid "PagSeguro: Subscription Suspended (%s)."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:543
+#, php-format
+msgid "PagSeguro: Problem Suspending Subscription (%s)."
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:730
+#, php-format
+msgid "TEST MODE ENABLED. Use a test card: %s"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:752
+msgid "Expiry (MM/YYYY)"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:753
+msgid "MM / YYYY"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:757
+msgid "Card Holder Name"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:764
+msgid "CPF"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:769
+msgid "Card Holder Birth Date"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:770
+msgid "DD / MM / YYYY"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:774
+msgid "Card Holder Phone"
+msgstr ""
+
+#: includes/pagseguro-assinaturas-gateway.php:775
+msgid "(xx) xxxx-xxxx"
+msgstr ""
+
+#: woocommerce-pagseguro-assinaturas.php:212
+msgid ""
+"An Unexpected HTTP Error occurred during the API request.</p> <p><a href=\"?"
+"\" onclick=\"document.location.reload(); return false;\">Try again</a>"
+msgstr ""
+
+#: woocommerce-pagseguro-assinaturas.php:217
+msgid "An unknown error occurred"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce PagSeguro - Assinaturas"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://wcpagsegurorecorrente.com.br/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Sell subscriptions products and services with PagSeguro Recorrente"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Felipe Rinaldi"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://feliperinaldi.com"
+msgstr ""
