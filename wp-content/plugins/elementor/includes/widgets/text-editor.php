@@ -95,10 +95,10 @@ class Widget_Text_Editor extends Widget_Base {
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function register_controls() {
+	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_editor',
 			[
@@ -138,7 +138,7 @@ class Widget_Text_Editor extends Widget_Base {
 				'separator' => 'before',
 				'options' => $text_columns,
 				'selectors' => [
-					'{{WRAPPER}}' => 'columns: {{VALUE}};',
+					'{{WRAPPER}} .elementor-text-editor' => 'columns: {{VALUE}};',
 				],
 			]
 		);
@@ -167,7 +167,7 @@ class Widget_Text_Editor extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}' => 'column-gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .elementor-text-editor' => 'column-gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -206,7 +206,7 @@ class Widget_Text_Editor extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .elementor-text-editor' => 'text-align: {{VALUE}};',
 				],
 			]
 		);
@@ -233,14 +233,6 @@ class Widget_Text_Editor extends Widget_Base {
 				'global' => [
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
 				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Text_Shadow::get_type(),
-			[
-				'name' => 'text_shadow',
-				'selector' => '{{WRAPPER}}',
 			]
 		);
 
@@ -299,14 +291,6 @@ class Widget_Text_Editor extends Widget_Base {
 				'condition' => [
 					'drop_cap_view!' => 'default',
 				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Text_Shadow::get_type(),
-			[
-				'name' => 'drop_cap_shadow',
-				'selector' => '{{WRAPPER}} .elementor-drop-cap',
 			]
 		);
 
@@ -412,19 +396,11 @@ class Widget_Text_Editor extends Widget_Base {
 
 		$editor_content = $this->parse_text_editor( $editor_content );
 
-		if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) {
-			$this->add_render_attribute( 'editor', 'class', [ 'elementor-text-editor', 'elementor-clearfix' ] );
-		}
+		$this->add_render_attribute( 'editor', 'class', [ 'elementor-text-editor', 'elementor-clearfix' ] );
 
 		$this->add_inline_editing_attributes( 'editor', 'advanced' );
 		?>
-		<?php if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) { ?>
-			<div <?php echo $this->get_render_attribute_string( 'editor' ); ?>>
-		<?php } ?>
-			<?php echo $editor_content; ?>
-		<?php if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) { ?>
-			</div>
-		<?php } ?>
+		<div <?php echo $this->get_render_attribute_string( 'editor' ); ?>><?php echo $editor_content; ?></div>
 		<?php
 	}
 
@@ -452,19 +428,11 @@ class Widget_Text_Editor extends Widget_Base {
 	protected function content_template() {
 		?>
 		<#
-		<?php if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) { ?>
-			view.addRenderAttribute( 'editor', 'class', [ 'elementor-text-editor', 'elementor-clearfix' ] );
-		<?php } ?>
+		view.addRenderAttribute( 'editor', 'class', [ 'elementor-text-editor', 'elementor-clearfix' ] );
 
 		view.addInlineEditingAttributes( 'editor', 'advanced' );
 		#>
-		<?php if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) { ?>
-			<div {{{ view.getRenderAttributeString( 'editor' ) }}}>
-		<?php } ?>
-			{{{ settings.editor }}}
-		<?php if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) { ?>
-			</div>
-		<?php } ?>
+		<div {{{ view.getRenderAttributeString( 'editor' ) }}}>{{{ settings.editor }}}</div>
 		<?php
 	}
 }

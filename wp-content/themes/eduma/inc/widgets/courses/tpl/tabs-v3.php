@@ -62,7 +62,7 @@ if ( ! empty( $cat_id_tab ) ) {
 							<a class="course-readmore" href="<?php echo esc_url( get_the_permalink( get_the_ID() ) ); ?>"><?php echo esc_html__( 'Read More', 'eduma' ); ?></a>
 						</div>
 						<div class="thim-course-content">
-							<?php if ( class_exists( 'LP_Addon_Coming_Soon_Courses_Preload' ) && learn_press_is_coming_soon( get_the_ID() ) ) { ?>
+							<?php if ( thim_plugin_active( 'learnpress-coming-soon-courses/learnpress-coming-soon-courses.php' ) && learn_press_is_coming_soon( get_the_ID() ) ) { ?>
 								<?php if ( '' !== get_post_meta( get_the_ID(), '_lp_coming_soon_msg', true ) ) { ?>
 									<?php $message = strip_tags( get_post_meta( get_the_ID(), '_lp_coming_soon_msg', true ) ); ?>
 									<div class="message message-warning learn-press-message coming-soon-message"> <?php echo $message; ?></div>

@@ -138,10 +138,6 @@ do_action( 'learn-press/before-single-course' );
 			LP()->template( 'course' )->course_buttons();
 			?>
         </div>
-        <?php thim_course_forum_link(); ?>
-
-        <?php do_action('thim_single_course_featured_review'); ?>
-
         <div class="course-summary">
             <?php
             /**

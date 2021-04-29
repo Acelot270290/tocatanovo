@@ -33,7 +33,7 @@ if ( $course ) {
 		do_action( 'thim_courses_loop_item_thumb' );
 		?>
         <div class="thim-course-content">
-			<?php if ( class_exists( 'LP_Addon_Coming_Soon_Courses_Preload' ) && learn_press_is_coming_soon( $course_id ) ): ?>
+			<?php if ( thim_plugin_active( 'learnpress-coming-soon-courses/learnpress-coming-soon-courses.php' ) && learn_press_is_coming_soon( $course_id ) ): ?>
 
 				<?php learn_press_courses_loop_item_instructor(); ?>
 				<?php

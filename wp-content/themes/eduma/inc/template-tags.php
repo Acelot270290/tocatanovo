@@ -46,7 +46,7 @@ if ( !function_exists( 'thim_paging_nav' ) ) :
 
 		if ( $links ) :
 			?>
-			<div class="pagination loop-paginationasd">
+			<div class="pagination loop-pagination">
 				<?php echo ent2ncr( $links ); ?>
 			</div>
 			<!-- .pagination -->
@@ -455,7 +455,7 @@ if ( !function_exists( 'thim_about_author' ) ) {
 			</div>
 		</div>
 		<?php
-		if ( class_exists( 'LearnPress' ) && function_exists( 'thim_co_instructors' ) ) {
+		if ( thim_plugin_active( 'learnpress/learnpress.php' ) && function_exists( 'thim_co_instructors' ) ) {
  			thim_co_instructors( get_the_ID(), get_the_author_meta( 'ID' ) );
 		}
  	}

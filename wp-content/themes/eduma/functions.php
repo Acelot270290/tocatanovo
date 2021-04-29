@@ -7,7 +7,7 @@
 
 define( 'THIM_DIR', trailingslashit( get_template_directory() ) );
 define( 'THIM_URI', trailingslashit( get_template_directory_uri() ) );
-define( 'THIM_THEME_VERSION', '4.4.0' );
+define( 'THIM_THEME_VERSION', '4.3.5.1' );
 
 /**
  * Set the content width based on the theme's design and stylesheet.
@@ -77,7 +77,6 @@ if ( ! function_exists( 'thim_setup' ) ) :
 		add_theme_support( 'thim-core' );
 
 		add_theme_support( 'eduma-demo-data' );
-		add_theme_support( 'thim-full-widgets' );
  		/*
 		 * Enable support for Post Formats.
 		 * See http://codex.wordpress.org/Post_Formats
@@ -351,12 +350,11 @@ if ( ! function_exists( 'thim_styles' ) ) {
 		wp_enqueue_style( 'ionicons', THIM_URI . 'assets/css/ionicons.min.css' );
 		wp_enqueue_style( 'font-pe-icon-7', THIM_URI . 'assets/css/font-pe-icon-7.css' );
 		wp_enqueue_style( 'flaticon', THIM_URI . 'assets/css/flaticon.css' );
-		wp_enqueue_style( 'thim-linearicons-font', THIM_URI . 'assets/css/linearicons.css' );
-        wp_enqueue_style( 'line-awesome', THIM_URI . 'assets/css/line-awesome.min.css', array(), THIM_THEME_VERSION );
+		wp_register_style( 'thim-linearicons-font', THIM_URI . 'assets/css/linearicons.css' );
 
-		// if ( get_theme_mod( 'thim_layout_content_page', 'normal' ) == 'new-1' ) {
-		// 	wp_enqueue_style( 'thim-linearicons-font' );
-		// }
+		if ( get_theme_mod( 'thim_layout_content_page', 'normal' ) == 'new-1' ) {
+			wp_enqueue_style( 'thim-linearicons-font' );
+		}
 
 		//Load style for page builder Visual Composer
 		$page_builder = get_theme_mod( 'thim_page_builder_chosen', '' );
@@ -511,13 +509,10 @@ if ( ! function_exists( 'thim_scripts' ) ) {
 add_action( 'wp_enqueue_scripts', 'thim_scripts', 1000 );
 
 function thim_custom_admin_scripts() {
-	wp_enqueue_script( 'thim-admin-custom-script', THIM_URI . 'assets/js/admin-custom-script.js', array( 'jquery' ), uniqid(), true );
+	wp_enqueue_script( 'thim-admin-custom-script', THIM_URI . 'assets/js/admin-custom-script.js', array( 'jquery' ), THIM_THEME_VERSION, true );
 	wp_enqueue_style( 'thim-admin-theme-style', THIM_URI . 'assets/css/thim-admin.css', array(), THIM_THEME_VERSION );
-
 	wp_enqueue_style( 'thim-admin-font-icon7', THIM_URI . 'assets/css/font-pe-icon-7.css', array(), THIM_THEME_VERSION );
 	wp_enqueue_style( 'thim-admin-font-flaticon', THIM_URI . 'assets/css/flaticon.css', array(), THIM_THEME_VERSION );
-	wp_register_style( 'thim-admin-ionicons', THIM_URI . 'assets/css/ionicons.min.css', array(), THIM_THEME_VERSION );
-
 	$thim_mod                 = get_theme_mods();
 	$thim_page_builder_chosen = ! empty( $thim_mod['thim_page_builder_chosen'] ) ? $thim_mod['thim_page_builder_chosen'] : '';
 	wp_localize_script( 'thim-admin-custom-script', 'thim_theme_mods', array(

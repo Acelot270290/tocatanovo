@@ -1,6 +1,8 @@
 <?php
 namespace Automattic\WooCommerce\Blocks\StoreApi\Routes;
 
+use Automattic\WooCommerce\Blocks\StoreApi\Utilities\CartController;
+
 /**
  * CartRemoveCoupon class.
  *
@@ -50,7 +52,8 @@ class CartRemoveCoupon extends AbstractCartRoute {
 			throw new RouteException( 'woocommerce_rest_cart_coupon_disabled', __( 'Coupons are disabled.', 'woocommerce' ), 404 );
 		}
 
-		$cart        = $this->cart_controller->get_cart_instance();
+		$controller  = new CartController();
+		$cart        = $controller->get_cart_instance();
 		$coupon_code = wc_format_coupon_code( $request['code'] );
 		$coupon      = new \WC_Coupon( $coupon_code );
 
@@ -58,11 +61,11 @@ class CartRemoveCoupon extends AbstractCartRoute {
 			throw new RouteException( 'woocommerce_rest_cart_coupon_error', __( 'Invalid coupon code.', 'woocommerce' ), 400 );
 		}
 
-		if ( ! $this->cart_controller->has_coupon( $coupon_code ) ) {
+		if ( ! $controller->has_coupon( $coupon_code ) ) {
 			throw new RouteException( 'woocommerce_rest_cart_coupon_invalid_code', __( 'Coupon cannot be removed because it is not already applied to the cart.', 'woocommerce' ), 409 );
 		}
 
-		$cart = $this->cart_controller->get_cart_instance();
+		$cart = $controller->get_cart_instance();
 		$cart->remove_coupon( $coupon_code );
 		$cart->calculate_totals();
 

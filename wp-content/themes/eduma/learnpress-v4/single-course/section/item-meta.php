@@ -16,6 +16,10 @@ defined( 'ABSPATH' ) || exit();
 ?>
 
 
+
+
+<?php do_action( 'learn-press/course-section-item/before-' . $item->get_item_type() . '-meta', $item ); ?>
+
 <div class="course-item-meta">
 	<?php if ( $item->is_preview() ) : ?>
 		<a title="<?php esc_html_e( 'Previews', 'eduma' ); ?>" class="lesson-preview button-load-item" href="<?php echo $item->get_permalink(); ?>" data-id="<?php echo $item->get_id(); ?>" data-complete-nonce="<?php echo wp_create_nonce( 'learn-press-complete-' . $item->get_item_type() . '-' . $item->get_id() ); ?>">
@@ -27,6 +31,5 @@ defined( 'ABSPATH' ) || exit();
 	<?php endif; ?>
 
 </div>
-<?php do_action( 'learn-press/course-section-item/before-' . $item->get_item_type() . '-meta', $item ); ?>
 <?php do_action( 'learn-press/course-section-item/after-' . $item->get_item_type() . '-meta', $item ); ?>
 

@@ -29,7 +29,7 @@ const EMIT_TYPES = {
  *
  * @return {Object} An object with the checkout emmitter registration
  */
-const emitterObservers = ( dispatcher ) => ( {
+const emitterSubscribers = ( dispatcher ) => ( {
 	onCheckoutAfterProcessingWithSuccess: emitterCallback(
 		EMIT_TYPES.CHECKOUT_AFTER_PROCESSING_WITH_SUCCESS,
 		dispatcher
@@ -44,4 +44,10 @@ const emitterObservers = ( dispatcher ) => ( {
 	),
 } );
 
-export { EMIT_TYPES, emitterObservers, reducer, emitEvent, emitEventWithAbort };
+export {
+	EMIT_TYPES,
+	emitterSubscribers,
+	reducer,
+	emitEvent,
+	emitEventWithAbort,
+};

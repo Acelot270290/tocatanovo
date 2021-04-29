@@ -310,7 +310,7 @@ form#lostpasswordform {
 	}
 }
 
-.has-shortcode >.mo-openid-app-icons {
+.mo-openid-app-icons {
 	display: -webkit-box;
 	display: -moz-box;
 	display: -ms-flexbox;
@@ -374,17 +374,9 @@ form#lostpasswordform {
 		}
 	}
 
-		&:after {
-			content: '';
-			left: auto;
-			bottom: 0;
-			top: 0;
-			right: 1px;
-			width: 1px;
-			border: 0;
-			background: #eee;
-			//height: 300px;
-		}
+	&:after {
+		content: none;
+	}
 }
 
 #thim-popup-login {
@@ -521,22 +513,22 @@ form#lostpasswordform {
 		@include opacity(0.6);
 	}
 
-	//.has-shortcode >.mo-openid-app-icons {
-	//	width: 50%;
-	//	float: left;
-	//
-	//	&:after {
-	//		content: '';
-	//		left: auto;
-	//		bottom: auto;
-	//		top: 0;
-	//		right: 1px;
-	//		width: 1px;
-	//		border: 0;
-	//		background: #eee;
-	//		height: 300px;
-	//	}
-	//}
+	.mo-openid-app-icons {
+		width: 50%;
+		float: left;
+
+		&:after {
+			content: '';
+			left: auto;
+			bottom: auto;
+			top: 0;
+			right: 1px;
+			width: 1px;
+			border: 0;
+			background: #eee;
+			height: 300px;
+		}
+	}
 }
 
 body.thim-search-active {
@@ -679,7 +671,7 @@ body.thim-popup-active {
 			padding: 0;
 			text-transform: none;
 			line-height: 30px;
-			//margin-bottom: 23px!important;
+			margin-bottom: 23px!important;
 		}
 
 		.btn-block{

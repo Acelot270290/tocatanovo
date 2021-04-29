@@ -9,10 +9,9 @@
 #toolbar .widget_nav_menu .menu > li > span:hover,
 #toolbar .thim-course-search-overlay .search-toggle,
 #toolbar a,
-#toolbar span.value {
+#toolbar span.value{
 	color: $thim_thim_link_color_toolbar;
 }
-
 #toolbar .widget_nav_menu .menu > li > a:hover,
 #toolbar .thim-course-search-overlay .search-toggle:hover,
 #toolbar a:hover {
@@ -22,12 +21,10 @@
 #toolbar .menu li:hover .sub-menu {
 	background-color: $thim_thim_sub_menu_bg_color;
 }
-
 #toolbar .menu li .sub-menu li > span,
 #toolbar .menu li .sub-menu li > a {
 	color: $thim_thim_sub_menu_text_color;
 }
-
 #toolbar .menu li .sub-menu li:hover > span,
 #toolbar .menu li .sub-menu li:hover > a {
 	color: $thim_thim_sub_menu_text_color_hover;
@@ -76,7 +73,7 @@ body.page-template-landing-page .navigation .navbar-nav #magic-line {
 .navigation .width-navigation .navbar-nav > li .sub-menu li > span:hover,
 .navigation .width-navigation .navbar-nav > li .sub-menu li.current-menu-item > span,
 .navigation li.current-menu-item > a,
-.navigation li.current-menu-item > span {
+.navigation li.current-menu-item > span{
 	color: $thim_thim_sub_menu_text_color_hover;
 }
 
@@ -118,7 +115,7 @@ body.page-template-landing-page .navigation .navbar-nav #magic-line {
 	color: $thim_thim_main_menu_text_color;
 }
 
-.menu-mobile-effect.navbar-toggle span.icon-bar {
+.menu-mobile-effect.navbar-toggle span.icon-bar{
 	background-color: $thim_thim_main_menu_text_color;
 }
 
@@ -164,8 +161,8 @@ body.page-template-landing-page .navigation .navbar-nav #magic-line {
 }
 
 #masthead.header_v4.affix .navigation .menu-right .thim-widget-button .widget-button {
-	color: $thim_thim_sticky_main_menu_text_color !important;
-	border-color: $thim_thim_sticky_main_menu_text_color !important;
+	color: $thim_thim_sticky_main_menu_text_color!important;
+	border-color: $thim_thim_sticky_main_menu_text_color!important;
 }
 
 .site-header.bg-custom-sticky.affix .navbar-nav > li > a:hover,
@@ -193,23 +190,14 @@ body.thim-demo-university-4 .toolbar-container,
 	.toolbar {
 		padding-left: $thim_thim_width_logo;
 	}
-
 	.width-logo {
 		width: $thim_thim_width_logo;
-
 		> a {
 			background-color: $thim_thim_body_primary_color;
 		}
 	}
-
 	#toolbar .thim-have-any-question .mobile a {
 		color: $thim_thim_body_primary_color;
-	}
-}
-
-.thim-widget-courses-searching .thim-course-search-overlay.bg_circle {
-	.search-toggle, .search-toggle:before {
-		background-color: $thim_thim_body_primary_color;
 	}
 }
 
@@ -223,8 +211,4 @@ body.thim-demo-university-4 .toolbar-container,
 	.width-logo > a {
 		width: $thim_thim_width_logo * 0.75;
 	}
-}
-
-.toolbar_border_bottom {
-	border-bottom-color: $thim_thim_link_color_toolbar_border_button;
 }

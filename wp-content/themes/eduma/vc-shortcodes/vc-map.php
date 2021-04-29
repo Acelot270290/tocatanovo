@@ -33,21 +33,20 @@ function ts_map_vc_shortcodes() {
 	include_once( THIM_DIR_SHORTCODES_MAP . 'carousel-categories.php' );
 	include_once( THIM_DIR_SHORTCODES_MAP . 'link.php' );
 	include_once( THIM_DIR_SHORTCODES_MAP . 'multiple-images.php' );
-
-	if ( class_exists( 'LearnPress' ) ) {
+	if ( thim_plugin_active( 'learnpress/learnpress.php' ) ) {
 		include_once( THIM_DIR_SHORTCODES_MAP . 'course-categories.php' );
 		include_once( THIM_DIR_SHORTCODES_MAP . 'courses.php' );
 		include_once( THIM_DIR_SHORTCODES_MAP . 'courses-searching.php' );
 		include_once( THIM_DIR_SHORTCODES_MAP . 'list-instructors.php' );
 
-		if ( class_exists( 'LP_Addon_Collections_Preload' )  ) {
+		if ( thim_plugin_active( 'learnpress-collections/learnpress-collections.php' ) ) {
 			include_once( THIM_DIR_SHORTCODES_MAP . 'courses-collection.php' );
 		}
-		if (  class_exists( 'LP_Co_Instructor_Preload' ) ) {
+		if ( thim_plugin_active( 'learnpress-co-instructor/learnpress-co-instructor.php' ) ) {
 			include_once( THIM_DIR_SHORTCODES_MAP . 'one-course-instructors.php' );
 		}
 	}
-	if ( class_exists( 'WPEMS' ) ) {
+	if ( thim_plugin_active( 'wp-events-manager/wp-events-manager.php' ) ) {
 		include_once( THIM_DIR_SHORTCODES_MAP . 'list-events.php' );
 	}
 	if ( thim_plugin_active( 'thim-testimonials/thim-testimonials.php' ) ) {
@@ -56,7 +55,7 @@ function ts_map_vc_shortcodes() {
 	if ( thim_plugin_active( 'thim-our-team/init.php' )  ) {
 		include_once( THIM_DIR_SHORTCODES_MAP . 'our-team.php' );
 	}
-	if ( class_exists( 'Thim_Portfolio' ) ) {
+	if ( thim_plugin_active( 'tp-portfolio/tp-portfolio.php' ) ) {
 		include_once( THIM_DIR_SHORTCODES_MAP . 'portfolio.php' );
 	}
 	if ( thim_plugin_active( 'thim-twitter/thim-twitter.php' ) ) {

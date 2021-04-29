@@ -72,26 +72,6 @@ input[type="radio"]:nth-child(1):checked ~ .switch-btn:nth-child(2):before {
 	}
 }
 
-body {
-	.learn-press-4 {
-		.course-payment {
-			.lp-course-buttons {
-				.course-wishlist-box {
-					span{
-						background: $thim_thim_body_primary_color;
-					}
-
-					&:hover{
-						span {
-							background: darken($thim_thim_body_primary_color, 10%);
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
 /* Single Course */
 body{
 	.lp-single-course{

@@ -355,26 +355,6 @@ body {
 		#learn-press-content-item {
 			overflow-y: scroll;
 		}
-
-		&.full-screen-content-item {
-			.learn-press-4 {
-				#learn-press-course-curriculum {
-					@media (max-width: 767px){
-						left: 0;
-					}
-				}
-			}
-		}
-
-		.lp-single-course {
-			&.learn-press-4 {
-				.content-item-wrap {
-					.edit-course-item-link {
-						margin: 10px 20px !important;
-					}
-				}
-			}
-		}
 	}
 
 	.learn-press-4 #learn-press-course-curriculum ul.curriculum-sections .section-header {
@@ -382,32 +362,6 @@ body {
 	}
 
 	.learn-press-4 {
-
-		.course-forum {
-			margin-top: -20px;
-		}
-
-		.course-payment {
-			.lp-course-buttons {
-				margin-bottom: 20px !important;
-
-				.course-wishlist-box {
-					display: inline-block;
-					span {
-						padding: 5px 15px;
-						transform: translateY(1px);
-						color: #333;
-						transition: all .3s;
-						margin-left: 12px;
-						font-size: 14px;
-						span{
-							padding: 0;
-						}
-					}
-				}
-			}
-		}
-
 		.lp-course-buttons .lp-button {
 			display: inline-block;
 		}
@@ -554,11 +508,6 @@ body{
 								.course-item{
 									>span{
 										width: unset;
-										margin-right: 5px;
-
-										@media screen and (max-width: 480px) {
-											padding-left: 0 !important;
-										}
 									}
 									.course-item-meta{
 										.item-meta{
@@ -569,11 +518,6 @@ body{
 										.course-item-meta{
 											.item-meta{
 												display: inline-block !important;
-												transform: translateY(-3px);
-
-												@media screen and (max-width: 480px) {
-													margin-right: 5px;
-												}
 											}
 										}
 									}
@@ -624,22 +568,8 @@ body{
 					content: '\f105';
 				}
 				#popup-header{
-					justify-content: space-between;
-
-					.course-title {
-						margin-left: 40px;
-						a {
-							color: white;
-						}
-
-						@media screen and (max-width: 767px) {
-							display: none;
-						}
-					}
-
-					@media screen and (max-width: 767px) {
-						justify-content: flex-end;
-					}
+					line-height: 70px;
+					display: block;
 
 					.thim-course-item-popup-right{
 						float: right;
@@ -775,12 +705,6 @@ body{
 								padding-top: 0px;
 								.content-item-summary{
 									margin-top: 30px;
-
-									#learn-press-quiz-app {
-										.quiz-intro {
-											flex-wrap: wrap;
-										}
-									}
 								}
 								#content-item-quiz{
 									#learn-press-quiz-app{
@@ -841,10 +765,7 @@ body{
 						margin: 0 auto;
 						width: 800px;
 						padding: 15px 0;
-						@media(max-width: 1200px){
-							padding: 15px;
-						}
-						@media(max-width: 1024px){
+						@media(max-width:1024px){
 							width: 100%;
 						}
 						.next,.prev{
@@ -875,49 +796,4 @@ body{
 			}
 		}
 	}
-}
-
-.learnpress-v4 {
-	#learn-press-checkout {
-		width: 1170px;
-	}
-
-	#learn-press-profile,
-	#learn-press-checkout{
-		margin-top: 70px;
-	}
-
-	.course-extra-box {
-		.course-extra-box__title {
-			font-size: 15px;
-		}
-	}
-
-	@media screen and (max-width: 480px) {
-		.quiz-status {
-			& > div {
-				display: inherit;
-				height: auto;
-				text-align: center;
-				padding: 5px;
-
-				.questions-index {
-					margin-top: 15px;
-				}
-
-				div:nth-child(3) {
-					justify-content: center;
-					flex: 0 0 100%;
-
-					.lp-button {
-						margin-right: 0;
-					}
-				}
-			}
-		}
-	}
-}
-
-div:focus {
-	outline: unset;
 }

@@ -4,11 +4,12 @@
  *
  * @author   ThimPress
  * @package  LearnPress/Wishlist/Classes
- * @version  4.0.0
+ * @version  3.0.0
  */
 
 // Prevent loading this file directly
 defined( 'ABSPATH' ) || exit;
+
 if ( ! class_exists( 'LP_Addon_Wishlist' ) ) {
 	/**
 	 * Class LP_Addon_Wishlist.
@@ -29,13 +30,6 @@ if ( ! class_exists( 'LP_Addon_Wishlist' ) ) {
 		 * @var string
 		 */
 		public $require_version = LP_ADDON_WISHLIST_REQUIRE_VER;
-
-		/**
-		 * Path file addon
-		 *
-		 * @var string
-		 */
-		public $plugin_file = LP_ADDON_WISHLIST_FILE;
 
 		/**
 		 * LP_Addon_Wishlist constructor.
@@ -78,11 +72,8 @@ if ( ! class_exists( 'LP_Addon_Wishlist' ) ) {
 		 * Wishlist scripts.
 		 */
 		protected function _enqueue_assets() {
-			wp_enqueue_style( 'lp-course-wishlist-style',
-				untrailingslashit( plugins_url( '/', LP_ADDON_WISHLIST_FILE ) ) . '/assets/css/wishlist.css' );
-			wp_enqueue_script( 'lp-course-wishlist-script',
-				untrailingslashit( plugins_url( '/', LP_ADDON_WISHLIST_FILE ) ) . '/assets/js/wishlist.js',
-				array( 'jquery' ) );
+			wp_enqueue_style( 'lp-course-wishlist-style', untrailingslashit( plugins_url( '/', LP_ADDON_WISHLIST_FILE ) ) . '/assets/css/wishlist.css' );
+			wp_enqueue_script( 'lp-course-wishlist-script', untrailingslashit( plugins_url( '/', LP_ADDON_WISHLIST_FILE ) ) . '/assets/js/wishlist.js', array( 'jquery' ) );
 		}
 
 		/**
@@ -140,8 +131,7 @@ if ( ! class_exists( 'LP_Addon_Wishlist' ) ) {
 					'user_id'     => $user_id,
 					'title'       => $this->_get_state_title( $state ),
 					'message'     => '',
-					'button_text' => $state != 'on' ? __( 'Add to Wishlist',
-						'learnpress-wishlist' ) : __( 'Remove from Wishlist', 'learnpress-wishlist' )
+					'button_text' => $state != 'on' ? __( 'Add to Wishlist', 'learnpress-wishlist' ) : __( 'Remove from Wishlist', 'learnpress-wishlist' )
 				)
 			);
 		}
@@ -152,8 +142,7 @@ if ( ! class_exists( 'LP_Addon_Wishlist' ) ) {
 		 * @return mixed
 		 */
 		private function _get_state_title( $state = 'on' ) {
-			return $state == 'on' ? __( 'Remove this course from your wishlist',
-				'learnpress-wishlist' ) : __( 'Add this course to your wishlist', 'learnpress-wishlist' );
+			return $state == 'on' ? __( 'Remove this course from your wishlist', 'learnpress-wishlist' ) : __( 'Add this course to your wishlist', 'learnpress-wishlist' );
 		}
 
 		/**
@@ -162,15 +151,13 @@ if ( ! class_exists( 'LP_Addon_Wishlist' ) ) {
 		 * @return mixed
 		 */
 		private function _get_state_message( $state = 'on' ) {
-			return $state == 'on' ? __( 'This course added to your wishlist',
-				'learnpress-wishlist' ) : __( 'This course removed from your wishlist', 'learnpress-wishlist' );
+			return $state == 'on' ? __( 'This course added to your wishlist', 'learnpress-wishlist' ) : __( 'This course removed from your wishlist', 'learnpress-wishlist' );
 		}
 
 		/*
 		  * Show wishlist button
 		  */
 		public function wishlist_button( $course_id = null ) {
-
 			$user_id = get_current_user_id();
 			if ( ! $course_id ) {
 				$course_id = get_the_ID();
@@ -191,8 +178,7 @@ if ( ! class_exists( 'LP_Addon_Wishlist' ) ) {
 			$title   = $this->_get_state_title( $state );
 
 			// fetch template
-			learn_press_course_wishlist_template( 'button.php',
-				compact( 'user_id', 'course_id', 'classes', 'title', 'state' ) );
+			learn_press_course_wishlist_template( 'button.php', compact( 'user_id', 'course_id', 'classes', 'title', 'state' ) );
 		}
 
 		public function get_tab_slug() {

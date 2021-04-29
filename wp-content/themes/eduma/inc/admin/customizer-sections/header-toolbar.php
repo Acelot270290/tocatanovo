@@ -139,37 +139,3 @@ thim_customizer()->add_field(
         )
     )
 );
-
-thim_customizer()->add_field(
-	array(
-		'id'       => 'thim_toolbar_show_border',
-		'type'     => 'switch',
-		'label'    => esc_html__( 'Enable border button', 'eduma' ),
- 		'section'  => 'header_toolbar',
-		'default'  => false,
-		'priority' => 35,
-		'choices'  => array(
-			true  => esc_html__( 'On', 'eduma' ),
-			false => esc_html__( 'Off', 'eduma' ),
-		),
-	)
-);
-thim_customizer()->add_field(
-	array(
-		'id'          => 'thim_link_color_toolbar_border_button',
-		'type'        => 'color',
-		'label'       => esc_html__( 'Border Color', 'eduma' ),
- 		'section'     => 'header_toolbar',
-		'default'     => '#ddd',
-		'priority'    => 40,
-		'choices' => array ('alpha'     => true),
-		'transport' => 'postMessage',
-		'active_callback' => array(
-			array(
-				'setting'  => 'thim_toolbar_show_border',
-				'operator' => '===',
-				'value'    => true,
-			),
-		),
- 	)
-);

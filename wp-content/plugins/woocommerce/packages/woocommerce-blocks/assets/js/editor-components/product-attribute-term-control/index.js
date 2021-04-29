@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { __, _n, sprintf } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
 import { find } from 'lodash';
 import PropTypes from 'prop-types';
 import { SearchListControl, SearchListItem } from '@woocommerce/components';
@@ -59,7 +60,7 @@ const ProductAttributeTermControl = ( {
 					disabled={ item.count === '0' }
 					aria-expanded={ expandedAttribute === item.id }
 					aria-label={ sprintf(
-						/* translators: %1$s is the item name, %2$d is the count of terms for the item. */
+						// Translators: %1$s is the item name, %2$d is the count of terms for the item.
 						_n(
 							'%1$s, has %2$d term',
 							'%1$s, has %2$d terms',
@@ -113,7 +114,7 @@ const ProductAttributeTermControl = ( {
 		),
 		selected: ( n ) =>
 			sprintf(
-				/* translators: %d is the count of attributes selected. */
+				// Translators: %d is the count of attributes selected.
 				_n(
 					'%d attribute selected',
 					'%d attributes selected',
@@ -133,7 +134,7 @@ const ProductAttributeTermControl = ( {
 	}
 
 	return (
-		<>
+		<Fragment>
 			<SearchListControl
 				className="woocommerce-product-attributes"
 				list={ currentList }
@@ -183,7 +184,7 @@ const ProductAttributeTermControl = ( {
 					/>
 				</div>
 			) }
-		</>
+		</Fragment>
 	);
 };
 

@@ -23,11 +23,11 @@ $checkout_redirect = add_query_arg( 'enroll-course', $course->get_id(), $course-
 $login_redirect    = add_query_arg( 'redirect_to', $checkout_redirect, thim_get_login_page_url() );
 $check_courses     = get_post_meta( $course->get_id(), '_lp_coming_soon', true );
 
-if ( class_exists( 'LP_Addon_Coming_Soon_Courses_Preload' ) && learn_press_is_coming_soon( $course_id ) && $check_courses == 'yes' ) {
+if ( thim_plugin_active( 'learnpress-coming-soon-courses/learnpress-coming-soon-courses.php' ) && learn_press_is_coming_soon( $course_id ) && $check_courses == 'yes' ) {
 	?>
 	<div class="lp-course-buttons">
 		<button class="lp-button button">
-			<?php echo esc_html__( 'Course Coming soon', 'eduma' ); ?>
+			<?php echo esc_html( 'Course Coming soon', 'eduma' ); ?>
 		</button>
 	</div>
 <?php } else { ?>

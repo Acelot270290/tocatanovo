@@ -17,7 +17,7 @@
 
 	// Login popup link output
 	if ( is_user_logged_in() ) {
-		if ( class_exists( 'LearnPress' ) && $profile_text ) {
+		if ( thim_plugin_active( 'learnpress/learnpress.php' ) && $profile_text ) {
 			if ( thim_is_new_learnpress( '1.0' ) ) {
 				echo '<a class="profile" href="' . esc_url( learn_press_user_profile_link() ) . '">' . ( $profile_text ) . '</a>';
 			} else {

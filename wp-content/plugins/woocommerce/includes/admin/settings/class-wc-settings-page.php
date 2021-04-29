@@ -2,12 +2,14 @@
 /**
  * WooCommerce Settings Page/Tab
  *
+ * @author      WooThemes
+ * @category    Admin
  * @package     WooCommerce\Admin
  * @version     2.1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit; // Exit if accessed directly
 }
 
 if ( ! class_exists( 'WC_Settings_Page', false ) ) :
@@ -64,7 +66,7 @@ if ( ! class_exists( 'WC_Settings_Page', false ) ) :
 		/**
 		 * Add this page to settings.
 		 *
-		 * @param array $pages The pages array to add this page to.
+		 * @param array $pages
 		 *
 		 * @return mixed
 		 */
@@ -100,7 +102,7 @@ if ( ! class_exists( 'WC_Settings_Page', false ) ) :
 
 			$sections = $this->get_sections();
 
-			if ( empty( $sections ) || 1 === count( $sections ) ) {
+			if ( empty( $sections ) || 1 === sizeof( $sections ) ) {
 				return;
 			}
 
@@ -109,8 +111,7 @@ if ( ! class_exists( 'WC_Settings_Page', false ) ) :
 			$array_keys = array_keys( $sections );
 
 			foreach ( $sections as $id => $label ) {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo '<li><a href="' . admin_url( 'admin.php?page=wc-settings&tab=' . $this->id . '&section=' . sanitize_title( $id ) ) . '" class="' . ( $current_section === $id ? 'current' : '' ) . '">' . esc_html( $label ) . '</a> ' . ( end( $array_keys ) === $id ? '' : '|' ) . ' </li>';
+				echo '<li><a href="' . admin_url( 'admin.php?page=wc-settings&tab=' . $this->id . '&section=' . sanitize_title( $id ) ) . '" class="' . ( $current_section == $id ? 'current' : '' ) . '">' . $label . '</a> ' . ( end( $array_keys ) == $id ? '' : '|' ) . ' </li>';
 			}
 
 			echo '</ul><br class="clear" />';

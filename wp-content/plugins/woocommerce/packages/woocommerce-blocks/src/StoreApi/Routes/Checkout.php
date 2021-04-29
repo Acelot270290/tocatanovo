@@ -1,7 +1,6 @@
 <?php
 namespace Automattic\WooCommerce\Blocks\StoreApi\Routes;
 
-use Automattic\WooCommerce\Blocks\StoreApi\Utilities\InvalidStockLevelsInCartException;
 use \Exception;
 use \WP_Error;
 use \WP_REST_Server;
@@ -10,8 +9,6 @@ use \WP_REST_Response;
 use \WC_Order;
 use Automattic\WooCommerce\Blocks\Package;
 use Automattic\WooCommerce\Blocks\Domain\Services\CreateAccount;
-use Automattic\WooCommerce\Blocks\StoreApi\Schemas\AbstractSchema;
-use Automattic\WooCommerce\Blocks\StoreApi\Schemas\CartSchema;
 use Automattic\WooCommerce\Blocks\StoreApi\Utilities\CartController;
 use Automattic\WooCommerce\Blocks\StoreApi\Utilities\OrderController;
 use Automattic\WooCommerce\Checkout\Helpers\ReserveStock;
@@ -24,36 +21,13 @@ use Automattic\WooCommerce\Blocks\Payments\PaymentContext;
  *
  * @internal This API is used internally by Blocks--it is still in flux and may be subject to revisions.
  */
-class Checkout extends AbstractCartRoute {
+class Checkout extends AbstractRoute {
 	/**
 	 * Holds the current order being processed.
 	 *
 	 * @var WC_Order
 	 */
 	private $order = null;
-
-	/**
-	 * Order controller class instance.
-	 *
-	 * @var OrderController
-	 */
-	protected $order_controller;
-
-	/**
-	 * Constructor accepts two types of schema; one for the item being returned, and one for the cart as a whole. These
-	 * may be the same depending on the route.
-	 *
-	 * @param CartSchema      $cart_schema Schema class for the cart.
-	 * @param AbstractSchema  $item_schema Schema class for this route's items if it differs from the cart schema.
-	 * @param CartController  $cart_controller Cart controller class.
-	 * @param OrderController $order_controller Order controller class.
-	 */
-	public function __construct( CartSchema $cart_schema, AbstractSchema $item_schema = null, CartController $cart_controller, OrderController $order_controller ) {
-		$this->schema           = is_null( $item_schema ) ? $cart_schema : $item_schema;
-		$this->cart_schema      = $cart_schema;
-		$this->cart_controller  = $cart_controller;
-		$this->order_controller = $order_controller;
-	}
 
 	/**
 	 * Get the path of this REST route.
@@ -65,13 +39,23 @@ class Checkout extends AbstractCartRoute {
 	}
 
 	/**
-	 * Checks if a nonce is required for the route.
+	 * Enforce nonces for all checkout endpoints.
 	 *
-	 * @param \WP_REST_Request $request Request.
-	 * @return bool
+	 * @param WP_REST_Request $request Request object.
+	 * @return WP_Error|WP_REST_Response
 	 */
-	protected function requires_nonce( \WP_REST_Request $request ) {
-		return true;
+	public function get_response( WP_REST_Request $request ) {
+		$this->maybe_load_cart();
+		$response = null;
+		try {
+			$this->check_nonce( $request );
+			$response = parent::get_response( $request );
+		} catch ( RouteException $error ) {
+			$response = $this->get_route_error_response( $error->getErrorCode(), $error->getMessage(), $error->getCode() );
+		} catch ( Exception $error ) {
+			$response = $this->get_route_error_response( 'unknown_server_error', $error->getMessage(), 500 );
+		}
+		return $response;
 	}
 
 	/**
@@ -90,6 +74,12 @@ class Checkout extends AbstractCartRoute {
 				],
 			],
 			[
+				'methods'             => WP_REST_Server::EDITABLE,
+				'callback'            => array( $this, 'get_response' ),
+				'permission_callback' => '__return_true',
+				'args'                => $this->schema->get_endpoint_args_for_item_schema( WP_REST_Server::EDITABLE ),
+			],
+			[
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => [ $this, 'get_response' ],
 				'permission_callback' => '__return_true',
@@ -105,7 +95,7 @@ class Checkout extends AbstractCartRoute {
 										'type' => 'string',
 									],
 									'value' => [
-										'type' => [ 'string', 'boolean' ],
+										'type' => 'string',
 									],
 								],
 							],
@@ -113,12 +103,6 @@ class Checkout extends AbstractCartRoute {
 					],
 					$this->schema->get_endpoint_args_for_item_schema( WP_REST_Server::CREATABLE )
 				),
-			],
-			[
-				'methods'             => WP_REST_Server::EDITABLE,
-				'callback'            => array( $this, 'get_response' ),
-				'permission_callback' => '__return_true',
-				'args'                => $this->schema->get_endpoint_args_for_item_schema( WP_REST_Server::EDITABLE ),
 			],
 			'schema' => [ $this->schema, 'get_public_item_schema' ],
 		];
@@ -206,20 +190,10 @@ class Checkout extends AbstractCartRoute {
 	 * 5. Process Payment
 	 *
 	 * @throws RouteException On error.
-	 * @throws InvalidStockLevelsInCartException On error.
-	 *
 	 * @param WP_REST_Request $request Request object.
-	 *
 	 * @return WP_REST_Response
 	 */
 	protected function get_route_post_response( WP_REST_Request $request ) {
-		/**
-		 * Validate items etc are allowed in the order before the order is processed. This will fix violations and tell
-		 * the customer.
-		 */
-		$this->cart_controller->validate_cart_items();
-		$this->cart_controller->validate_cart_coupons();
-
 		/**
 		 * Obtain Draft Order and process request data.
 		 *
@@ -242,7 +216,8 @@ class Checkout extends AbstractCartRoute {
 		 *
 		 * This logic ensures the order is valid before payment is attempted.
 		 */
-		$this->order_controller->validate_order_before_payment( $this->order );
+		$order_controller = new OrderController();
+		$order_controller->validate_order_before_payment( $this->order );
 
 		/**
 		 * WooCommerce Blocks Checkout Order Processed (experimental).
@@ -255,6 +230,7 @@ class Checkout extends AbstractCartRoute {
 		 *
 		 * @see https://github.com/woocommerce/woocommerce-gutenberg-products-block/pull/3238
 		 * @internal This Hook is experimental and may change or be removed.
+		 * @since 3.8.0
 		 *
 		 * @param WC_Order $order Order object.
 		 */
@@ -284,51 +260,25 @@ class Checkout extends AbstractCartRoute {
 	 * @return WP_Error WP Error object.
 	 */
 	protected function get_route_error_response( $error_code, $error_message, $http_status_code = 500, $additional_data = [] ) {
-		$error_from_message = new WP_Error(
-			$error_code,
-			$error_message
-		);
 		switch ( $http_status_code ) {
 			case 409:
-				// 409 is when there was a conflict, so we return the cart so the client can resolve it.
-				return $this->add_data_to_error_object( $error_from_message, $additional_data, $http_status_code, true );
-		}
-		return $this->add_data_to_error_object( $error_from_message, $additional_data, $http_status_code );
-	}
+				// If there was a conflict, return the cart so the client can resolve it.
+				$controller = new CartController();
+				$cart       = $controller->get_cart_instance();
 
-	/**
-	 * Get route response when something went wrong.
-	 *
-	 * @param WP_Error $error_object User facing error message.
-	 * @param int      $http_status_code HTTP status. Defaults to 500.
-	 * @param array    $additional_data  Extra data (key value pairs) to expose in the error response.
-	 * @return WP_Error WP Error object.
-	 */
-	protected function get_route_error_response_from_object( $error_object, $http_status_code = 500, $additional_data = [] ) {
-		switch ( $http_status_code ) {
-			case 409:
-				// 409 is when there was a conflict, so we return the cart so the client can resolve it.
-				return $this->add_data_to_error_object( $error_object, $additional_data, $http_status_code, true );
+				return new WP_Error(
+					$error_code,
+					$error_message,
+					array_merge(
+						$additional_data,
+						[
+							'status' => $http_status_code,
+							'cart'   => wc()->api->get_endpoint_data( '/wc/store/cart' ),
+						]
+					)
+				);
 		}
-		return $this->add_data_to_error_object( $error_object, $additional_data, $http_status_code );
-	}
-
-	/**
-	 * Adds additional data to the WP_Error object.
-	 *
-	 * @param WP_Error $error The error object to add the cart to.
-	 * @param array    $data The data to add to the error object.
-	 * @param int      $http_status_code The HTTP status code this error should return.
-	 * @param bool     $include_cart Whether the cart should be included in the error data.
-	 * @returns WP_Error The WP_Error with the cart added.
-	 */
-	private function add_data_to_error_object( $error, $data, $http_status_code, bool $include_cart = false ) {
-		$data = array_merge( $data, [ 'status' => $http_status_code ] );
-		if ( $include_cart ) {
-			$data = array_merge( $data, [ 'cart' => wc()->api->get_endpoint_data( '/wc/store/cart' ) ] );
-		}
-		$error->add_data( $data );
-		return $error;
+		return new WP_Error( $error_code, $error_message, [ 'status' => $http_status_code ] );
 	}
 
 	/**
@@ -380,30 +330,20 @@ class Checkout extends AbstractCartRoute {
 	 * @throws RouteException On error.
 	 */
 	private function create_or_update_draft_order() {
-		$this->order = $this->get_draft_order_id() ? wc_get_order( $this->get_draft_order_id() ) : null;
+		$cart_controller  = new CartController();
+		$order_controller = new OrderController();
+		$reserve_stock    = new ReserveStock();
+		$this->order      = $this->get_draft_order_id() ? wc_get_order( $this->get_draft_order_id() ) : null;
+
+		// Validate items etc are allowed in the order before it gets created.
+		$cart_controller->validate_cart_items();
+		$cart_controller->validate_cart_coupons();
 
 		if ( ! $this->is_valid_draft_order( $this->order ) ) {
-			$this->order = $this->order_controller->create_order_from_cart();
+			$this->order = $order_controller->create_order_from_cart();
 		} else {
-			$this->order_controller->update_order_from_cart( $this->order );
+			$order_controller->update_order_from_cart( $this->order );
 		}
-
-		/**
-		 * WooCommerce Blocks Checkout Update Order Meta (experimental).
-		 *
-		 * This hook gives extensions the chance to add or update meta data on the $order.
-		 *
-		 * This is similar to existing core hook woocommerce_checkout_update_order_meta.
-		 * We're using a new action:
-		 * - To keep the interface focused (only pass $order, not passing request data).
-		 * - This also explicitly indicates these orders are from checkout block/StoreAPI.
-		 *
-		 * @see https://github.com/woocommerce/woocommerce-gutenberg-products-block/pull/3686
-		 * @internal This Hook is experimental and may change or be removed.
-		 *
-		 * @param WC_Order $order Order object.
-		 */
-		do_action( '__experimental_woocommerce_blocks_checkout_update_order_meta', $this->order );
 
 		// Confirm order is valid before proceeding further.
 		if ( ! $this->order instanceof WC_Order ) {
@@ -419,7 +359,6 @@ class Checkout extends AbstractCartRoute {
 
 		// Try to reserve stock for 10 mins, if available.
 		try {
-			$reserve_stock = new ReserveStock();
 			$reserve_stock->reserve_stock_for_order( $this->order, 10 );
 		} catch ( ReserveStockException $e ) {
 			$error_data = $e->getErrorData();
@@ -439,10 +378,12 @@ class Checkout extends AbstractCartRoute {
 	 * @param WP_REST_Request $request Full details about the request.
 	 */
 	private function update_customer_from_request( WP_REST_Request $request ) {
+		$schema   = $this->get_item_schema();
 		$customer = wc()->customer;
 
 		if ( isset( $request['billing_address'] ) ) {
-			foreach ( $request['billing_address'] as $key => $value ) {
+			$allowed_billing_values = array_intersect_key( $request['billing_address'], $schema['properties']['billing_address']['properties'] );
+			foreach ( $allowed_billing_values as $key => $value ) {
 				if ( is_callable( [ $customer, "set_billing_$key" ] ) ) {
 					$customer->{"set_billing_$key"}( $value );
 				}
@@ -450,7 +391,8 @@ class Checkout extends AbstractCartRoute {
 		}
 
 		if ( isset( $request['shipping_address'] ) ) {
-			foreach ( $request['shipping_address'] as $key => $value ) {
+			$allowed_shipping_values = array_intersect_key( $request['shipping_address'], $schema['properties']['shipping_address']['properties'] );
+			foreach ( $allowed_shipping_values as $key => $value ) {
 				if ( is_callable( [ $customer, "set_shipping_$key" ] ) ) {
 					$customer->{"set_shipping_$key"}( $value );
 				}
@@ -602,11 +544,15 @@ class Checkout extends AbstractCartRoute {
 	 *
 	 * @internal CreateAccount class includes feature gating logic (i.e. this may not create an account depending on build).
 	 * @internal Checkout signup is feature gated to WooCommerce 4.7 and newer; Because it requires updated my-account/lost-password screen in 4.7+ for setting initial password.
+
+	 * @todo OrderController (and CartController) should be injected into Checkout Route Class.
 	 *
 	 * @throws RouteException API error object with error details.
 	 * @param WP_REST_Request $request Request object.
 	 */
 	private function process_customer( WP_REST_Request $request ) {
+		$order_controller = new OrderController();
+
 		if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '4.7', '>=' ) ) {
 			try {
 				$create_account = Package::container()->get( CreateAccount::class );
@@ -632,7 +578,7 @@ class Checkout extends AbstractCartRoute {
 		}
 
 		// Persist customer address data to account.
-		$this->order_controller->sync_customer_data_with_order( $this->order );
+		$order_controller->sync_customer_data_with_order( $this->order );
 	}
 
 }

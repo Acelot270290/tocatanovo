@@ -13,7 +13,7 @@ $args_cat = array(
 	'title_li'     => '',
 );
 ?>
-<?php if ( isset($instance['title'])  ) {
+<?php if ( $instance['title'] ) {
 	echo ent2ncr( $args['before_title'] . $instance['title'] . $args['after_title'] );
 } ?>
 

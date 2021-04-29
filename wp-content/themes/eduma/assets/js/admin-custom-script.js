@@ -4,6 +4,8 @@ jQuery(function($) {
 
         thim_eduma_install_demo();
 
+        thim_eduma_30_install_demo();
+
         thim_eduma_edit_term();
 
         thim_vc_template_ui.init();
@@ -91,20 +93,25 @@ jQuery(function($) {
         }).trigger('change');
     }
 
-    function thim_eduma_install_demo() {
+    function thim_eduma_30_install_demo() {
+
         if ($('.tc-importer-wrapper').length == 0) {
             return;
         }
-        if ($('.tc-importer-wrapper .theme.installed[data-thim-demo^=demo-vc]').length > 0) {
-            $('.tc-importer-wrapper').addClass('visual_composer');
-        }
+
         if ($('.tc-importer-wrapper .theme.installed[data-thim-demo^=demo-so]').length > 0) {
             $('.tc-importer-wrapper').addClass('site_origin');
         }
+
+        if ($('.tc-importer-wrapper .theme.installed[data-thim-demo^=demo-vc]').length > 0) {
+            $('.tc-importer-wrapper').addClass('visual_composer');
+        }
+
         if ($('.tc-importer-wrapper .theme.installed[data-thim-demo^=demo-el]').length > 0) {
             $('.tc-importer-wrapper').addClass('elementor');
         }
-         if ($('.tc-importer-wrapper .theme.installed').length > 0) {
+
+        if ($('.tc-importer-wrapper .theme.installed').length > 0) {
             return;
         }
 
@@ -122,6 +129,74 @@ jQuery(function($) {
             $('.tc-importer-wrapper').addClass('overlay');
         }
 
+        $(document).on('change', '#thim-select-page-builder', function() {
+
+            var elem = $(this),
+                elem_val = elem.val(),
+                elem_parent = elem.parents('.tc-importer-wrapper'),
+                data = {
+                    action    : 'thim_update_theme_mods',
+                    thim_key  : 'thim_page_builder_chosen',
+                    thim_value: elem_val,
+                };
+
+            if (elem_val !== '') {
+                elem_parent.removeClass('visual_composer');
+                elem_parent.removeClass('site_origin');
+                elem_parent.removeClass('elementor');
+                elem_parent.addClass(elem_val);
+
+                elem_parent.removeClass('overlay').addClass('loading');
+                $.post(ajaxurl, data, function (response) {
+                    console.log(response);
+                    elem_parent.removeClass('loading');
+                });
+            } else {
+                elem_parent.addClass('overlay');
+            }
+
+        });
+    }
+
+    function thim_eduma_install_demo() {
+        if ($('.thim-demo-browser.theme-browser').length == 0) {
+            return;
+        }
+
+        var $html = '<div class="thim-choose-page-builder"><h3 class="title">Please select page builder before Import Demo.</h3>';
+        $html += '<select id="thim-select-page-builder">';
+        $html += '<option value="">Select</option>';
+        $html += '<option value="visual_composer">Visual Composer</option>';
+        $html += '<option value="site_origin">Site Origin</option>';
+        $html += '</select></div>';
+
+        $('.thim-demo-browser.theme-browser').prepend($html);
+
+        if ($('#thim-select-page-builder').val() === '') {
+            $('.thim-demo-browser').addClass('overlay');
+        }
+
+        $(document).on('change', '#thim-select-page-builder', function() {
+
+            var elem = $(this),
+                elem_val = elem.val(),
+                elem_parent = elem.parents('.thim-demo-browser'),
+                data = {
+                    action    : 'thim_update_theme_mods',
+                    thim_key  : 'thim_page_builder_chosen',
+                    thim_value: elem_val,
+                };
+
+            if (elem_val !== '') {
+                elem_parent.removeClass('overlay').addClass('loading');
+                $.post(ajaxurl, data, function(response) {
+                    elem_parent.removeClass('loading');
+                });
+            } else {
+                elem_parent.addClass('overlay');
+            }
+
+        });
     }
 
     function thim_eduma_edit_term() {

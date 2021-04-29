@@ -5,7 +5,7 @@
 class Loco_fs_LocaleFile extends Loco_fs_File {
     
     /**
-     * @var Loco_Locale|null
+     * @var Loco_Locale
      */
     private $locale;
     
@@ -19,26 +19,16 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
      */
     private $prefix;
 
-    /**
-     * @var string
-     */
-    private $hash = '';
-
 
     /**
      * Lazy handling of localized path info
-     * @return array [ prefix, suffix, hash ]
+     * @return array [ prefix, suffix ]
      */
     public function split(){
         if( is_null($this->suffix) ){
-            $parts = explode('-',$this->filename() );
-            $this->suffix = array_pop($parts);
-            // handle script hashes for JSONs only
-            if( 'json' === $this->extension() && preg_match('/^[0-9a-f]{32}$/',$this->suffix) ){
-                $this->hash = $this->suffix;
-                $this->suffix = array_pop($parts);
-            }
-            $this->prefix = implode('-',$parts);
+            $parts = explode( '-', $this->filename() );
+            $this->suffix = array_pop( $parts );
+            $this->prefix = implode( '-', $parts );
             // handle situations where suffixless name is wrongly taken as the prefix
             // e.g. "de.po" is valid but "hello.po" is not. 
             // There are still some  ambiguous situations, e.g. "foo-bar.po" is valid, but nonsense
@@ -48,7 +38,7 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
                 $this->locale = null;
             }
         }
-        return array( $this->prefix, $this->suffix, $this->hash );
+        return array( $this->prefix, $this->suffix );
     }
     
     
@@ -87,6 +77,7 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
         return new Loco_fs_LocaleFile($path);
     }
 
+    
 
     /**
      * Get prefix (or stem) from name that comes before locale suffix.
@@ -107,13 +98,6 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
         return $info[1];
     }
 
-    /**
-     * @return string
-     */
-    public function getHash(){
-        $info = $this->split();
-        return $info[2];
-    }
 
     /**
      * Test if file is suffix only, e.g. "en_US.po"
@@ -133,6 +117,5 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
         $info = $this->split();
         return $info[0] && ! $info[1];
     }
-    
-    
+        
 }

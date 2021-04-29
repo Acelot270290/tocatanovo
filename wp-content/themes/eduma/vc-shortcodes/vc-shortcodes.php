@@ -39,20 +39,20 @@ require_once( THIM_DIR . 'vc-shortcodes/shortcodes/list-post/list-post.php' );
 require_once( THIM_DIR . 'vc-shortcodes/shortcodes/carousel-categories/carousel-categories.php' );
 require_once( THIM_DIR . 'vc-shortcodes/shortcodes/link/link.php' );
 require_once( THIM_DIR . 'vc-shortcodes/shortcodes/multiple-images/multiple-images.php' );
-if ( class_exists( 'LearnPress' ) ) {
+if ( thim_plugin_active( 'learnpress/learnpress.php' ) ) {
 	require_once( THIM_DIR . 'vc-shortcodes/shortcodes/courses/courses.php' );
 	require_once( THIM_DIR . 'vc-shortcodes/shortcodes/course-categories/course-categories.php' );
 	require_once( THIM_DIR . 'vc-shortcodes/shortcodes/courses-searching/courses-searching.php' );
 	require_once( THIM_DIR . 'vc-shortcodes/shortcodes/list-instructors/list-instructors.php' );
 
-	if ( class_exists( 'LP_Addon_Collections_Preload' )  ) {
+	if ( thim_plugin_active( 'learnpress-collections/learnpress-collections.php' ) ) {
 		require_once( THIM_DIR . 'vc-shortcodes/shortcodes/courses-collection/courses-collection.php' );
 	}
-	if (  class_exists( 'LP_Co_Instructor_Preload' ) ) {
+	if ( thim_plugin_active( 'learnpress-co-instructor/learnpress-co-instructor.php' ) ) {
 		require_once( THIM_DIR . 'vc-shortcodes/shortcodes/one-course-instructors/one-course-instructors.php' );
 	}
 }
-if ( class_exists( 'WPEMS' ) ) {
+if ( thim_plugin_active( 'wp-events-manager/wp-events-manager.php' ) ) {
 //	require_once( THIM_DIR . 'vc-shortcodes/shortcodes/tab-event/tab-event.php' );
 	require_once( THIM_DIR . 'vc-shortcodes/shortcodes/list-events/list-events.php' );
 }
@@ -62,7 +62,7 @@ if ( thim_plugin_active( 'thim-testimonials/thim-testimonials.php' ) ) {
 if ( thim_plugin_active( 'thim-our-team/init.php' ) ) {
 	require_once( THIM_DIR . 'vc-shortcodes/shortcodes/our-team/our-team.php' );
 }
-if ( class_exists( 'Thim_Portfolio' ) ) {
+if ( thim_plugin_active( 'tp-portfolio/tp-portfolio.php' ) ) {
 	require_once( THIM_DIR . 'vc-shortcodes/shortcodes/portfolio/portfolio.php' );
 }
 if ( thim_plugin_active( 'thim-twitter/thim-twitter.php' ) ) {

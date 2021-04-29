@@ -4,7 +4,7 @@ $limit          = (int) $instance['slider-options']['limit'];
 $pagination     = $instance['slider-options']['show_pagination'] ? 1 : 0;
 $navigation     = $instance['slider-options']['show_navigation'] ? 1 : 0;
 $sub_categories = $instance['sub_categories'] ? '' : 0;
-$item_visible   = isset($instance['slider-options']['responsive-options']) ? (int) $instance['slider-options']['responsive-options']['item_visible'] : 7;
+$item_visible   = (int) $instance['slider-options']['responsive-options']['item_visible'];
 $taxonomy       = 'course_category';
 $autoplay       = isset( $instance['slider-options']['auto_play'] ) ? $instance['slider-options']['auto_play'] : 0;
 

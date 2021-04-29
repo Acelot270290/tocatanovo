@@ -23,7 +23,7 @@ const label = decodeEntities( settings.title ) || defaultLabel;
  * Content component
  */
 const Content = () => {
-	return decodeEntities( settings.description || '' );
+	return <div>{ decodeEntities( settings.description || '' ) }</div>;
 };
 
 /**
@@ -79,9 +79,6 @@ const cashOnDeliveryPaymentMethod = {
 	edit: <Content />,
 	canMakePayment,
 	ariaLabel: label,
-	supports: {
-		features: settings?.supports ?? [],
-	},
 };
 
 registerPaymentMethod( cashOnDeliveryPaymentMethod );

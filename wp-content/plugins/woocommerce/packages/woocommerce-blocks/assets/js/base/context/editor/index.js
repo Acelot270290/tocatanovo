@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { createContext, useContext, useCallback } from '@wordpress/element';
+import { createContext, useContext } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 
 /**
@@ -13,7 +13,6 @@ const EditorContext = createContext( {
 	isEditor: false,
 	currentPostId: 0,
 	previewData: {},
-	getPreviewData: () => void null,
 } );
 
 /**
@@ -50,16 +49,6 @@ export const EditorProvider = ( {
 		[ currentPostId ]
 	);
 
-	const getPreviewData = useCallback(
-		( name ) => {
-			if ( name in previewData ) {
-				return previewData[ name ];
-			}
-			return {};
-		},
-		[ previewData ]
-	);
-
 	/**
 	 * @type {EditorDataContext}
 	 */
@@ -67,7 +56,6 @@ export const EditorProvider = ( {
 		isEditor: true,
 		currentPostId: editingPostId,
 		previewData,
-		getPreviewData,
 	};
 
 	return (

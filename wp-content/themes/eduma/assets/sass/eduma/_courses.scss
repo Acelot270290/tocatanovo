@@ -16,19 +16,16 @@
 			position: relative;
 			top: auto;
 			right: auto;
-			display: inline-block;
+			display: block;
 			text-align: center;
 			border: none;
 			font-size: 16px;
 			height: 60px;
 			line-height: 40px;
-			padding: 10px 30px;
+			padding: 10px 0;
 			margin-top: 20px;
 			margin-bottom: 40px;
 		}
-	}
-	.wrapper-bottom-view-courses {
-		text-align: center;
 	}
 	.thim-course-grid {
 		margin: 0 -15px;
@@ -310,9 +307,7 @@
 		float: left;
 		margin-bottom: 40px;
 		padding-top: 0 !important;
-		&:hover{
-			box-shadow: 0 0 0!important;
-		}
+
 		.thim-ralated-course & {
 			margin-bottom: 0;
 		}
@@ -323,9 +318,7 @@
 	.course-item {
 		text-align: center;
 		box-shadow: none;
-		&:hover{
-			box-shadow: 0 0 5px 0 rgba(221, 221, 221, 0.7);
-		}
+
 		.course-thumbnail {
 			margin: 0;
 			overflow: hidden;
@@ -340,12 +333,11 @@
 				left: 0;
 				text-align: center;
 			}
-			a{
-				>img {
-					width: 100%;
-					@include transition(all 0.5s ease-in-out);
-				}
+			img {
+				width: 100%;
+				@include transition(all 0.5s ease-in-out);
 			}
+
 			a.thumb {
 				&:before {
 					content: '';
@@ -388,10 +380,9 @@
 			}
 
 			&:hover {
-				a >img {
+				img {
 					@include transform(scale(1.05, 1.05));
 				}
-				
 
 				a.thumb {
 					&:before {
@@ -528,7 +519,6 @@
 					color: #ccc;
 					padding: 0;
 					border: 0;
-					transition: all .35s;
 
 					a {
 						color: #ccc;
@@ -834,7 +824,6 @@
 				height: auto;
 				border-bottom: none;
 				text-decoration: none;
-				transition: all .35s;
 
 				&:before {
 					width: auto;
@@ -1743,6 +1732,7 @@ body .learnpress li {
 .thim_tabs_slider {
 	overflow: hidden;
 	padding-bottom: 50px;
+	border-bottom: 1px solid #e5e5e5;
 
 	.thim_content_tabs {
 		position: relative;
@@ -1880,8 +1870,6 @@ body .learnpress li {
 		}
 	}
 }
-
-
 
 body.learnpress-page {
 	&.archive {

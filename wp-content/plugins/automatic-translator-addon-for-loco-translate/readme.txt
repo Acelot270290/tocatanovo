@@ -1,9 +1,9 @@
-=== Automatic Translate Addon For Loco Translate ===
+﻿=== Automatic Translate Addon For Loco Translate ===
 Contributors: narinder-singh, satindersingh
 Donate link: https://paypal.me/CoolPlugins/10USD/
 Tags: translate, translation, translator, localization, language, translations, loco, loco translate, loco addon, google translate, deepl
 Requires at least: 4.5
-Tested up to: 5.7
+Tested up to: 5.6
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -29,7 +29,7 @@ Install this plugin along with the famous **[Loco Translate](https://wordpress.o
 
 * One-click translate any plugin or theme all translatable strings. It will only translate plain text strings means if a string will contain HTML or special character then it will skipped from automatic translations.
 * You can automatic translate **unlimited characters** free of cost without any API key. You just need to install this addon and click on translate button to translate any plugin or theme strings.
-* After auto translations, you can manually edit any machine translated string inside Loco built-in editor.
+* After auto translations, you can manually edit any machine translated string inside Loco build-in editor.
 
 > “If you spend too much time thinking about a thing, you'll never get it done. Stop wasting time, complete work smartly & quickly!”
 
@@ -134,17 +134,6 @@ There is no limit. Yes, you can translate unlimited characters without any API k
 5. Premium License Pricing 
 
 == Changelog ==
-<strong>Version 2.2.2 | 27/04/2021 </strong>
-<pre>
-Fixed:Minor ID bug fixes
-</pre>
-<strong>Version 2.2 | 17/04/2021 </strong>
-<pre>
-Added:Updated Yandex new translation API
-Fixed:unable to translate issue with Yandex
-Improved:tested upto WordPress 5.7
-</pre>
-
 <strong>Version 2.1.3 | 11 DEC 2020 </strong>
 <pre>
 Fixed: Compatibility issues with  WordPress 5.6

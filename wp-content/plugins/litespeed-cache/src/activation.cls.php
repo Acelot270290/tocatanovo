@@ -40,11 +40,15 @@ class Activation extends Instance {
 			}
 		}
 
-		// Files will be delayed updated in next visit to wp-admin
-		Conf::update_option( '__activation', Core::VER );
+		do_action( 'litespeed_load_thirdparty' );
+
+		// Check new version @since 2.9.3
+		Cloud::version_check( 'activate' . ( defined( 'LSCWP_REF' ) ? '_' . LSCWP_REF : '' ) );
 
 		/* Network file handler */
+
 		if ( is_multisite() ) {
+
 			if ( ! is_network_admin() ) {
 				if ( $count === 1 ) {
 					// Only itself is activated, set .htaccess with only CacheLookUp
@@ -54,8 +58,16 @@ class Activation extends Instance {
 						Admin_Display::error( $ex->getMessage() );
 					}
 				}
+				return;
 			}
+
+			Conf::get_instance()->update_confs();
+
+			return;
 		}
+
+		/* Single site file handler */
+		Conf::get_instance()->update_confs();
 
 		if ( defined( 'LSCWP_REF' ) && LSCWP_REF == 'whm' ) {
 			GUI::update_option( GUI::WHM_MSG, GUI::WHM_MSG_VAL );
@@ -401,7 +413,7 @@ class Activation extends Instance {
 			$upgrader = new \Plugin_Upgrader( $skin );
 			$result = $upgrader->upgrade( $plugin );
 			if ( ! is_plugin_active( $plugin ) ) {// todo: upgrade should reactivate the plugin again by WP. Need to check why disabled after upgraded.
-				activate_plugin( $plugin, '', is_multisite() );
+				activate_plugin( $plugin );
 			}
 			ob_end_clean();
 		} catch ( \Exception $e ) {

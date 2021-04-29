@@ -284,7 +284,7 @@
 		text-align: center;
 
 		&:before {
-			font-family: 'Font Awesome 5 Free';
+			font-family:  'Font Awesome 5 Free';
 			font-size: 40px;
 			line-height: 1;
 			content: "\f04b";
@@ -336,10 +336,6 @@
 	}
 
 	.wrapper-box-icon {
-		&.text-center .iconbox-top .boxes-icon {
-			margin-bottom: 15px;
-		}
-
 		&.circle {
 			.iconbox-top {
 				.content-inner {
@@ -408,11 +404,8 @@
 		margin-bottom: 40px;
 		@include transition();
 
-		@media screen and (max-width: 480px) {
-			margin-bottom: 0;
-		}
-
 		.icon {
+
 			&.icon-images {
 				background-image: url(images/bg_icon.png);
 				height: 120px;
@@ -429,10 +422,6 @@
 
 		.desc-icon-box {
 			margin-top: 10px;
-
-			.desc-content {
-				line-height: 30px !important;
-			}
 		}
 	}
 
@@ -544,6 +533,7 @@
 		}
 	}
 }
+
 
 .thim-welcome-university {
 	> .panel-grid-cell {
@@ -730,239 +720,3 @@
 	}
 }
 
-// new style for new demo by tuanta
-.thim-widget-icon-box .layout_text_number {
-	background-color: #fff;
-	border-radius: 5px;
-	padding: 35px 0;
-	border-left: 1px solid #ddd;
-
-	&:not(:hover) {
-		background-image: none !important;
-	}
-
-	.boxes-icon {
-		margin-bottom: 20px;
-		font-weight: bold;
-	}
-
-	.iconbox-left {
-		.boxes-icon {
-			margin-right: 0;
-
-			&.circle {
-				border-radius: 0 20px 20px 0;
-			}
-		}
-	}
-
-	.iconbox-right {
-		.boxes-icon {
-			margin-left: 0;
-
-			&.circle {
-				border-radius: 20px 0 0 20px;
-			}
-		}
-	}
-
-	.content-inner {
-		padding: 0 40px;
-	}
-
-	&.image_box {
-		padding: 45px 0 35px!important;
-	}
-
-	.smicon-read {
-		padding: 0;
-		margin-top: 20px;
-		border: none;
-		position: relative;
-
-		&:before {
-			content: "";
-			width: 0;
-			height: 2px;
-			background: #000;
-			display: inline-block;
-			margin-right: 8px;
-			vertical-align: middle;
-			-webkit-transition: all 0.3s;
-			-khtml-transition: all 0.3s;
-			-moz-transition: all 0.3s;
-			-ms-transition: all 0.3s;
-			-o-transition: all 0.3s;
-			transition: all 0.3s;
-		}
-
-		i {
-			display: none;
-		}
-	}
-
-	&:hover {
-		.smicon-read:before {
-			width: 15px;
-		}
-	}
-}
-
-.thim-widget-icon-box .dot_line_buttom_top {
- 	.dot-line {
-		width: 8px;
-		height: 8px;
-		display: block;
-		margin: 15px auto;
-		border-radius: 50%;
-		position: relative;
-
-		&:before, &:after {
-			content: "";
-			width: 60px;
-			height: 1px;
-			display: block;
-			position: absolute;
-			border: 2px solid;
-			right: 100%;
-			margin-right: 22px;
-			top: 2px;
-			@include transition();
-			@include scale(0, 0);
-		}
-
-		&:after {
-			left: 100%;
-			right: auto;
-			margin-right: 0;
-			margin-left: 22px;
-		}
-
-		span {
-			&:before, &:after {
-				content: "";
-				display: block;
-				position: absolute;
-				border: 8px solid;
-				top: -4px;
-				left: -4px;
-				opacity: 0.3;
-				border-radius: 50%;
-				z-index: -1;
-				@include transition();
-				@include scale(0, 0);
-			}
-
-			&:after {
-				border: 12px solid;
-				top: -8px;
-				left: -8px;
-				opacity: 0.2;
-			}
-		}
-	}
-
-	.smicon-box {
-		position: relative;
-		z-index: -1;
-
-		//.line_top {
- 		//	background: #f5f5f5;
-		//	position: fixed;
-		//	display: block;
-		//	width: 1px;
-		//	top: 0;
-		//	bottom: 0;
- 		//	z-index: -2;
-		//}
-
-		.boxes-icon, .content-inner {
-			z-index: 1;
-			position: relative;
-
-			.desc-icon-box {
-				margin-top: 35px;
-			}
-		}
-	}
-
-	&:hover {
-		.dot-line {
-			&:before, &:after {
-				@include scale(1, 1);
-			}
-
-			span {
-				&:before, &:after {
-					@include scale(1, 1);
-				}
-			}
-		}
-	}
-	@media (max-width: 768px) {
-		.smicon-box .line_top{
-			display: none;
-		}
-	}
-}
-
-.thim-widget-icon-box,
-.elementor-widget-thim-icon-box{
-	&.custom-title-slider-gradient {
-		.image_box {
-			.desc-icon-box {
-				line-height: 30px !important;
-				margin-top: 15px;
-
-				.desc-content {
-					overflow: hidden;
-					text-overflow: ellipsis;
-					display: -webkit-box;
-					-webkit-line-clamp: 4;
-					-webkit-box-orient: vertical;
-				}
-			}
-		}
-	}
-}
-
-.thim-widget-icon-box {
-	&.custom-title-slider-gradient {
-		.layout_text_number {
-			.smicon-read {
-				font-size: 18px;
-				text-transform: uppercase;
-			}
-
-			.iconbox-left {
-				.boxes-icon{
-					&.circle {
-						border-radius: 0 50px 50px 0;
-					}
-				}
-			}
-			&:hover .smicon-read:before{
-				width: 30px;
-				margin-right: 16px;
-			}
-		}
-
-		.inner-icon {
-			position: relative;
-
-			.text-number-icon {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-			}
-		}
-
-		.image_box {
-			.heading__primary {
-				padding-right: 25%;
-				line-height: 42px !important;
-			}
-		}
-	}
-}

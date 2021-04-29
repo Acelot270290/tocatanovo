@@ -31,7 +31,7 @@ $user_id = get_the_author_meta( 'ID' );
 ?>
 
 <div class="course-author" itemscope itemtype="http://schema.org/Person">
-	<?php echo get_avatar( $user_id, 50 ); ?>
+	<?php echo get_avatar( $user_id, 40 ); ?>
 	<div class="author-contain">
 		<div class="value" itemprop="name">
 			<?php

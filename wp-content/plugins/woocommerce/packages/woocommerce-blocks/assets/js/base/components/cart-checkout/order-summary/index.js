@@ -4,7 +4,7 @@
 import { __ } from '@wordpress/i18n';
 import PropTypes from 'prop-types';
 import { useContainerWidthContext } from '@woocommerce/base-context';
-import { Panel } from '@woocommerce/blocks-checkout';
+import Panel from '@woocommerce/base-components/panel';
 
 /**
  * Internal dependencies
@@ -23,7 +23,6 @@ const OrderSummary = ( { cartItems = [] } ) => {
 		<Panel
 			className="wc-block-components-order-summary"
 			initialOpen={ isLarge }
-			hasBorder={ true }
 			title={
 				<span className="wc-block-components-order-summary__button-text">
 					{ __( 'Order summary', 'woocommerce' ) }

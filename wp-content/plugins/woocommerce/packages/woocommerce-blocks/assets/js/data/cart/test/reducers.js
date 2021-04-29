@@ -14,7 +14,6 @@ describe( 'cartReducer', () => {
 		cartData: {
 			coupons: [],
 			items: [],
-			fees: [],
 			itemsCount: 0,
 			itemsWeight: 0,
 			needsShipping: true,
@@ -35,7 +34,6 @@ describe( 'cartReducer', () => {
 			response: {
 				coupons: [],
 				items: [],
-				fees: [],
 				itemsCount: 0,
 				itemsWeight: 0,
 				needsShipping: true,
@@ -47,7 +45,6 @@ describe( 'cartReducer', () => {
 		expect( newState.cartData ).toEqual( {
 			coupons: [],
 			items: [],
-			fees: [],
 			itemsCount: 0,
 			itemsWeight: 0,
 			needsShipping: true,

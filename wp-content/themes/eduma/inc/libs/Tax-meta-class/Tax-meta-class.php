@@ -1248,7 +1248,7 @@ if ( ! class_exists( 'Tax_Meta_Class' ) ) :
 
 			global $wp_version;
 
-			if ( version_compare( $wp_version, '4.0.0-beta-0', '>=' ) ) {
+			if ( version_compare( $wp_version, '4.0', '>=' ) ) {
 				return '1.11.2';
 			}
 			if ( version_compare( $wp_version, '3.9', '>=' ) ) {

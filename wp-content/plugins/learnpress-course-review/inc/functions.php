@@ -13,9 +13,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * @param int     $course_id
- * @param int     $paged
- * @param int     $per_page
+ * @param int $course_id
+ * @param int $paged
+ * @param int $per_page
  * @param boolean $force
  *
  * @return mixed
@@ -257,7 +257,7 @@ function learn_press_init_courses_review( $posts ) {
 /**
  * Get rating for a course
  *
- * @param int  $course_id
+ * @param int $course_id
  * @param bool $get_items
  *
  * @return array
@@ -420,65 +420,12 @@ function learn_press_get_ratings_result_bak( $course_id = 0, $get_items = false 
 			'rated'     => $avg,
 			'items'     => $items
 		);
+		LP_Debug::timeEnd( 'xxxxx' );
 
+		learn_press_debug( $result );
 
 		wp_cache_set( 'course-' . $course_id, $result, 'lp-course-ratings' );
 	}
 
 	return $result;
 }
-
-function learn_press_course_review_loop_stars() {
-	if ( LP_COURSE_CPT !== get_post_type() ) {
-		return;
-	}
-
-	$course_rate_res = learn_press_get_course_rate( get_the_ID(), false );
-	?>
-
-    <div class="course-review">
-		<?php learn_press_course_review_template( 'rating-stars.php', array( 'rated' => $course_rate_res['rated'] ) ); ?>
-       <div class="clearfix">
-
-       </div>
-   </div>
-
-	<?php
-}
-
-add_action( 'learn-press/after-courses-loop-item', 'learn_press_course_review_loop_stars' );
-
-function learn_press_course_meta_primary_review() {
-
-	/**
-	 * Template for displaying course instructor in primary-meta section.
-	 *
-	 * @version 4.0.0
-	 * @author  ThimPress
-	 * @package LearnPress/Templates
-	 */
-
-	defined( 'ABSPATH' ) or die;
-
-	/**
-	 * @var LP_Course $course
-	 */
-	$course = LP_Global::course();
-	if ( LP_COURSE_CPT !== get_post_type() ) {
-		return;
-	}
-
-	$course_rate_res = learn_press_get_course_rate( get_the_ID(), false );
-	?>
-    <div class="meta-item meta-item-review">
-        <div class="meta-item__value">
-            <label><?php esc_html_e( 'Review', 'learnpress' ); ?></label>
-            <div>
-	            <?php learn_press_course_review_template( 'rating-stars.php', array( 'rated' => $course_rate_res['rated'] ) ); ?>
-            </div>
-        </div>
-    </div>
-	<?php
-}
-
-add_action( 'learn-press/course-meta-primary-left', 'learn_press_course_meta_primary_review', 30 );

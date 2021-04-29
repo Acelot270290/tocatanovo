@@ -10,8 +10,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-use Automattic\WooCommerce\Internal\RestApiUtil;
-
 /**
  * REST API Order Refunds controller class.
  *
@@ -36,8 +34,6 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Order_Refunds_V2_Controll
 	 * @return WP_Error|WC_Data The prepared item, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-		RestApiUtil::adjust_create_refund_request_parameters( $request );
-
 		$order = wc_get_order( (int) $request['order_id'] );
 
 		if ( ! $order ) {
@@ -53,9 +49,9 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Order_Refunds_V2_Controll
 			array(
 				'order_id'       => $order->get_id(),
 				'amount'         => $request['amount'],
-				'reason'         => $request['reason'],
-				'line_items'     => $request['line_items'],
-				'refund_payment' => $request['api_refund'],
+				'reason'         => empty( $request['reason'] ) ? null : $request['reason'],
+				'line_items'     => empty( $request['line_items'] ) ? array() : $request['line_items'],
+				'refund_payment' => is_bool( $request['api_refund'] ) ? $request['api_refund'] : true,
 				'restock_items'  => true,
 			)
 		);
@@ -86,30 +82,5 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Order_Refunds_V2_Controll
 		 * @param bool            $creating If is creating a new object.
 		 */
 		return apply_filters( "woocommerce_rest_pre_insert_{$this->post_type}_object", $refund, $request, $creating );
-	}
-
-	/**
-	 * Get the refund schema, conforming to JSON Schema.
-	 *
-	 * @return array
-	 */
-	public function get_item_schema() {
-		$schema = parent::get_item_schema();
-
-		$schema['properties']['line_items']['items']['properties']['refund_total'] = array(
-			'description' => __( 'Amount that will be refunded for this line item (excluding taxes).', 'woocommerce' ),
-			'type'        => 'number',
-			'context'     => array( 'edit' ),
-			'readonly'    => true,
-		);
-
-		$schema['properties']['line_items']['items']['properties']['taxes']['items']['properties']['refund_total'] = array(
-			'description' => __( 'Amount that will be refunded for this tax.', 'woocommerce' ),
-			'type'        => 'number',
-			'context'     => array( 'edit' ),
-			'readonly'    => true,
-		);
-
-		return $schema;
 	}
 }

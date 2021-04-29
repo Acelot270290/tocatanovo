@@ -26,9 +26,9 @@ class ProductOnSale extends AbstractProductGrid {
 	 *
 	 * @return array
 	 */
-	protected function get_block_type_attributes() {
+	protected function get_attributes() {
 		return array_merge(
-			parent::get_block_type_attributes(),
+			parent::get_attributes(),
 			array(
 				'className' => $this->get_schema_string(),
 				'orderby'   => $this->get_schema_orderby(),

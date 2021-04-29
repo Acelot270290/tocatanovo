@@ -751,6 +751,9 @@ body .learn-press-cert-preview.popup:before{
 			.course-item{
 				line-height: 20px;
 				padding: 15px 18px 13px 18px;
+			  .course-item-meta {
+				vertical-align: top;
+			  }
 			  .course-item-title {
 				max-width: calc(100% - 88px);
 				max-width: -webkit-calc(100% - 88px);

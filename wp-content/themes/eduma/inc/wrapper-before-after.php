@@ -89,11 +89,6 @@ if ( ! function_exists( 'thim_wrapper_layout' ) ) :
 			$class_col = 'col-sm-9 alignright';
 		}
 
-		if ( $wrapper_layout == 'full-width' ) {
-			$class_col = 'content-wide';
-		}
-
-
 		return $class_col;
 	}
 endif;
@@ -102,8 +97,6 @@ endif;
 add_action( 'thim_wrapper_loop_start', 'thim_wrapper_loop_start', 10 );
 if ( ! function_exists( 'thim_wrapper_loop_start' ) ) :
 	function thim_wrapper_loop_start() {
-		$theme_options_data = get_theme_mods();
-
 		$class_no_padding = '';
 		if ( is_page() || is_single() ) {
 			$mtb_no_padding = get_post_meta( get_the_ID(), 'thim_mtb_no_padding', true );
@@ -122,18 +115,10 @@ if ( ! function_exists( 'thim_wrapper_loop_start' ) ) :
 		if ( $class_col == "col-sm-9 alignright" ) {
 			$sidebar_class = ' sidebar-left';
 		}
-		if ( $class_col == "content-wide" ) {
-			$sidebar_class = '-fluid';
-		}
-		// add new style for top heading
 
-		if ( ! empty( $theme_options_data['thim_layout_content_page'] ) ) {
-			$layout_style_2 = $theme_options_data['thim_layout_content_page'];
-			$sidebar_class  .= ( $layout_style_2 == 'layout_style_2' ) ? ' top-heading-style-3' : '';
-		}
 		do_action( 'thim_before_site_content' );
 
-		echo '<div class="container' . $sidebar_class . $class_no_padding . ' site-content">';
+		echo '<div class="container site-content' . $sidebar_class . $class_no_padding . '">';
 
 		echo '<div class="row"><main id="main" class="site-main ' . $class_col . '">';
 	}
@@ -174,7 +159,6 @@ endif;
 add_action( 'thim_wrapper_loop_start', 'thim_wrapper_div_open', 1 );
 if ( ! function_exists( 'thim_wrapper_div_open' ) ) {
 	function thim_wrapper_div_open() {
-
 		echo '<section class="content-area">';
 	}
 }

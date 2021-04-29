@@ -1,9 +1,7 @@
 <?php
 namespace Elementor\Core\Common\Modules\Connect\Apps;
 
-use Elementor\Core\Admin\Admin_Notices;
 use Elementor\Core\Common\Modules\Connect\Admin;
-use Elementor\Plugin;
 use Elementor\Tracker;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -572,20 +570,13 @@ abstract class Base_App {
 				}
 				break;
 			default:
-				/**
-				 * @var Admin_Notices $admin_notices
-				 */
-				$admin_notices = Plugin::$instance->admin->get_component( 'admin-notices' );
+				echo '<div id="message" class="updated notice is-dismissible"><p>';
 
 				foreach ( $notices as $notice ) {
-					$options = [
-						'description' => wp_kses_post( wpautop( $notice['content'] ) ),
-						'type' => $notice['type'],
-						'icon' => false,
-					];
-
-					$admin_notices->print_admin_notice( $options );
+					echo wp_kses_post( sprintf( '<div class="%s"><p>%s</p></div>', $notice['type'], wpautop( $notice['content'] ) ) );
 				}
+
+				echo '</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">' . __( 'Dismiss', 'elementor' ) . '</span></button></div>';
 		}
 	}
 

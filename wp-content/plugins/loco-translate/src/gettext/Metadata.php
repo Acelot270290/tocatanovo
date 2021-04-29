@@ -56,7 +56,7 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
     public static function load( Loco_fs_File $po, $nocache = false ){
         $bytes = $po->size();
         $mtime = $po->modified();
-        // quick construct of new meta object. enough to query and validate cache
+        // quick construct of new meta object. enough to query and validate cache 
         $meta = new Loco_gettext_Metadata( array(
             'rpath' => $po->getRelativePath( loco_constant('WP_CONTENT_DIR') ),
         ) );
@@ -184,20 +184,19 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
     }
 
 
+
     /**
      * Get wordy summary of total strings
-     * @return string
      */
     public function getTotalSummary(){
         $total = $this->getTotal();
-        // translators: Where %s is any number of strings
-        return sprintf( _n('%s string','%s strings',$total,'loco-translate'), number_format_i18n($total) );
+        return sprintf( _n('1 string','%s strings',$total,'loco-translate'), number_format($total) );
     }
+
 
 
     /**
      * Get wordy summary including translation stats
-     * @return string
      */
     public function getProgressSummary(){
         $extra = array();
@@ -215,10 +214,7 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
     }
 
 
-    /**
-     * @param bool
-     * @return string
-     */
+
     public function getPath( $absolute ){
         $path = $this['rpath'];
         if( $absolute && ! Loco_fs_File::abs($path) ){

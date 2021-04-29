@@ -107,7 +107,7 @@ class Thim_Image_Box_El extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 
 		// Map variables between Elementor and SiteOrigin
- 		$instance = array(
+		$instance = array(
 			'layout'    => $settings['style'],
 			'title'     => $settings['title'],
 			'description'     => $settings['description'],

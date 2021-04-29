@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import FormattedMonetaryAmount from '@woocommerce/base-components/formatted-monetary-amount';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { createInterpolateElement } from 'wordpress-element';
 
 /**
  * Internal dependencies
@@ -13,6 +12,7 @@ import { createInterpolateElement } from 'wordpress-element';
 import './style.scss';
 
 const PriceRange = ( {
+	className,
 	currency,
 	maxPrice,
 	minPrice,
@@ -20,7 +20,7 @@ const PriceRange = ( {
 	priceStyle,
 } ) => {
 	return (
-		<>
+		<span className={ className }>
 			<FormattedMonetaryAmount
 				className={ classNames(
 					'wc-block-components-product-price__value',
@@ -40,11 +40,12 @@ const PriceRange = ( {
 				value={ maxPrice }
 				style={ priceStyle }
 			/>
-		</>
+		</span>
 	);
 };
 
 const SalePrice = ( {
+	className,
 	currency,
 	regularPriceClassName,
 	regularPriceStyle,
@@ -54,7 +55,7 @@ const SalePrice = ( {
 	price,
 } ) => {
 	return (
-		<>
+		<span className={ className }>
 			<span className="screen-reader-text">
 				{ __( 'Previous price:', 'woocommerce' ) }
 			</span>
@@ -92,7 +93,7 @@ const SalePrice = ( {
 				) }
 				value={ price }
 			/>
-		</>
+		</span>
 	);
 };
 
@@ -100,7 +101,6 @@ const ProductPrice = ( {
 	align,
 	className,
 	currency,
-	format = '<price/>',
 	maxPrice = null,
 	minPrice = null,
 	price = null,
@@ -119,25 +119,12 @@ const ProductPrice = ( {
 		}
 	);
 
-	if ( ! format.includes( '<price/>' ) ) {
-		format = '<price/>';
-		// eslint-disable-next-line no-console
-		console.error( 'Price formats need to include the `<price/>` tag.' );
-	}
-
 	const isDiscounted = regularPrice && price !== regularPrice;
-	let priceComponent = (
-		<span
-			className={ classNames(
-				'wc-block-components-product-price__value',
-				priceClassName
-			) }
-		/>
-	);
 
 	if ( isDiscounted ) {
-		priceComponent = (
+		return (
 			<SalePrice
+				className={ wrapperClassName }
 				currency={ currency }
 				price={ price }
 				priceClassName={ priceClassName }
@@ -147,9 +134,12 @@ const ProductPrice = ( {
 				regularPriceStyle={ regularPriceStyle }
 			/>
 		);
-	} else if ( minPrice !== null && maxPrice !== null ) {
-		priceComponent = (
+	}
+
+	if ( minPrice !== null && maxPrice !== null ) {
+		return (
 			<PriceRange
+				className={ wrapperClassName }
 				currency={ currency }
 				maxPrice={ maxPrice }
 				minPrice={ minPrice }
@@ -157,25 +147,32 @@ const ProductPrice = ( {
 				priceStyle={ priceStyle }
 			/>
 		);
-	} else if ( price !== null ) {
-		priceComponent = (
-			<FormattedMonetaryAmount
-				className={ classNames(
-					'wc-block-components-product-price__value',
-					priceClassName
-				) }
-				currency={ currency }
-				value={ price }
-				style={ priceStyle }
-			/>
+	}
+
+	if ( price !== null ) {
+		return (
+			<span className={ wrapperClassName }>
+				<FormattedMonetaryAmount
+					className={ classNames(
+						'wc-block-components-product-price__value',
+						priceClassName
+					) }
+					currency={ currency }
+					value={ price }
+					style={ priceStyle }
+				/>
+			</span>
 		);
 	}
 
 	return (
 		<span className={ wrapperClassName }>
-			{ createInterpolateElement( format, {
-				price: priceComponent,
-			} ) }
+			<span
+				className={ classNames(
+					'wc-block-components-product-price__value',
+					priceClassName
+				) }
+			/>
 		</span>
 	);
 };
@@ -184,7 +181,6 @@ ProductPrice.propTypes = {
 	align: PropTypes.oneOf( [ 'left', 'center', 'right' ] ),
 	className: PropTypes.string,
 	currency: PropTypes.object,
-	format: PropTypes.string,
 	price: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 	priceClassName: PropTypes.string,
 	priceStyle: PropTypes.object,

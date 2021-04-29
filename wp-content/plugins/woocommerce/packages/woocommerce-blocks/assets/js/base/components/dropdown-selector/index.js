@@ -155,7 +155,7 @@ const DropdownSelector = ( {
 								checked.length > 0 && multiple
 									? null
 									: sprintf(
-											/* translators: %s attribute name. */
+											// Translators: %s attribute name.
 											__(
 												'Any %s',
 												'woocommerce'

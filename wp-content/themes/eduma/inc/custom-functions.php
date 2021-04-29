@@ -232,11 +232,11 @@ function thim_get_related_posts( $post_id, $number_posts = - 1 ) {
 	}
 	$args  = wp_parse_args(
 		$args, array(
-			'posts_per_page'      => $number_posts,
-			'post__not_in'        => array( $post_id ),
-			'ignore_sticky_posts' => 0,
-			'category__in'        => wp_get_post_categories( $post_id )
-		)
+		'posts_per_page'      => $number_posts,
+		'post__not_in'        => array( $post_id ),
+		'ignore_sticky_posts' => 0,
+		'category__in'        => wp_get_post_categories( $post_id )
+	)
 	);
 	$query = new WP_Query( $args );
 
@@ -292,10 +292,10 @@ if ( ! function_exists( 'thim_comment' ) ) {
 					<?php comment_reply_link(
 						array_merge(
 							$args, array(
-								'add_below' => $add_below,
-								'depth'     => $depth,
-								'max_depth' => $args['max_depth']
-							)
+							'add_below' => $add_below,
+							'depth'     => $depth,
+							'max_depth' => $args['max_depth']
+						)
 						)
 					)
 					?>
@@ -318,8 +318,7 @@ if ( ! function_exists( 'thim_comment' ) ) {
 require THIM_DIR . 'inc/wrapper-before-after.php';
 require THIM_DIR . 'inc/templates/page-title.php';
 
-/**mtb
- *
+/**
  * @param $mtb_setting
  *
  * @return mixed
@@ -350,6 +349,24 @@ function thim_mtb_setting_after_created( $mtb_setting ) {
 
 add_filter( 'thim_mtb_setting_after_created', 'thim_mtb_setting_after_created', 10, 2 );
 
+
+/**
+ * @param $tabs
+ *
+ * @return array
+ */
+function thim_widget_group( $tabs ) {
+	$tabs[] = array(
+		'title'  => esc_html__( 'Thim Widget', 'eduma' ),
+		'filter' => array(
+			'groups' => array( 'thim_widget_group' )
+		)
+	);
+
+	return $tabs;
+}
+
+add_filter( 'siteorigin_panels_widget_dialog_tabs', 'thim_widget_group', 19 );
 
 /**
  * @param $attributes
@@ -854,10 +871,6 @@ if ( ! function_exists( 'thim_body_classes' ) ) {
 			$classes[] = 'thim-popup-feature';
 		}
 
-		if ( thim_is_new_learnpress( '4.0.0-beta-0' ) ) {
-            $classes[] = 'learnpress-v4';
-        }
-
 		return $classes;
 	}
 }
@@ -1058,22 +1071,22 @@ if ( ! function_exists( 'thim_related_our_team' ) ) {
 		}
 		$args  = wp_parse_args(
 			$args, array(
-				'posts_per_page'      => $number_posts,
-				'post_type'           => 'our_team',
-				'post__not_in'        => array( $post_id ),
-				'ignore_sticky_posts' => true,
-				'tax_query'           => array(
-					array(
-						'taxonomy' => 'our_team_category',
-						// taxonomy name
-						'field'    => 'term_id',
-						// term_id, slug or name
-						'operator' => 'IN',
-						'terms'    => wp_get_post_terms( $post_id, 'our_team_category', array( "fields" => "ids" ) ),
-						// term id, term slug or term name
-					)
-				),
-			)
+			'posts_per_page'      => $number_posts,
+			'post_type'           => 'our_team',
+			'post__not_in'        => array( $post_id ),
+			'ignore_sticky_posts' => true,
+			'tax_query'           => array(
+				array(
+					'taxonomy' => 'our_team_category',
+					// taxonomy name
+					'field'    => 'term_id',
+					// term_id, slug or name
+					'operator' => 'IN',
+					'terms'    => wp_get_post_terms( $post_id, 'our_team_category', array( "fields" => "ids" ) ),
+					// term id, term slug or term name
+				)
+			),
+		)
 		);
 		$query = new WP_Query( $args );
 
@@ -1348,43 +1361,24 @@ if ( ! function_exists( 'thim_gallery_popup' ) ) {
 
 if ( class_exists( 'LearnPress' ) ) {
 	function thim_new_learnpress_template_path( $slash ) {
-		if ( thim_is_new_learnpress( '4.0.beta-0' ) ) {
+		if ( thim_is_new_learnpress( '4.0' ) ) {
 			$layout = '-v4';
 		} else {
 			$layout = '-v3';
 		}
 
 		return 'learnpress' . $layout;
-
 	}
 
-	if ( thim_is_new_learnpress( '4.0.0-beta-0' ) ) {
+	if ( thim_is_new_learnpress( '4.0' ) ) {
 		$layout = '-v4';
 	} else {
 		$layout = '-v3';
 	}
 
-
 	add_filter( 'learn_press_template_path', 'thim_new_learnpress_template_path', 999 );
 	require_once THIM_DIR . 'inc/learnpress-functions.php';
 	require_once THIM_DIR . 'inc/learnpress' . $layout . '-functions.php';
-
-	if ( is_child_theme() === true && thim_is_new_learnpress( '4.0.0-beta-0' ) ) {
-		function thim_eduma_child_locate_template() {
-			$base_directory = basename( get_stylesheet_directory() );
-			if ( ( $base_directory == 'eduma-child-kid-art' ) || ( $base_directory == 'eduma-child-kindergarten' ) || ( $base_directory == 'eduma-child-new-art' ) || ( $base_directory == 'eduma-child-udemy' ) ) {
-				return $base_directory;
-			} else {
-				return '';
-			}
-		}
-
-		add_filter( 'learn_press_child_in_parrent_template_path', 'thim_eduma_child_locate_template', 999 );
-		$base_directory = basename( get_stylesheet_directory() );
-		if ( ( $base_directory == 'eduma-child-kid-art' ) || ( $base_directory == 'eduma-child-kindergarten' ) || ( $base_directory == 'eduma-child-new-art' ) || ( $base_directory == 'eduma-child-udemy' ) ) {
-			require_once THIM_DIR . 'lp-child-path/learnpress-v4/' . $base_directory . '/custom-functions-child.php';
-		}
-	}
 }
 
 /**
@@ -1407,7 +1401,7 @@ function thim_is_new_learnpress( $version ) {
  */
 function thim_is_version_addons_woo( $version ) {
 	if ( defined( 'LP_ADDON_WOO_PAYMENT_VER' ) ) {
-		return ( version_compare( LP_ADDON_WOO_PAYMENT_VER, $version, '>=' ) );
+		return ( version_compare( LP_ADDON_WOO_PAYMENT_VER, $version, '>=' ) && version_compare( LP_ADDON_WOO_PAYMENT_VER, (int) $version + 1, '<' ) );
 	}
 
 	return false;
@@ -1420,7 +1414,7 @@ function thim_is_version_addons_woo( $version ) {
  */
 function thim_is_version_addons_review( $version ) {
 	if ( defined( 'LP_ADDON_COURSE_REVIEW_VER' ) ) {
-		return ( version_compare( LP_ADDON_COURSE_REVIEW_VER, $version, '>=' ) );
+		return ( version_compare( LP_ADDON_COURSE_REVIEW_VER, $version, '>=' ) && version_compare( LP_ADDON_COURSE_REVIEW_VER, (int) $version + 1, '<' ) );
 	}
 
 	return false;
@@ -1433,7 +1427,7 @@ function thim_is_version_addons_review( $version ) {
  */
 function thim_is_version_addons_bbpress( $version ) {
 	if ( defined( 'LP_ADDON_BBPRESS_VER' ) ) {
-		return ( version_compare( LP_ADDON_BBPRESS_VER, $version, '>=' ) );
+		return ( version_compare( LP_ADDON_BBPRESS_VER, $version, '>=' ) && version_compare( LP_ADDON_BBPRESS_VER, (int) $version + 1, '<' ) );
 	}
 
 	return false;
@@ -1446,7 +1440,7 @@ function thim_is_version_addons_bbpress( $version ) {
  */
 function thim_is_version_addons_certificates( $version ) {
 	if ( defined( 'LP_ADDON_CERTIFICATES_VER' ) ) {
-		return ( version_compare( LP_ADDON_CERTIFICATES_VER, $version, '>=' ) );
+		return ( version_compare( LP_ADDON_CERTIFICATES_VER, $version, '>=' ) && version_compare( LP_ADDON_CERTIFICATES_VER, (int) $version + 1, '<' ) );
 	}
 
 	return false;
@@ -1459,7 +1453,7 @@ function thim_is_version_addons_certificates( $version ) {
  */
 function thim_is_version_addons_wishlist( $version ) {
 	if ( defined( 'LP_ADDON_WISHLIST_VER' ) ) {
-		return ( version_compare( LP_ADDON_WISHLIST_VER, $version, '>=' ) );
+		return ( version_compare( LP_ADDON_WISHLIST_VER, $version, '>=' ) && version_compare( LP_ADDON_WISHLIST_VER, (int) $version + 1, '<' ) );
 	}
 
 	return false;
@@ -1472,7 +1466,7 @@ function thim_is_version_addons_wishlist( $version ) {
  */
 function thim_is_version_addons_instructor( $version ) {
 	if ( defined( 'LP_ADDON_CO_INSTRUCTOR_VER' ) ) {
-		return ( version_compare( LP_ADDON_CO_INSTRUCTOR_VER, $version, '>=' ) );
+		return ( version_compare( LP_ADDON_CO_INSTRUCTOR_VER, $version, '>=' ) && version_compare( LP_ADDON_CO_INSTRUCTOR_VER, (int) $version + 1, '<' ) );
 	}
 
 	return false;
@@ -1567,6 +1561,9 @@ if ( ! function_exists( 'thim_js_inline_windowload' ) ) {
 		?>
 		<script>
 			window.addEventListener('load', function () {
+				/**
+				 * Fix issue there is an empty spacing between image and title of owl-carousel
+				 */
 				setTimeout(function () {
 					var $ = jQuery
 					var $carousel = $('.thim-owl-carousel-post').each(function () {
@@ -2901,9 +2898,6 @@ if ( ! function_exists( 'thim_header_class' ) ) {
 		if ( get_theme_mod( 'thim_config_logo_mobile', 'default_logo' ) == 'custom_logo' ) {
 			$header_class .= ' mobile-logo-custom';
 		}
-		if ( get_theme_mod( 'thim_line_active_item_menu', 'bottom' ) == 'top' ) {
-			$header_class .= ' item_menu_active_top';
-		}
 		echo esc_attr( $header_class );
 	}
 }
@@ -2949,7 +2943,7 @@ add_action( 'thim_above_footer_area', 'thim_above_footer_area_fnc' );
  */
 if ( ! function_exists( 'thim_back_to_top' ) ) {
 	function thim_back_to_top() {
-		if ( get_theme_mod( 'thim_show_to_top', false ) && get_theme_mod( 'thim_to_top_position', '' ) == '' ) { ?>
+		if ( get_theme_mod( 'thim_show_to_top', false ) ) { ?>
 			<a href="#" id="back-to-top">
 				<i class="fa fa-chevron-up" aria-hidden="true"></i>
 			</a>
@@ -2959,39 +2953,28 @@ if ( ! function_exists( 'thim_back_to_top' ) ) {
 }
 add_action( 'thim_end_wrapper_container', 'thim_back_to_top' );
 
-
 /**
  * Copyright Area
  */
 if ( ! function_exists( 'thim_print_copyright' ) ) {
 	function thim_print_copyright() {
-		$html_to_top         = $div_inline = '';
 		$theme_mods          = get_theme_mods();
 		$copyright_text      = isset( $theme_mods['thim_copyright_text'] ) ? $theme_mods['thim_copyright_text'] : '';
 		$display_copyright   = ( ! isset( $theme_mods['thim_copyright_text'] ) || ! empty( $theme_mods['thim_copyright_text'] ) ) ? true : false;
 		$is_active_copyright = is_active_sidebar( 'copyright' );
-		if ( get_theme_mod( 'thim_show_to_top', false ) && get_theme_mod( 'thim_to_top_position', '' ) == 'show_in_copyright' ) {
-			$is_active_copyright = true;
-			$div_inline          = ' block-inline';
-			$html_to_top         = '<aside class="to-top-copyright"><a href="#" id="back-to-top">
-				<i class="las la-location-arrow"></i>' . esc_html__( 'Back to top', 'eduma' ) . '
-			</a></aside>';
-		}
 		if ( $display_copyright || $is_active_copyright ) { ?>
 			<div class="copyright-area">
 				<div class="container">
 					<div class="copyright-content">
 						<div class="row">
 							<?php
-							$class_copyright = $is_active_copyright ? 'col-sm-' . get_theme_mod( 'thim_copyright_column', 6 ) : 'col-sm-12';
+							$class_copyright = $is_active_copyright ? 'col-sm-6' : 'col-sm-12';
 							echo '<div class="' . $class_copyright . '"><p class="text-copyright">' . $copyright_text . '</p></div>';
-							if ( $is_active_copyright ) {
-								echo '<div class="col-sm-'.(12 - get_theme_mod( 'thim_copyright_column', 6 )) .' text-right' . $div_inline . '">';
-								dynamic_sidebar( 'copyright' );
-								echo $html_to_top;
-								echo '</div>';
-							}
-							?>
+							if ( $is_active_copyright ) : ?>
+								<div class="col-sm-6 text-right">
+									<?php dynamic_sidebar( 'copyright' ); ?>
+								</div>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
@@ -3013,6 +2996,7 @@ if ( ! function_exists( 'thim_footer_class' ) ) {
 		$footer_bg_image    = get_theme_mod( 'thim_footer_background_img', '' );
 		$custom_class       .= ! empty( $footer_bg_image ) ? ' footer-bg-image' : '';
 		$footer_class       = ( ( is_active_sidebar( 'footer_bottom' ) && $style_content != 'new-1' ) || ( is_active_sidebar( 'footer_bottom' ) && $style_header != 'header_v4' ) ) ? $custom_class . ' has-footer-bottom' : $custom_class;
+
 
 		echo esc_attr( $footer_class );
 	}
@@ -3065,6 +3049,75 @@ function thim_filter_site_demos( $demo_datas ) {
 
 add_filter( 'tp_chameleon_get_site_demos', 'thim_filter_site_demos' );
 
+
+/**
+ * Check import demo data page-builder
+ */
+add_action( 'wp_ajax_thim_update_theme_mods', 'thim_import_demo_page_builder' );
+if ( ! function_exists( 'thim_import_demo_page_builder' ) ) {
+	function thim_import_demo_page_builder() {
+		$thim_key   = sanitize_text_field( $_POST["thim_key"] );
+		$thim_value = sanitize_text_field( $_POST["thim_value"] );
+
+		if ( ! is_multisite() ) {
+			$active_plugins = get_option( 'active_plugins' );
+
+			if ( $thim_value == 'visual_composer' ) {
+				if ( $site_origin = array_search( 'siteorigin-panels/siteorigin-panels.php', $active_plugins ) ) {
+					unset( $active_plugins[$site_origin] );
+				}
+
+				if ( $elementor = array_search( 'elementor/elementor.php', $active_plugins ) ) {
+					unset( $active_plugins[$elementor] );
+				}
+
+				if ( ! in_array( 'js_composer/js_composer.php', $active_plugins ) ) {
+					$active_plugins[] = 'js_composer/js_composer.php';
+				}
+			} else {
+				if ( $thim_value == 'site_origin' ) {
+					if ( $visual_composer = array_search( 'js_composer/js_composer.php', $active_plugins ) ) {
+						unset( $active_plugins[$visual_composer] );
+					}
+
+					if ( $elementor = array_search( 'elementor/elementor.php', $active_plugins ) ) {
+						unset( $active_plugins[$elementor] );
+					}
+
+					if ( ! in_array( 'siteorigin-panels/siteorigin-panels.php', $active_plugins ) ) {
+						$active_plugins[] = 'siteorigin-panels/siteorigin-panels.php';
+					}
+				} else {
+					if ( $thim_value == 'elementor' ) {
+						if ( $visual_composer = array_search( 'js_composer/js_composer.php', $active_plugins ) ) {
+							unset( $active_plugins[$visual_composer] );
+						}
+
+						if ( $site_origin = array_search( 'siteorigin-panels/siteorigin-panels.php', $active_plugins ) ) {
+							unset( $active_plugins[$site_origin] );
+						}
+
+						if ( ! in_array( 'elementor/elementor.php', $active_plugins ) ) {
+							$active_plugins[] = 'elementor/elementor.php';
+						}
+					}
+				}
+			}
+
+			update_option( 'active_plugins', $active_plugins );
+		}
+
+		if ( empty( $thim_key ) || empty( $thim_value ) ) {
+			$output = 'update fail';
+		} else {
+			set_theme_mod( $thim_key, $thim_value );
+			$output = 'update success';
+		}
+
+		echo ent2ncr( $output );
+		die();
+	}
+}
 
 /**
  * @param $settings
@@ -3169,6 +3222,144 @@ if ( ! function_exists( 'thim_eduma_field_name_custom_css_theme' ) ) {
 	}
 }
 add_filter( 'thim_core_field_name_custom_css_theme', 'thim_eduma_field_name_custom_css_theme' );
+
+/**
+ * Waring do not re-activate Thim Framework.
+ */
+function thim_notify_do_not_re_active_thim_framework() {
+	if ( class_exists( 'Thim_Notification' ) ) {
+		$detect_upgraded = get_option( 'thim_auto_updated_theme_mods_30', false );
+
+		if ( ! $detect_upgraded ) {
+			return;
+		}
+
+		$link_delete = network_admin_url( 'plugins.php?plugin_status=inactive' );
+
+		Thim_Notification::add_notification(
+			array(
+				'id'          => 'do_not_support_thim_framework',
+				'type'        => 'warning',
+				'content'     => sprintf( __( 'Thim Core plugin is the newest upgrade version of Thim Framework. <strong>Do not re-activate Thim Framework and <a href="%s" title="Delete Thim Framework plugin">better delete this plugin</a></strong>.', 'eduma' ), $link_delete ),
+				'dismissible' => true,
+				'global'      => true,
+			)
+		);
+	}
+}
+
+//add_action( 'admin_init', 'thim_notify_do_not_re_active_thim_framework' );
+
+/**
+ * Notify fix error theme mods.
+ */
+function thim_notify_fix_update_failed() {
+	if ( class_exists( 'Thim_Notification' ) ) {
+		$detect = get_option( 'thim_eduma_fix_theme_mods_broken', false );
+
+		if ( $detect ) {
+			return;
+		}
+
+		$version = get_option( 'thim_eduma_version' );
+		if ( ! empty( $version ) ) {
+			if ( version_compare( $version, THIM_THEME_VERSION, '>=' ) ) {
+				return;
+			}
+		}
+
+		$link = admin_url( '?thim_eduma_fix_theme_mods_broken=1' );
+
+		Thim_Notification::add_notification(
+			array(
+				'id'          => 'eduma_fix_update',
+				'type'        => 'warning',
+				'content'     => sprintf( __( '<h3>Notice</h3>If you have troubles with saving customize after update the theme, <a href="%s">please click here to fix it</a>. If not, ignore this message.', 'eduma' ), $link ),
+				'dismissible' => true,
+				'global'      => true,
+			)
+		);
+	}
+}
+
+//add_action( 'admin_init', 'thim_notify_fix_update_failed' );
+
+/**
+ * Only for developer.
+ */
+//add_action( 'admin_init', 'thim_eduma_fix_theme_mods_broken' );
+function thim_eduma_fix_theme_mods_broken() {
+	$request = isset( $_GET['thim_eduma_fix_theme_mods_broken'] );
+	if ( ! $request ) {
+		return;
+	}
+
+	$thim_font_body = array(
+		'font-family' => 'Roboto',
+		'variant'     => 'normal',
+		'font-size'   => '15px',
+		'line-height' => '1.7em',
+		'color'       => '#666'
+	);
+
+	set_theme_mod( 'thim_font_body', $thim_font_body );
+
+	$thim_font_title = array(
+		'font-family' => 'Roboto Slab',
+		'variant'     => '700',
+		'color'       => '#333333'
+	);
+
+	set_theme_mod( 'thim_font_title', $thim_font_title );
+
+	$thim_font_h1 = array(
+		'font-size'   => '36px',
+		'line-height' => '1.6em',
+	);
+
+	set_theme_mod( 'thim_font_h1', $thim_font_h1 );
+
+	$thim_font_h2 = array(
+		'font-size'   => '28px',
+		'line-height' => '1.6em',
+	);
+
+	set_theme_mod( 'thim_font_h2', $thim_font_h2 );
+
+	$thim_font_h3 = array(
+		'font-size'   => '24px',
+		'line-height' => '1.6em',
+	);
+
+	set_theme_mod( 'thim_font_h3', $thim_font_h3 );
+
+	$thim_font_h4 = array(
+		'font-size'   => '18px',
+		'line-height' => '1.6em',
+	);
+
+	set_theme_mod( 'thim_font_h4', $thim_font_h4 );
+
+	$thim_font_h5 = array(
+		'font-size'   => '16px',
+		'line-height' => '1.6em',
+	);
+
+	set_theme_mod( 'thim_font_h5', $thim_font_h5 );
+
+	$thim_font_h6 = array(
+		'font-size'   => '16px',
+		'line-height' => '1.4em',
+	);
+
+	set_theme_mod( 'thim_font_h6', $thim_font_h6 );
+
+	update_option( 'thim_eduma_fix_theme_mods_broken', true );
+	if ( ! headers_sent() ) {
+		wp_redirect( admin_url( 'customize.php' ) );
+	}
+}
+
 
 function thim_eduma_register_meta_boxes_portfolio( $meta_boxes ) {
 	$prefix       = 'thim_';
@@ -3333,6 +3524,7 @@ if ( ! function_exists( 'thim_get_list_font_flaticon' ) ) {
 		return $new_icon;
 	}
 }
+add_filter( 'thim_core_widget_flat_icons', 'thim_get_list_font_flaticon' );
 
 if ( ! function_exists( 'thim_time_ago' ) ) {
 	function thim_time_ago( $time ) {
@@ -3470,8 +3662,7 @@ if ( thim_plugin_active( 'js_composer/js_composer.php' ) ) {
 /*
  * Handle conflict between Google captcha plugin vs Revolution Slider plugin
  */
-//if ( thim_plugin_active( 'google-captcha/google-captcha.php' ) || thim_plugin_active( 'anywhere-elementor/anywhere-elementor.php' ) ) {
-if ( thim_plugin_active( 'google-captcha/google-captcha.php' ) ) {
+if ( thim_plugin_active( 'google-captcha/google-captcha.php' ) || thim_plugin_active( 'anywhere-elementor/anywhere-elementor.php' ) ) {
 	remove_filter( 'widget_text', 'do_shortcode' );
 }
 
@@ -3512,34 +3703,8 @@ if ( ! function_exists( "thim_get_cat_taxonomy" ) ) {
 		return $cats;
 	}
 }
-if ( ! function_exists( "thim_sc_get_course_categories" ) ) {
-	function thim_sc_get_course_categories( $cats = false ) {
-		$args  = array(
-			'pad_counts'   => 1,
-			'hierarchical' => 1,
-			'hide_empty'   => 1,
-			'orderby'      => 'name',
-			'menu_order'   => false
-		);
-		$terms = get_terms( 'course_category', $args );
-		if ( ! $cats ) {
-			$cats = array();
-		}
-		if ( is_wp_error( $terms ) ) {
-		} else {
-			if ( empty( $terms ) ) {
-			} else {
-				foreach ( $terms as $term ) {
-					$cats[$term->name] = $term->term_id;
-				}
-			}
-		}
 
-		return $cats;
-	}
-}
-
-//if (  class_exists( 'LP_Co_Instructor_Preload' ) ) {
+//if ( thim_plugin_active( 'learnpress-co-instructor/learnpress-co-instructor.php' ) ) {
 if ( ! function_exists( "thim_get_instructors" ) ) {
 	function thim_get_instructors( $ins = false, $vc = false ) {
 		if ( ! $ins ) {
@@ -3653,220 +3818,13 @@ function eduma_lp_get_popular_courses( $limit = 10 ) {
 
 /* Disable VC auto-update */
 function thimpress_vc_disable_update() {
-	if ( function_exists( 'vc_license' ) && function_exists( 'vc_updater' ) && ! vc_license()->isActivated() ) {
-		remove_filter( 'upgrader_pre_download', array( vc_updater(), 'preUpgradeFilter' ), 10 );
-		remove_filter(
-			'pre_set_site_transient_update_plugins', array(
-				vc_updater()->updateManager(),
-				'check_update'
-			)
-		);
+	if (function_exists('vc_license') && function_exists('vc_updater') && ! vc_license()->isActivated()) {
+ 		remove_filter( 'upgrader_pre_download', array( vc_updater(), 'preUpgradeFilter' ), 10);
+		remove_filter( 'pre_set_site_transient_update_plugins', array(
+			vc_updater()->updateManager(),
+			'check_update'
+		) );
 
 	}
 }
-
 add_action( 'admin_init', 'thimpress_vc_disable_update', 9 );
-
-function thim_sc_get_list_image_size() {
-	global $_wp_additional_image_sizes;
-
-	$sizes                        = array();
-	$get_intermediate_image_sizes = get_intermediate_image_sizes();
-
-	// Create the full array with sizes and crop info
-	foreach ( $get_intermediate_image_sizes as $_size ) {
-
-		if ( in_array( $_size, array( 'thumbnail', 'medium', 'large' ) ) ) {
-
-			$sizes[$_size]['width']  = get_option( $_size . '_size_w' );
-			$sizes[$_size]['height'] = get_option( $_size . '_size_h' );
-			$sizes[$_size]['crop']   = (bool) get_option( $_size . '_crop' );
-
-		} elseif ( isset( $_wp_additional_image_sizes[$_size] ) ) {
-
-			$sizes[$_size] = array(
-				'width'  => $_wp_additional_image_sizes[$_size]['width'],
-				'height' => $_wp_additional_image_sizes[$_size]['height'],
-				'crop'   => $_wp_additional_image_sizes[$_size]['crop']
-			);
-
-		}
-
-	}
-
-	$image_size                                        = array();
-	$image_size[esc_html__( "No Image", 'eduma' )]     = 'none';
-	$image_size[esc_html__( "Custom Image", 'eduma' )] = 'custom_image';
-	if ( ! empty( $sizes ) ) {
-		foreach ( $sizes as $key => $value ) {
-			if ( $value['width'] && $value['height'] ) {
-				$image_size[$value['width'] . 'x' . $value['height']] = $key;
-			} else {
-				$image_size[$key] = $key;
-			}
-		}
-	}
-
-	return $image_size;
-}
-
-
-/**
- * Extra class to widget
- * -----------------------------------------------------------------------------
- */
-add_action( 'widgets_init', array( 'Thim_Widget_Attributes', 'setup' ) );
-
-class Thim_Widget_Attributes {
-	const VERSION = '0.2.2';
-
-	/**
-	 * Initialize plugin
-	 */
-	public static function setup() {
-		if ( is_admin() ) {
-			// Add necessary input on widget configuration form
-			add_action( 'in_widget_form', array( __CLASS__, '_input_fields' ), 10, 3 );
-
-			// Save widget attributes
-			add_filter( 'widget_update_callback', array( __CLASS__, '_save_attributes' ), 10, 4 );
-		} else {
-			// Insert attributes into widget markup
-			add_filter( 'dynamic_sidebar_params', array( __CLASS__, '_insert_attributes' ) );
-		}
-	}
-
-
-	/**
-	 * Inject input fields into widget configuration form
-	 *
-	 * @param object $widget Widget object
-	 *
-	 * @return NULL
-	 * @since   0.1
-	 * @wp_hook action in_widget_form
-	 *
-	 */
-	public static function _input_fields( $widget, $return, $instance ) {
-		$instance = self::_get_attributes( $instance );
-		?>
-		<p>
-			<?php printf(
-				'<label for="%s">%s</label>',
-				esc_attr( $widget->get_field_id( 'widget-class' ) ),
-				esc_html__( 'Extra Class', 'eduma' )
-			) ?>
-			<?php printf(
-				'<input type="text" class="widefat" id="%s" name="%s" value="%s" />',
-				esc_attr( $widget->get_field_id( 'widget-class' ) ),
-				esc_attr( $widget->get_field_name( 'widget-class' ) ),
-				esc_attr( $instance['widget-class'] )
-			) ?>
-		</p>
-		<?php
-		return null;
-	}
-
-	/**
-	 * Get default attributes
-	 *
-	 * @param array $instance Widget instance configuration
-	 *
-	 * @return array
-	 * @since 0.1
-	 *
-	 */
-	private static function _get_attributes( $instance ) {
-		$instance = wp_parse_args(
-			$instance,
-			array(
-				'widget-class' => '',
-			)
-		);
-
-		return $instance;
-	}
-
-	/**
-	 * Save attributes upon widget saving
-	 *
-	 * @param array  $instance     Current widget instance configuration
-	 * @param array  $new_instance New widget instance configuration
-	 * @param array  $old_instance Old Widget instance configuration
-	 * @param object $widget       Widget object
-	 *
-	 * @return array
-	 * @since   0.1
-	 * @wp_hook filter widget_update_callback
-	 *
-	 */
-	public static function _save_attributes( $instance, $new_instance, $old_instance, $widget ) {
-		$instance['widget-class'] = '';
-
-		// Classes
-		if ( ! empty( $new_instance['widget-class'] ) ) {
-			$instance['widget-class'] = apply_filters(
-				'widget_attribute_classes',
-				implode(
-					' ',
-					array_map(
-						'sanitize_html_class',
-						explode( ' ', $new_instance['widget-class'] )
-					)
-				)
-			);
-		} else {
-			$instance['widget-class'] = '';
-		}
-
-		return $instance;
-	}
-
-	/**
-	 * Insert attributes into widget markup
-	 *
-	 * @param array $params Widget parameters
-	 *
-	 * @return Array
-	 * @since  0.1
-	 * @filter dynamic_sidebar_params
-	 *
-	 */
-	public static function _insert_attributes( $params ) {
-		global $wp_registered_widgets;
-
-		$widget_id  = $params[0]['widget_id'];
-		$widget_obj = $wp_registered_widgets[$widget_id];
-
-		if (
-			! isset( $widget_obj['callback'][0] )
-			|| ! is_object( $widget_obj['callback'][0] )
-		) {
-			return $params;
-		}
-
-		$widget_options = get_option( $widget_obj['callback'][0]->option_name );
-		if ( empty( $widget_options ) ) {
-			return $params;
-		}
-
-		$widget_num = $widget_obj['params'][0]['number'];
-		if ( empty( $widget_options[$widget_num] ) ) {
-			return $params;
-		}
-
-		$instance = $widget_options[$widget_num];
-
-		// Classes
-		if ( ! empty( $instance['widget-class'] ) ) {
-			$params[0]['before_widget'] = preg_replace(
-				'/class="/',
-				sprintf( 'class="%s ', $instance['widget-class'] ),
-				$params[0]['before_widget'],
-				1
-			);
-		}
-
-		return $params;
-	}
-}

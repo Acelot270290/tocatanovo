@@ -26,7 +26,7 @@ import { reducer, prepareResponseData } from './reducer';
 import { DEFAULT_STATE, STATUS } from './constants';
 import {
 	EMIT_TYPES,
-	emitterObservers,
+	emitterSubscribers,
 	emitEvent,
 	emitEventWithAbort,
 	reducer as emitReducer,
@@ -97,7 +97,7 @@ export const CheckoutStateProvider = ( {
 	// the redirectUrl for when checkout is reset to PRISTINE state.
 	DEFAULT_STATE.redirectUrl = redirectUrl;
 	const [ checkoutState, dispatch ] = useReducer( reducer, DEFAULT_STATE );
-	const [ observers, observerDispatch ] = useReducer( emitReducer, {} );
+	const [ observers, subscriber ] = useReducer( emitReducer, {} );
 	const currentObservers = useRef( observers );
 	const { setValidationErrors } = useValidationContext();
 	const { addErrorNotice, removeNotices } = useStoreNotices();
@@ -120,19 +120,18 @@ export const CheckoutStateProvider = ( {
 	}, [ observers ] );
 	const onCheckoutAfterProcessingWithSuccess = useMemo(
 		() =>
-			emitterObservers( observerDispatch )
+			emitterSubscribers( subscriber )
 				.onCheckoutAfterProcessingWithSuccess,
-		[ observerDispatch ]
+		[ subscriber ]
 	);
 	const onCheckoutAfterProcessingWithError = useMemo(
 		() =>
-			emitterObservers( observerDispatch )
-				.onCheckoutAfterProcessingWithError,
-		[ observerDispatch ]
+			emitterSubscribers( subscriber ).onCheckoutAfterProcessingWithError,
+		[ subscriber ]
 	);
 	const onCheckoutBeforeProcessing = useMemo(
-		() => emitterObservers( observerDispatch ).onCheckoutBeforeProcessing,
-		[ observerDispatch ]
+		() => emitterSubscribers( subscriber ).onCheckoutBeforeProcessing,
+		[ subscriber ]
 	);
 
 	/**

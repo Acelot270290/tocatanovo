@@ -200,6 +200,16 @@ function thim_get_all_plugins_require( $plugins ) {
 		),
 
 		array(
+			'name'        => 'LearnPress Instructor Commission',
+			'slug'        => 'learnpress-commission',
+			'premium'     => true,
+			'required'    => false,
+			'version'     => '3.0',
+			'description' => 'Commission add-on for LearnPress.',
+			'add-on'      => true,
+		),
+
+		array(
 			'name'        => 'LearnPress Course Review',
 			'slug'        => 'learnpress-course-review',
 			'required'    => false,

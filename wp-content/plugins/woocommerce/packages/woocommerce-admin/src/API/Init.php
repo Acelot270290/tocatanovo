@@ -97,7 +97,6 @@ class Init {
 			'Automattic\WooCommerce\Admin\API\OnboardingProfile',
 			'Automattic\WooCommerce\Admin\API\OnboardingTasks',
 			'Automattic\WooCommerce\Admin\API\OnboardingThemes',
-			'Automattic\WooCommerce\Admin\API\NavigationFavorites',
 		);
 
 		// The performance indicators controller must be registered last, after other /stats endpoints have been registered.

@@ -11,7 +11,13 @@ import {
 	usePrevious,
 	useShallowEqual,
 } from '@woocommerce/base-hooks';
-import { useCallback, useEffect, useState, useMemo } from '@wordpress/element';
+import {
+	useCallback,
+	Fragment,
+	useEffect,
+	useState,
+	useMemo,
+} from '@wordpress/element';
 import CheckboxList from '@woocommerce/base-components/checkbox-list';
 import DropdownSelector from '@woocommerce/base-components/dropdown-selector';
 import FilterSubmitButton from '@woocommerce/base-components/filter-submit-button';
@@ -255,7 +261,7 @@ const AttributeFilterBlock = ( {
 				if ( filterAddedName && filterRemovedName ) {
 					speak(
 						sprintf(
-							/* translators: %1$s and %2$s are attribute terms (for example: 'red', 'blue', 'large'...). */
+							/* Translators: %1$s and %2$s are attribute terms (for example: 'red', 'blue', 'large'...). */
 							__(
 								'%1$s filter replaced with %2$s.',
 								'woocommerce'
@@ -267,7 +273,7 @@ const AttributeFilterBlock = ( {
 				} else if ( filterAddedName ) {
 					speak(
 						sprintf(
-							/* translators: %s attribute term (for example: 'red', 'blue', 'large'...) */
+							/* Translators: %s attribute term (for example: 'red', 'blue', 'large'...) */
 							__(
 								'%s filter added.',
 								'woocommerce'
@@ -278,7 +284,7 @@ const AttributeFilterBlock = ( {
 				} else if ( filterRemovedName ) {
 					speak(
 						sprintf(
-							/* translators: %s attribute term (for example: 'red', 'blue', 'large'...) */
+							/* Translators: %s attribute term (for example: 'red', 'blue', 'large'...) */
 							__(
 								'%s filter removed.',
 								'woocommerce'
@@ -326,7 +332,7 @@ const AttributeFilterBlock = ( {
 	const isDisabled = ! blockAttributes.isPreview && filteredCountsLoading;
 
 	return (
-		<>
+		<Fragment>
 			{ ! isEditor && blockAttributes.heading && (
 				<TagName>{ blockAttributes.heading }</TagName>
 			) }
@@ -360,7 +366,7 @@ const AttributeFilterBlock = ( {
 					/>
 				) }
 			</div>
-		</>
+		</Fragment>
 	);
 };
 

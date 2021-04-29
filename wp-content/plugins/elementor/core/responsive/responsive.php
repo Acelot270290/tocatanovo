@@ -1,8 +1,7 @@
 <?php
 namespace Elementor\Core\Responsive;
 
-use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
-use Elementor\Modules\DevTools\Deprecation;
+use Elementor\Core\Responsive\Files\Frontend;
 use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * responsive breakpoints.
  *
  * @since 1.0.0
- * @deprecated 3.2.0
  */
 class Responsive {
 
@@ -88,8 +86,6 @@ class Responsive {
 	 * @return array Editable breakpoints.
 	 */
 	public static function get_editable_breakpoints() {
-		Plugin::$instance->modules_manager->get_modules( 'dev-tools' )->deprecation->deprecated_function( __METHOD__, '3.2.0' );
-
 		return array_intersect_key( self::get_breakpoints(), array_flip( self::$editable_breakpoints_keys ) );
 	}
 
@@ -126,8 +122,6 @@ class Responsive {
 	 * @static
 	 */
 	public static function has_custom_breakpoints() {
-		Plugin::$instance->modules_manager->get_modules( 'dev-tools' )->deprecation->deprecated_function( __METHOD__, '3.2.0', 'Plugin::$instance->breakpoints->has_custom_breakpoints()' );
-
 		return ! ! array_diff( self::$default_breakpoints, self::get_breakpoints() );
 	}
 
@@ -137,9 +131,7 @@ class Responsive {
 	 * @static
 	 */
 	public static function get_stylesheet_templates_path() {
-		Plugin::$instance->modules_manager->get_modules( 'dev-tools' )->deprecation->deprecated_function( __METHOD__, '3.2.0', 'Elementor\Core\Breakpoints\Manager::get_stylesheet_templates_path()' );
-
-		return Breakpoints_Manager::get_stylesheet_templates_path();
+		return ELEMENTOR_ASSETS_PATH . 'css/templates/';
 	}
 
 	/**
@@ -148,8 +140,29 @@ class Responsive {
 	 * @static
 	 */
 	public static function compile_stylesheet_templates() {
-		Plugin::$instance->modules_manager->get_modules( 'dev-tools' )->deprecation->deprecated_function( __METHOD__, '3.2.0', 'Elementor\Core\Breakpoints\Manager::compile_stylesheet_templates()' );
+		foreach ( self::get_stylesheet_templates() as $file_name => $template_path ) {
+			$file = new Frontend( $file_name, $template_path );
 
-		Breakpoints_Manager::compile_stylesheet_templates();
+			$file->update();
+		}
+	}
+
+	/**
+	 * @since 2.1.0
+	 * @access private
+	 * @static
+	 */
+	private static function get_stylesheet_templates() {
+		$templates_paths = glob( self::get_stylesheet_templates_path() . '*.css' );
+
+		$templates = [];
+
+		foreach ( $templates_paths as $template_path ) {
+			$file_name = 'custom-' . basename( $template_path );
+
+			$templates[ $file_name ] = $template_path;
+		}
+
+		return apply_filters( 'elementor/core/responsive/get_stylesheet_templates', $templates );
 	}
 }

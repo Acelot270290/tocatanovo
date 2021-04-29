@@ -26,17 +26,8 @@ $media_intro = get_post_meta( $post->ID, 'thim_course_media_intro', true );
         ?>
         <div class="media-intro">
             <?php
-			if ( wp_oembed_get( $media_intro ) ) {
-				echo '<div class="responsive-iframe">' . wp_oembed_get( $media_intro ) . '</div>';
-			} else {
-				echo str_replace(
-					array( "<iframe", "</iframe>" ), array(
-					'<div class="responsive-iframe"><iframe',
-					"</iframe></div>"
-				), do_shortcode( $media_intro )
-				);
-			}
-           ?>
+             echo str_replace(array("<iframe", "</iframe>"), array('<div class="responsive-iframe"><iframe', "</iframe></div>"), apply_filters('the_content', $media_intro));
+          ?>
         </div>
         <?php
     } elseif ( $video_embed ) {

@@ -428,7 +428,6 @@ function thim_filter_variables_compile_scss() {
 
         'thim_maintenance_text_color',
         'thim_maintenance_bg_color',
-        'thim_link_color_toolbar_border_button',
 	);
 
 	$prefix = 'thim_';

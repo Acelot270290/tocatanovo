@@ -47,24 +47,24 @@ thim_customizer()->add_field(
 
 // Background Header
 thim_customizer()->add_field(
-	array(
-		'id'        => 'thim_bg_main_menu_color',
-		'type'      => 'color',
-		'label'     => esc_html__( 'Background Color', 'eduma' ),
-		'tooltip'   => esc_html__( 'Allows you can choose background color for your header. ', 'eduma' ),
-		'section'   => 'header_main_menu',
-		'default'   => 'rgba(255,255,255,0)',
-		'priority'  => 20,
-		'choices'   => array( 'alpha' => true ),
-		'transport' => 'postMessage',
-		'js_vars'   => array(
-			array(
-				'function' => 'css',
-				'element'  => '.site-header, .site-header.header_v2 .width-navigation',
-				'property' => 'background-color',
-			)
-		)
-	)
+    array(
+        'id'        => 'thim_bg_main_menu_color',
+        'type'      => 'color',
+        'label'     => esc_html__( 'Background Color', 'eduma' ),
+        'tooltip'   => esc_html__( 'Allows you can choose background color for your header. ', 'eduma' ),
+        'section'   => 'header_main_menu',
+        'default'   => 'rgba(255,255,255,0)',
+        'priority'  => 20,
+        'choices' => array ('alpha'     => true),
+        'transport' => 'postMessage',
+        'js_vars'   => array(
+            array(
+                'function' => 'css',
+                'element'  => '.site-header, .site-header.header_v2 .width-navigation',
+                'property' => 'background-color',
+            )
+        )
+    )
 );
 
 // Text color
@@ -77,7 +77,7 @@ thim_customizer()->add_field(
 		'section'   => 'header_main_menu',
 		'default'   => '#ffffff',
 		'priority'  => 25,
-		'choices'   => array( 'alpha' => true ),
+		'choices' => array ('alpha'     => true),
 		'transport' => 'postMessage',
 		'js_vars'   => array(
 			array(
@@ -108,7 +108,7 @@ thim_customizer()->add_field(
 		'section'   => 'header_main_menu',
 		'default'   => '#ffffff',
 		'priority'  => 30,
-		'choices'   => array( 'alpha' => true ),
+		'choices' => array ('alpha'     => true),
 		'transport' => 'postMessage',
 		'js_vars'   => array(
 			array(
@@ -124,21 +124,5 @@ thim_customizer()->add_field(
 				'property' => 'background-color',
 			)
 		)
-	)
-);
-
-thim_customizer()->add_field(
-	array(
-		'type'     => 'select',
-		'id'       => 'thim_line_active_item_menu',
-		'label'    => esc_html__( 'Line Active Item', 'eduma' ),
-		'default'  => 'bottom',
-		'priority' => 13,
-		'multiple' => 0,
-		'section'  => 'header_main_menu',
-		'choices'  => array(
-			'top'    => esc_html__( 'Top', 'eduma' ),
-			'bottom' => esc_html__( 'Bottom', 'eduma' ),
-		),
 	)
 );

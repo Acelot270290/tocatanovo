@@ -2,7 +2,7 @@
 /*
 Plugin Name:Automatic Translate Addon For Loco Translate
 Description:Auto language translator add-on for Loco Translate official plugin version 2.4.0 to translate plugins and themes translation files into any language via fully automatic machine translations via Yandex Translate Widget.
-Version:2.2.2
+Version:2.1.3
 License:GPL2
 Text Domain:automatic-translator-addon-for-loco-translate
 Domain Path:languages
@@ -14,7 +14,7 @@ use LocoAutoTranslateAddon\Helpers\Helpers;
 use LocoAutoTranslateAddon\Helpers\Atlt_downloader;
  /**
  * @package Loco Automatic Translate Addon
- * @version 2.2.2
+ * @version 2.1.3
  */
 if (!defined('ABSPATH')) {
     die('WordPress Environment Not Found!');
@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
 define('ATLT_FILE', __FILE__);
 define('ATLT_URL', plugin_dir_url(ATLT_FILE));
 define('ATLT_PATH', plugin_dir_path(ATLT_FILE));
-define('ATLT_VERSION', '2.2.2');
+define('ATLT_VERSION', '2.1.3');
 
 class LocoAutoTranslate
 {

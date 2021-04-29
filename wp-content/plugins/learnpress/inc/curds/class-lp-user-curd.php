@@ -1174,8 +1174,7 @@ class LP_User_CURD extends LP_Object_Data_CURD implements LP_Interface_CURD {
 			$args, array(
 				'paged'  => $paged,
 				'limit'  => LP_Settings::get_option( 'profile_courses_limit', 10 ),
-				'status' => '',
-				'suppress_filters' => false
+				'status' => ''
 			)
 		);
 

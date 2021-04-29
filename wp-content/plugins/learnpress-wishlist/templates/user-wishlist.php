@@ -19,8 +19,7 @@ $has_courses = $wishlist ? true : false;
     <div id="learn-press-profile-tab-course-wishlist" class="<?php echo $has_courses ? 'has-courses' : ''; ?>">
 		<?php if ( $has_courses ) { ?>
             <ul class="learn-press-courses profile-courses courses-list learn-press-wishlist-courses">
-				<?php foreach ( $wishlist as $post ) {
-					?>
+				<?php foreach ( $wishlist as $post ) { ?>
 					<?php learn_press_course_wishlist_template( 'wishlist-content.php' ); ?>
 				<?php } ?>
             </ul>

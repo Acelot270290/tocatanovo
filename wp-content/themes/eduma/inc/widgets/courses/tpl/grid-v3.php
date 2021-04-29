@@ -76,7 +76,7 @@ if ( $the_query->have_posts() ) :
 							the_title( sprintf( '<h2 class="course-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
 							?>
 
-							<?php if ( class_exists( 'LP_Addon_Coming_Soon_Courses_Preload' ) && learn_press_is_coming_soon( get_the_ID() ) ): ?>
+							<?php if ( thim_plugin_active( 'learnpress-coming-soon-courses/learnpress-coming-soon-courses.php' ) && learn_press_is_coming_soon( get_the_ID() ) ): ?>
                                 <div class="message message-warning learn-press-message coming-soon-message">
 									<?php esc_html_e( 'Coming soon', 'eduma' ) ?>
                                 </div>
@@ -104,7 +104,7 @@ if ( $the_query->have_posts() ) :
         </div>
 		<?php
 		if ( $view_all_course && 'bottom' == $view_all_position ) {
-			echo '<div class="wrapper-bottom-view-courses"><a class="view-all-courses position-bottom" href="' . get_post_type_archive_link( 'lp_course' ) . '">' . esc_attr( $view_all_course ) . '</a></div>';
+			echo '<a class="view-all-courses position-bottom" href="' . get_post_type_archive_link( 'lp_course' ) . '">' . esc_attr( $view_all_course ) . '</a>';
 		}
 		?>
     </div>

@@ -94,7 +94,6 @@ class WC_Admin {
 		switch ( $screen->id ) {
 			case 'dashboard':
 			case 'dashboard-network':
-				include __DIR__ . '/class-wc-admin-dashboard-setup.php';
 				include __DIR__ . '/class-wc-admin-dashboard.php';
 				break;
 			case 'options-permalink':

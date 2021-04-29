@@ -268,6 +268,7 @@ abstract class LP_Abstract_Assets {
 				$wp_scripts->print_extra_script( $handle );
 			}
 		}
+
 	}
 
 	public function localize_printed_admin_scripts() {

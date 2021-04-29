@@ -59,12 +59,10 @@ if ( $instance['tab'] ) {
 		if ( array_key_exists( "link", $tab ) ) {
 			if ( is_array( $tab['link'] ) ) {
 				$link   = $tab['link']['url'];
-				$rel    = isset( $tab['link']['rel'] ) ? 'nofollow' : 'dofollow';
-				$target = isset( $tab['link']['target'] ) ? '_blank' : '_self';
+				$rel    = $tab['link']['nofollow'] ? 'nofollow' : 'dofollow';
+				$target = $tab['link']['is_external'] ? '_blank' : '_self';
 			} else {
-				$link   = $tab['link'];
-				$rel    = isset( $tab['nofollow'] ) ? 'nofollow' : 'dofollow';
-				$target = isset( $tab['is_external'] ) ? '_blank' : '_self';
+				$link = $tab['link'];
 			}
 		}
 

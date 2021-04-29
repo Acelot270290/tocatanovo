@@ -11,11 +11,11 @@ $this->extend('../layout');
             <?php self::e( __('Version %s','loco-translate'), $version )?> 
         </h3>
         <p>
-            <?php esc_html_e('A newer version of Loco Translate is available for download','loco-translate')?>.
+            <?php esc_html_e( __('A newer version of Loco Translate is available for download','loco-translate') )?>.
         </p>
         <p class="submit">
             <a class="button button-primary" href="<?php echo $update_href?>" target="_blank"><?php self::e(__('Upgrade to %s','loco-translate'), 'v'.$update )?></a>
-            <a class="button button-link has-icon icon-ext" href="https://wordpress.org/plugins/loco-translate/installation/" target="_blank"><?php esc_html_e('Install manually','loco-translate')?></a>
+            <a class="button button-link has-icon icon-ext" href="https://wordpress.org/plugins/loco-translate/installation/" target="_blank"><?php esc_html_e( __('Install manually','loco-translate') )?></a>
         </p>
     </div><?php
 
@@ -50,7 +50,7 @@ $this->extend('../layout');
         </h3>
         <p><?php 
             // translators: (1) Name of software, e.g. "WordPress" (2) Version number, e.g. "5.6"
-            self::e( __('Your version of %1$s is very old. We recommend you upgrade to at least v%2$s, but preferably to the latest stable version.','loco-translate'),'PHP',$phpupdate)?> 
+            esc_html_e( sprintf(__('Your version of %1$s is very old. We recommend you upgrade to at least v%2$s, but preferably to the latest stable version.','loco-translate'),'PHP',$phpupdate) )?> 
         </p>
         <p class="submit">
             <a class="button button-primary" href="https://www.php.net/releases/#<?php echo $phpupdate?>" target="_blank">PHP <?php echo $phpupdate?></a>
@@ -69,7 +69,7 @@ $this->extend('../layout');
             self::e( __('WordPress %s','loco-translate'), $wpversion )?> 
         </h3>
         <p><?php
-            self::e( __('Your version of %1$s is very old. We recommend you upgrade to at least v%2$s, but preferably to the latest stable version.','loco-translate'),'WordPress',$wpupdate)?> 
+            esc_html_e( sprintf(__('Your version of %1$s is very old. We recommend you upgrade to at least v%2$s, but preferably to the latest stable version.','loco-translate'),'WordPress',$wpupdate) )?>
         </p>
         <p class="submit">
             <a class="button button-primary" href="<?php echo esc_url($wpupdate_href)?>"><?php esc_html_e('Update Now','default')?></a>

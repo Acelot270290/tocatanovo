@@ -25,10 +25,6 @@ $show_sidebar = learn_press_cookie_get( 'sidebar-toggle' );
 ?>
 
 <div id="popup-header">
-
-    <h3 class="course-title">
-        <a href="<?php echo esc_url( $course->get_permalink() ); ?>"><?php echo $course->get_title(); ?></a>
-    </h3>
 	
 	<div class="thim-course-item-popup-right">
 		<input type="checkbox" id="sidebar-toggle" class="toggle-content-item" <?php checked( $show_sidebar, true ); ?> />

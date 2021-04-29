@@ -11,18 +11,9 @@
 
 // Prevent loading this file directly
 defined( 'ABSPATH' ) || exit;
-if (!isset($classes) || !isset($course_id) || !isset($title) || !isset($state)) {
-	return;
-}
-if ( version_compare( LEARNPRESS_VERSION, '4.0.0-beta-0', '>=' ) ) {
-	$lp_version = 'lp4';
-} else {
-	$lp_version = 'lp3';
-}
-
 
 printf(
-	'<button class="'.$lp_version.' learn-press-course-wishlist lp-button gray learn-press-course-wishlist-button-%2$d wishlist-button %s" data-id="%s" data-nonce="%s" title="%s" data-text="%s">%s</button>',
+	'<button class="learn-press-course-wishlist learn-press-course-wishlist-button-%2$d wishlist-button %s" data-id="%s" data-nonce="%s" title="%s" data-text="%s">%s</button>',
 	join( " ", $classes ),
 	$course_id,
 	wp_create_nonce( 'course-toggle-wishlist' ),

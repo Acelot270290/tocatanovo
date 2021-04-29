@@ -1801,26 +1801,10 @@ function wc_ascii_uasort_comparison( $a, $b ) {
 function wc_asort_by_locale( &$data, $locale = '' ) {
 	// Use Collator if PHP Internationalization Functions (php-intl) is available.
 	if ( class_exists( 'Collator' ) ) {
-		try {
-			$locale   = $locale ? $locale : get_locale();
-			$collator = new Collator( $locale );
-			$collator->asort( $data, Collator::SORT_STRING );
-			return $data;
-		} catch ( IntlException $e ) {
-			/*
-			 * Just skip if some error got caused.
-			 * It may be caused in installations that doesn't include ICU TZData.
-			 */
-			if ( Constants::is_true( 'WP_DEBUG' ) ) {
-				error_log( // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-					sprintf(
-						'An unexpected error occurred while trying to use PHP Intl Collator class, it may be caused by an incorrect installation of PHP Intl and ICU, and could be fixed by reinstallaing PHP Intl, see more details about PHP Intl installation: %1$s. Error message: %2$s',
-						'https://www.php.net/manual/en/intl.installation.php',
-						$e->getMessage()
-					)
-				);
-			}
-		}
+		$locale   = $locale ? $locale : get_locale();
+		$collator = new Collator( $locale );
+		$collator->asort( $data, Collator::SORT_STRING );
+		return $data;
 	}
 
 	$raw_data = $data;
@@ -2271,11 +2255,7 @@ function wc_prevent_dangerous_auto_updates( $should_update, $plugin ) {
 
 	$new_version      = wc_clean( $plugin->new_version );
 	$plugin_updates   = new WC_Plugin_Updates();
-	$version_type = Constants::get_constant( 'WC_SSR_PLUGIN_UPDATE_RELEASE_VERSION_TYPE' );
-	if ( ! is_string( $version_type ) ) {
-		$version_type = 'none';
-	}
-	$untested_plugins = $plugin_updates->get_untested_plugins( $new_version, $version_type );
+	$untested_plugins = $plugin_updates->get_untested_plugins( $new_version, 'major' );
 	if ( ! empty( $untested_plugins ) ) {
 		return false;
 	}

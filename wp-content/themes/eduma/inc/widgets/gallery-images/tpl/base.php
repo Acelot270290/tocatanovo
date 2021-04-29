@@ -14,10 +14,6 @@ if ( $instance['image'] ) {
 	} else {
 		$t = '';
 	}
-
-	if(isset($instance['item'] )){
-		$instance['number'] = $instance['item'];
- 	}
 	if ( $instance['number'] ) {
 		$number = 'data-visible="' . $instance['number'] . '"';
 	}

@@ -12,11 +12,7 @@ import {
 	usePaymentMethods,
 	useStoreCart,
 } from '@woocommerce/base-hooks';
-
-/**
- * Internal dependencies
- */
-import { PaymentMethods } from '../../payment-methods';
+import { PaymentMethods } from '@woocommerce/base-components/payment-methods';
 
 const PaymentMethodStep = () => {
 	const { isProcessing: checkoutIsProcessing } = useCheckoutContext();

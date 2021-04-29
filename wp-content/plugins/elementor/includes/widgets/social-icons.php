@@ -75,10 +75,10 @@ class Widget_Social_Icons extends Widget_Base {
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function register_controls() {
+	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_social_icon',
 			[
@@ -310,10 +310,13 @@ class Widget_Social_Icons extends Widget_Base {
 						'icon' => 'eicon-text-align-right',
 					],
 				],
-				'prefix_class' => 'e-grid-align-',
+				'selectors_dictionary' => [
+					'left' => 'flex-' . $start,
+					'right' => 'flex-' . $end,
+				],
 				'default' => 'center',
 				'selectors' => [
-					'{{WRAPPER}} .elementor-widget-container' => 'text-align: {{VALUE}}',
+					'{{WRAPPER}} .elementor-widget-container' => 'justify-content: {{VALUE}};',
 				],
 			]
 		);
@@ -391,7 +394,7 @@ class Widget_Social_Icons extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}}' => '--icon-size: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .elementor-social-icon' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -402,7 +405,7 @@ class Widget_Social_Icons extends Widget_Base {
 				'label' => __( 'Padding', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'selectors' => [
-					'{{WRAPPER}} .elementor-social-icon' => '--icon-padding: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .elementor-social-icon' => 'padding: {{SIZE}}{{UNIT}};',
 				],
 				'default' => [
 					'unit' => 'em',
@@ -437,7 +440,7 @@ class Widget_Social_Icons extends Widget_Base {
 					'size' => 5,
 				],
 				'selectors' => [
-					'{{WRAPPER}}' => '--grid-column-gap: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}}' => '--grid-column-gap: {{SIZE}}{{UNIT}}; --grid-side-margin: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);
@@ -451,7 +454,7 @@ class Widget_Social_Icons extends Widget_Base {
 					'size' => 0,
 				],
 				'selectors' => [
-					'{{WRAPPER}}' => '--grid-row-gap: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}}' => '--grid-row-gap: {{SIZE}}{{UNIT}}; --grid-bottom-margin: {{SIZE}}{{UNIT}}',
 				],
 			]
 		);

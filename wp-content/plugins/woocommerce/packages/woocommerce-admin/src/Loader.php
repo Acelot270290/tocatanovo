@@ -147,7 +147,6 @@ class Loader {
 	 * Gets WordPress capability required to use analytics features.
 	 *
 	 * @return string
-	 * @deprecated since 2.1.0, use value 'view_woocommerce_reports'
 	 */
 	public static function get_analytics_capability() {
 		if ( null === static::$required_capability ) {
@@ -165,7 +164,6 @@ class Loader {
 	 * Helper function indicating whether the current user has the required analytics capability.
 	 *
 	 * @return bool
-	 * @deprecated since 2.1.0, use current_user_can( 'view_woocommerce_reports' )
 	 */
 	public static function user_can_analytics() {
 		return current_user_can( static::get_analytics_capability() );
@@ -483,6 +481,13 @@ class Loader {
 			array( WC_ADMIN_APP ),
 			$css_file_version
 		);
+
+		wp_register_style(
+			'wc-material-icons',
+			'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined',
+			array(),
+			$css_file_version
+		);
 	}
 
 	/**
@@ -700,6 +705,10 @@ class Loader {
 			return;
 		}
 
+		if ( ! static::user_can_analytics() ) {
+			return;
+		}
+
 		// Grab translation strings from Webpack-generated chunks.
 		add_filter( 'load_script_translation_file', array( __CLASS__, 'load_script_translation_file' ), 10, 3 );
 
@@ -843,6 +852,10 @@ class Loader {
 	 * @param array $section Section to create breadcrumb from.
 	 */
 	private static function output_heading( $section ) {
+		if ( ! static::user_can_analytics() ) {
+			return;
+		}
+
 		echo esc_html( $section );
 	}
 
@@ -852,6 +865,10 @@ class Loader {
 	 */
 	public static function embed_page_header() {
 		if ( ! self::is_admin_page() && ! self::is_embed_page() ) {
+			return;
+		}
+
+		if ( ! static::user_can_analytics() ) {
 			return;
 		}
 
@@ -1068,10 +1085,8 @@ class Loader {
 			}
 		}
 
-		$user_controller = new \WP_REST_Users_Controller();
-		$request         = new \WP_REST_Request();
-		$request->set_query_params( array( 'context' => 'edit' ) );
-		$user_response     = $user_controller->get_current_item( $request );
+		$user_controller   = new \WP_REST_Users_Controller();
+		$user_response     = $user_controller->get_current_item( new \WP_REST_Request() );
 		$current_user_data = is_wp_error( $user_response ) ? (object) array() : $user_response->get_data();
 
 		$settings['currentUserData']      = $current_user_data;
@@ -1084,8 +1099,6 @@ class Loader {
 		$settings['wcAdminAssetUrl'] = plugins_url( 'images/', dirname( __DIR__ ) . '/woocommerce-admin.php' );
 		$settings['wcVersion']       = WC_VERSION;
 		$settings['siteUrl']         = site_url();
-		$settings['shopUrl']         = get_permalink( wc_get_page_id( 'shop' ) );
-		$settings['homeUrl']         = home_url();
 		$settings['dateFormat']      = get_option( 'date_format' );
 		$settings['plugins']         = array(
 			'installedPlugins' => PluginsHelper::get_installed_plugin_slugs(),

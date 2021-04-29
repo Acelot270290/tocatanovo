@@ -1,4 +1,4 @@
-/*! elementor - v3.2.1 - 21-04-2021 */
+/*! elementor - v3.0.8.1 - 14-09-2020 */
 body {
   color: #E0E1E3; }
   body .pcr-app {
@@ -137,8 +137,6 @@ select {
       border-bottom-color: #71D7F7; }
     .elementor-panel .elementor-panel-navigation .elementor-panel-navigation-tab a {
       color: #E0E1E3; }
-  .elementor-panel #elementor-panel-elements-search-area {
-    background-color: #34383C; }
   .elementor-panel #elementor-panel-elements-search-input {
     background-color: #4C4F56;
     color: #E0E1E3; }
@@ -258,12 +256,9 @@ a.elementor-responsive-switcher {
   border-color: #64666A; }
 
 .elementor-control-media-area, .pcr-app[data-theme=monolith] .pcr-color-palette, .pcr-button {
-  background-image: -webkit-linear-gradient(45deg, #34383C 25%, transparent 0, transparent 75%, #34383C 0, #34383C), -webkit-linear-gradient(45deg, #34383C 25%, transparent 0, transparent 75%, #34383C 0, #34383C);
-  background-image: -o-linear-gradient(45deg, #34383C 25%, transparent 0, transparent 75%, #34383C 0, #34383C), -o-linear-gradient(45deg, #34383C 25%, transparent 0, transparent 75%, #34383C 0, #34383C);
-  background-image: linear-gradient(45deg, #34383C 25%, transparent 0, transparent 75%, #34383C 0, #34383C), linear-gradient(45deg, #34383C 25%, transparent 0, transparent 75%, #34383C 0, #34383C);
-  -webkit-background-size: 12px 12px;
-          background-size: 12px 12px;
-  background-position: 0 0, 6px 6px;
+  background-image: -webkit-linear-gradient(45deg, #34383C 25%, transparent 25%, transparent 75%, #34383C 75%, #34383C), -webkit-linear-gradient(45deg, #34383C 25%, transparent 25%, transparent 75%, #34383C 75%, #34383C);
+  background-image: -o-linear-gradient(45deg, #34383C 25%, transparent 25%, transparent 75%, #34383C 75%, #34383C), -o-linear-gradient(45deg, #34383C 25%, transparent 25%, transparent 75%, #34383C 75%, #34383C);
+  background-image: linear-gradient(45deg, #34383C 25%, transparent 25%, transparent 75%, #34383C 75%, #34383C), linear-gradient(45deg, #34383C 25%, transparent 25%, transparent 75%, #34383C 75%, #34383C);
   background-color: #64666A; }
 
 .elementor-control-type-icons .elementor-control-media__preview i {
@@ -458,10 +453,6 @@ body.rtl .elementor-control-type-gallery .elementor-control-dynamic-switcher {
   color: #E0E1E3;
   border-color: #64666A; }
 
-.select2-container:not(.select2-container--all-selected) .select2-selection--multiple .select2-search--inline::before {
-  background-color: #4C4F56;
-  color: #B4B5B7; }
-
 .select2-container.select2-container--open .select2-selection--single,
 .select2-container.select2-container--open .select2-selection--multiple, .select2-container.select2-container--focus .select2-selection--single,
 .select2-container.select2-container--focus .select2-selection--multiple {
@@ -479,8 +470,6 @@ body.rtl .elementor-control-type-gallery .elementor-control-dynamic-switcher {
   .select2-container--default .select2-selection--multiple .select2-selection__choice {
     background-color: #4C4F56;
     border-color: #4C4F56; }
-    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-      color: #B4B5B7; }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
   background-color: #4C4F56;

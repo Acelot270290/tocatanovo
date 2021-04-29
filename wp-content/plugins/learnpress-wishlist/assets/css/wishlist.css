@@ -19,35 +19,6 @@
     animation-delay: 0s;
 }
 
-.lp4.course-wishlist:before {
-    content: "\f004";
-    margin-right: 5px;
-	font-family: "Font Awesome 5 Free";
-	font-size: 26px;
-	font-weight: 900;
-}
-
-.lp4.course-wishlist.filled:before {
-	font-family: "Font Awesome 5 Free";
-	font-size: 26px;
-	font-weight: 900;
-	content: "\f004";
-	margin-right: 5px;
-}
-
-.lp3.course-wishlist:before {
-	content: "\f08a";
-	margin-right: 5px;
-	font-family: fontawesome;
-}
-
-.lp3.course-wishlist.filled:before {
-	content: "\f004";
-}
-
-.learn-press-courses .course-wishlist{
-    float: right;
-}
 @keyframes course-wishlist-heartbeat {
     0% {
         transform: scale(1);
@@ -68,21 +39,4 @@
 
 .learn-press-courses .learn-press-course-wishlist.wishlist-button {
     width: 100%;
-}
-
-#learn-press-course .learn-press-course-wishlist,
-#learn-press-profile .learn-press-course-wishlist
-{
-	display: block;
-	position: relative !important;
-	background: #fff;
-	border: 1px solid #000;
-	font-size: 14px;
-	color: #000;
-	padding: 5px;
-}
-
-/**************** Page Profile ****************/
-#learn-press-profile #profile-nav .lp-profile-nav-tabs > li.wishlist.active > a::before {
-	color: white;
 }

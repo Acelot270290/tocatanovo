@@ -3,12 +3,10 @@
 	padding-bottom: 10px;
 	line-height: 30px;
 	font-weight: 700;
-
 	.thim-demo-university-4 & {
 		font-weight: 400;
 		padding-top: 0;
 		padding-bottom: 0;
-
 		.menu {
 			li {
 				padding-top: 10px;
@@ -16,27 +14,22 @@
 				line-height: 25px;
 			}
 		}
-
 		.widget {
 			display: inline-block;
 			float: right;
 			padding: 0;
 		}
-
 		.widget_login-popup .thim-link-login {
 			line-height: 45px;
 			border-left: 1px solid #444;
 			border-right: 1px solid #444;
 			padding: 0 15px;
-
 			a {
 				padding: 5px 0px;
 				line-height: 35px;
-
 				&.profile {
 					display: none;
 				}
-
 				&.logout,
 				&.login {
 					&:before {
@@ -48,7 +41,6 @@
 						font-weight: 900
 					}
 				}
-
 				&.login {
 					line-height: 35px;
 					height: 45px;
@@ -56,7 +48,6 @@
 					display: block;
 					overflow: hidden;
 					white-space: nowrap;
-
 					&:before {
 						width: 15px;
 						text-align: center;
@@ -65,12 +56,10 @@
 				}
 			}
 		}
-
 		.widget_search {
 			.search-form {
 				line-height: 45px;
 				padding: 0;
-
 				&:after {
 					height: 45px;
 					line-height: 45px;
@@ -80,7 +69,6 @@
 					right: 0;
 					left: auto;
 				}
-
 				label {
 					.search-field {
 						width: 45px;
@@ -90,26 +78,21 @@
 						line-height: 45px;
 						padding: 0 0 0 45px;
 						cursor: pointer;
-
 						&:focus {
 							cursor: text;
 							padding-left: 15px;
 							padding-right: 40px;
 							background: transparent;
 						}
-
 						&::-webkit-input-placeholder {
 							color: transparent;
 						}
-
 						&::-moz-placeholder {
 							color: transparent;
 						}
-
 						&:-ms-input-placeholder {
 							color: transparent;
 						}
-
 						&:-moz-placeholder {
 							color: transparent;
 						}
@@ -118,62 +101,50 @@
 			}
 		}
 	}
-
 	.header_v3 & {
 		font-weight: 400;
 		padding-bottom: 5px;
 		padding-top: 5px;
 	}
-
 	.widget_polylang {
 		.screen-reader-text {
 			display: none;
 		}
 	}
-
 	.widget_login-popup,
 	.widget_login-menu {
 		float: right;
-
 		.thim-link-login {
 			line-height: 30px;
-
 			a {
 				padding: 0 12px;
 				line-height: 20px;
 				display: inline-block;
-
 				&:last-child {
 					padding-right: 0;
 				}
-
 				&:first-child {
 					padding-left: 0;
 				}
-
 				&:first-child:not(:last-child) {
 					border-right: 1px solid #212121;
 				}
 			}
 		}
 	}
-
 	.thim-language {
 		float: right;
 		margin-right: 10px;
 	}
-
 	.widget_search {
 		float: right;
 		padding: 5px 0;
 		padding-left: 18px;
-
 		.search-form {
 			padding-left: 42px;
 			padding-right: 62px;
 			line-height: 20px;
 			border-left: 1px solid #444;
-
 			&:after {
 				left: 18px;
 				top: 0;
@@ -182,7 +153,6 @@
 				font-size: 14px;
 				width: 20px;
 			}
-
 			label .search-field {
 				background: transparent;
 				border: none;
@@ -195,14 +165,12 @@
 				top: -5px;
 				right: 0;
 				z-index: 999;
-
 				&:focus {
 					width: 200px;
 					padding: 0 10px;
 					background: #444;
 				}
 			}
-
 			.search-submit {
 				text-indent: -9999px;
 				display: none;
@@ -210,17 +178,14 @@
 			}
 		}
 	}
-
 	.menu {
 		display: inline-block;
 		margin: 0;
-
 		li {
 			display: inline-block;
 			list-style: none;
 			padding-right: 40px;
 			position: relative;
-
 			.sub-menu {
 				margin: 0;
 				padding: 5px 15px 10px;
@@ -230,49 +195,18 @@
 				min-width: 200px;
 				display: none;
 				overflow: hidden;
-
 				li {
 					display: block;
 					padding: 0;
 					margin: 0;
 				}
-
 				&[class*=tc-columns-] {
 					padding: 15px 30px 20px;
 				}
 			}
-
 			&:hover {
 				.sub-menu {
 					z-index: 9999;
-				}
-			}
-		}
-	}
-
-	.icon-before-text.widget_login-popup {
-		.thim-link-login {
-			a {
-				text-transform: uppercase;
-			}
-
-			a:first-child:not(:last-child) {
-				border-right: none !important;
-			}
-
-			.login {
-				border: 2px solid #ddd;
-				border-radius: 50px;
-				padding: 8px 30px;
-
-				&:before {
-					content: "\f2f6";
-					font-family: 'Line Awesome Free';
-					font-weight: 900;
-					font-size: 24px;
-					margin: -2px 10px 0px 10px;
-					display: inline-block;
-					vertical-align: middle;
 				}
 			}
 		}
@@ -282,11 +216,9 @@
 .thim-language {
 	line-height: 30px;
 	position: relative;
-
 	p {
 		margin-bottom: 0;
 	}
-
 	ul {
 		margin: 0;
 		min-width: 130px;
@@ -296,20 +228,16 @@
 		z-index: 99;
 		background: #2B2B2B;
 		display: none;
-
 		li {
 			list-style: none;
 		}
 	}
-
 	.lang-item {
 		line-height: 20px;
 		display: inline-block;
-
 		&.active {
 			padding-right: 12px;
 			border-right: 1px solid #212121;
-
 			&:after {
 				content: "\f078";
 				display: inline-block;
@@ -320,14 +248,12 @@
 				font-weight: 900;
 			}
 		}
-
 		img {
 			max-height: 10px;
 			width: auto;
 			margin-right: 7px;
 		}
 	}
-
 	.list-lang {
 		.lang-item {
 			display: block;
@@ -339,11 +265,9 @@
 .thim-have-any-question {
 	float: left;
 	line-height: 30px;
-
 	p {
 		display: inline-block;
 	}
-
 	.mobile,
 	.email {
 		display: inline-block;
@@ -354,64 +278,6 @@
 			margin-right: 7px;
 		}
 	}
-
-	&.any-question-v1 {
-		.question {
-			display: inline-block;
-			margin-top: -10px;
-			margin-bottom: -11px;
-			padding-top: 10px;
-			padding-bottom: 10px;
-			margin-left: 10px;
-			background: #f5f5f5;
-			padding-right: 25px;
-			border-radius: 0 50px 50px 0;
-			position: relative;
-			text-transform: uppercase;
-
-			.icon-question {
-				width: 44px;
-				height: 44px;
-				display: inline-block;
-				vertical-align: middle;
-				border-radius: 50%;
-				margin-left: 20px;
-				background: url("images/icon-question.png") no-repeat 9px 9px;
-				background-color: #fdb514;
-
-				&:before {
-					display: none;
-				}
-			}
-
-			&:before {
-				content: "";
-				background: #f5f5f5;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				right: 100%;
-				left: -40px;
-			}
-		}
-
-		.mobile, .email {
-			font-weight: normal;
-
-			i {
-				margin-right: 10px;
-				font-size: 22px;
-				display: inline-block;
-				vertical-align: middle;
-			}
-		}
-
-		@media (min-width: 1600px) {
-			.question:before {
-				left: -110px;
-			}
-		}
-	}
 }
 
 .header_v3 {
@@ -420,18 +286,15 @@
 		overflow: hidden;
 		border-right: 1px solid #f5f5f5;
 		padding: 0px 30px 19px 15px;
-
 		&:hover {
 			background: #f5f5f5;
 		}
-
 		.title {
 			font-weight: 500;
 			font-size: 15px;
 			margin-top: 19px;
 			margin-bottom: 2px;
 		}
-
 		.desc {
 			font-size: 11px;
 			color: #999;
@@ -444,7 +307,6 @@
 		margin-right: 0;
 		margin-left: 30px;
 	}
-
 	#toolbar {
 		a {
 			&:hover {
@@ -459,62 +321,47 @@
 	padding-bottom: 0;
 }
 
-.toolbar_border_bottom {
-	border-bottom: 1px dashed;
-	border-bottom-color: #dedede;
-}
-
 .header_v5 {
 	#toolbar {
 		padding-bottom: 0;
 		padding-top: 0;
 		font-weight: 300;
 		line-height: 40px;
-
 		.header_full {
 			padding-right: 0;
 		}
-
 		.thim-have-any-question {
 			line-height: 40px;
-
 			.mobile {
 				margin-left: 0;
 				margin-right: 15px;
-
 				a {
 					&:hover {
 						color: #fff;
 					}
 				}
 			}
-
 			a {
 				text-decoration: none;
 			}
 		}
-
 		.widget_nav_menu {
 			float: right;
 		}
-
 		.menu {
 			li {
 				padding-right: 30px;
-
 				a {
 					text-decoration: none;
 					text-transform: uppercase;
 				}
 			}
 		}
-
 		.widget_courses-searching {
 			float: right;
 			width: 48px;
 			border-left: 1px solid rgba(183, 183, 183, 0.1);
 		}
-
 		.widget_login-menu, .widget_login-popup {
 			.thim-link-login {
 				a {
@@ -523,7 +370,6 @@
 					border-left: 1px solid rgba(183, 183, 183, 0.1);
 					padding: 0;
 					text-align: center;
-
 					&:first-child:not(:last-child) {
 						border-right: none;
 					}
@@ -534,10 +380,10 @@
 }
 
 @media (min-width: 1024px) {
-	#toolbar .menu > li.menu-item-has-children > a {
+	#toolbar .menu >li.menu-item-has-children >a {
 		position: relative;
 	}
-	#toolbar .menu > li.menu-item-has-children > a:after {
+	#toolbar .menu >li.menu-item-has-children >a:after {
 		content: "\f078";
 		display: inline-block;
 		font-family: 'Font Awesome 5 Free';
@@ -549,6 +395,6 @@
 		line-height: 24px;
 		font-size: 11px;
 		font-weight: 900;
-		transform: translate(0, -50%);
+		transform: translate(0,-50%);
 	}
 }

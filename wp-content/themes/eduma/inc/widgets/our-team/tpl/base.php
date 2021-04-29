@@ -3,6 +3,7 @@ $number_post = $instance['number_post'];
 $columns     = $instance['columns'] ? $instance['columns'] : 4;
 
 $css_animation = $instance['css_animation'];
+
 $css_animation = thim_getCSSAnimation( $css_animation );
 
 $our_team_args = array(
@@ -28,25 +29,15 @@ if ( $columns <> '' ) {
 }
 
 $our_team = new WP_Query( $our_team_args );
-$html     = $extral_url = '';
+$html     = '';
 if ( $our_team->have_posts() ) {
 	$html .= '<div class="wrapper-lists-our-team ' . $css_animation . '">';
-
-	if ( is_array( $instance['link'] ) ) {
-		$link       = $instance['link']['url'];
-		$extral_url = isset($instance['link']['rel']) ? ' rel="nofollow"' : '';
-		$extral_url .= isset($instance['link']['target']) ? ' target="_blank"' : '';
-	} else {
-		$link       = $instance['link'];
-		$extral_url = isset($instance['nofollow']) ? ' rel="nofollow"' : '';
-		$extral_url .= isset($instance['is_external']) ? ' target="_blank"' : '';
-	}
-	if ( empty( $link ) ) {
-		$link       = "#";
-		$extral_url = '';
-	}
 	if ( $instance['text_link'] && $instance['text_link'] != '' ) {
- 		$html .= '<a class="join-our-team" href="' . $link . '" title="' . $instance['text_link'] . '"' . $extral_url . '>' . $instance['text_link'] . '</a>';
+		if ( $instance['text_link'] && $instance['text_link'] != '' ) {
+			$html .= '<a class="join-our-team" href="' . $instance['link'] . '" title="' . $instance['text_link'] . '">' . $instance['text_link'] . '</a>';
+		} else {
+			$html .= '<a class="join-our-team" href="#" title="' . $instance['text_link'] . '">' . $instance['text_link'] . '</a>';
+		}
 	}
 	$html .= '<div class="row">';
 	while ( $our_team->have_posts() ): $our_team->the_post();
@@ -59,7 +50,7 @@ if ( $our_team->have_posts() ) {
 		$linkedin_url = get_post_meta( $team_id, 'linkedin_url', true );
 
 		$html .= '<div class="our-team-item col-sm-' . $columns . '">';
-		$html .= '<div class="our-team-image"> <a class="link-img" href="' . esc_url( get_permalink() ) . '"></a>' . thim_get_feature_image( get_post_thumbnail_id(), 'full', apply_filters( 'thim_member_thumbnail_width', 200 ), apply_filters( 'thim_member_thumbnail_height', 200 ) );
+		$html .= '<div class="our-team-image"> <a class="link-img" href="' . esc_url( get_permalink() ) . '"></a>' . thim_get_feature_image( get_post_thumbnail_id(), 'full', apply_filters( 'thim_member_thumbnail_width', 200 ), apply_filters('thim_member_thumbnail_height', 200) );
 		$html .= '<div class="social-team">';
 		if ( $link_face <> '' ) {
 			$html .= '<a target="_blank" href="' . $link_face . '"><i class="fa fa-facebook"></i></a>';

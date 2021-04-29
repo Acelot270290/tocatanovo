@@ -63,7 +63,7 @@ if ( $the_query->have_posts() ) :
 							<?php echo thim_get_feature_image( get_post_thumbnail_id( get_the_ID() ), 'full', $thumb_w, $thumb_h, get_the_title() ); ?>
 						</a>
 						<?php do_action( 'thim_inner_thumbnail_course' ); ?>
-						<?php if ( class_exists( 'LP_Addon_Course_Review_Preload' ) ) { ?>
+						<?php if ( thim_plugin_active( 'learnpress-course-review/learnpress-course-review.php' ) ) { ?>
 							<?php $course_rate = learn_press_get_course_rate( get_the_ID() ); ?>
 							<div class="rate">
 								<i class="lnr icon-star"></i>
@@ -78,7 +78,7 @@ if ( $the_query->have_posts() ) :
 						the_title( sprintf( '<h2 class="course-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
 						?>
 
-						<?php if ( class_exists( 'LP_Addon_Coming_Soon_Courses_Preload' ) && learn_press_is_coming_soon( get_the_ID() ) ): ?>
+						<?php if ( thim_plugin_active( 'learnpress-coming-soon-courses/learnpress-coming-soon-courses.php' ) && learn_press_is_coming_soon( get_the_ID() ) ): ?>
 							<div class="message message-warning learn-press-message coming-soon-message">
 								<?php esc_html_e( 'Coming soon', 'eduma' ) ?>
 							</div>
@@ -106,7 +106,7 @@ if ( $the_query->have_posts() ) :
 	</div>
 	<?php
 	if ( $view_all_course && 'bottom' == $view_all_position ) {
-		echo '<div class="wrapper-bottom-view-courses"><a class="view-all-courses position-bottom" href="' . get_post_type_archive_link( 'lp_course' ) . '">' . esc_attr( $view_all_course ) . ' <i class="lnr icon-arrow-right"></i></a></div>';
+		echo '<a class="view-all-courses position-bottom" href="' . get_post_type_archive_link( 'lp_course' ) . '">' . esc_attr( $view_all_course ) . ' <i class="lnr icon-arrow-right"></i></a>';
 	}
 	echo '</div>';
 

@@ -82,8 +82,8 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
                 $n = count($list);
                 $maximum = Loco_mvc_FileParams::renderBytes( wp_convert_hr_to_bytes( Loco_data_Settings::get()->max_php_size ) );
                 $largest = Loco_mvc_FileParams::renderBytes( $extr->getMaxPhpSize() );
-                // Translators: (1) Number of files (2) Maximum size of file that will be included (3) Size of the largest encountered
-                $text = _n('%1$s file has been skipped because it\'s %3$s. (Max is %2$s). Check all strings are present before saving.','%1$s files over %2$s have been skipped. (Largest is %3$s). Check all strings are present before saving.',$n,'loco-translate');
+                // Translators: Where %2$s is the maximum size of a file that will be included and %3$s is the largest encountered
+                $text = _n('One file has been skipped because it\'s %3$s. (Max is %2$s). Check all strings are present before saving.','%s files over %2$s have been skipped. (Largest is %3$s). Check all strings are present before saving.',$n,'loco-translate');
                 $text = sprintf( $text, number_format($n), $maximum, $largest );
                 // not failing, just warning. Nothing will be saved until user saves editor state
                 Loco_error_AdminNotices::warn( $text );
@@ -91,11 +91,22 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
             // Have source strings. These cannot contain any translations.
             $source = $extr->includeMeta()->getTemplate($domain);
             $translate = false;
+            $strip = false;
         }
         
         // establish on back end what strings will be added, removed, and which could be fuzzy-matches
-        $matcher = new Loco_gettext_Matcher;
-        $matcher->loadRefs($source,$translate);
+        $ntotal = 0;
+        $nmatched = 0;
+        $added = array();
+        $dropped = array();
+        $fuzzy = array();
+        // add latest valid sources to matching instance
+        $matcher = new LocoFuzzyMatcher;
+        /* @var LocoPoMessage $new */
+        foreach( $source as $new ){
+            $matcher->add($new);
+            $ntotal++;
+        }
         // Fuzzy matching only applies to syncing PO files. POT files will always do hard sync (add/remove)
         if( 'po' === $type ){
             $fuzziness = Loco_data_Settings::get()->fuzziness;
@@ -107,7 +118,47 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         // update matches sources, deferring unmatched for deferred fuzzy match 
         $merged = clone $target;
         $merged->clear();
-        $this->set( 'done', $matcher->merge($target,$merged) );
+        /* @var LocoPoMessage $old */
+        foreach( $target as $old ){
+            $new = $matcher->match($old);
+            // if existing source is still valid, merge any changes
+            if( $new instanceof LocoPoMessage ){
+                $p = clone $old;
+                $p->merge($new,$translate);
+                $merged->push($p);
+                $nmatched++;
+            }
+        }
+        // Attempt fuzzy matching after all exact matches have been processed
+        if( $nmatched !== $ntotal ){
+            foreach( $matcher->getFuzzyMatches() as $pair ){
+                list($old,$new) = $pair;
+                $p = clone $old;
+                $p->merge($new);
+                $merged->push($p);
+                $fuzzy[] = $p->getKey();
+            }
+            // Any unmatched strings remaining are NEW
+            /* @var LocoPoMessage $new */
+            foreach( $matcher->unmatched() as $new ){
+                $p = clone $new;
+                $strip and $p->strip();
+                $merged->push($p);
+                $added[] = $p->getKey();
+            }
+            // any deferred matches not resolved are dropped
+            /* @var LocoPoMessage $old */
+            foreach( $matcher->redundant() as $old ){
+                $dropped[] = $old->getKey();
+            }
+        }
+        // return to JavaScript with stats in the same form as old front end merge
+        $this->set( 'done', array (
+            'add' => $added,
+            'fuz' => $fuzzy,
+            'del' => $dropped,
+        ) );
+        
         $merged->sort();
         $this->set( 'po', $merged->jsonSerialize() );
         

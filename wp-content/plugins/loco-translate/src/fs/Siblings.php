@@ -83,9 +83,8 @@ class Loco_fs_Siblings {
         $jsons = array();
         $name = $this->po->filename();
         $finder = new Loco_fs_FileFinder( $this->po->dirname() );
-        // match .json files with same name as .po, plus hashed names
         $regex = '/^'.preg_quote($name,'/').'-[0-9a-f]{32}$/';
-        /* @var Loco_fs_File $file */
+        /* @var $file Loco_fs_File */
         foreach( $finder->group('json')->exportGroups() as $files ) {
             foreach( $files as $file ){
                 $match = $file->filename();
@@ -94,12 +93,6 @@ class Loco_fs_Siblings {
                 }
             }
         }
-        // append single json using our filter
-        $path = apply_filters('loco_compile_single_json', '', $this->po->getPath() );
-        if( is_string($path) && '' !== $path && file_exists($path) && ! in_array($path,$jsons) ){
-            $jsons[] = $path;
-        }
-
         return $jsons;
     }
 

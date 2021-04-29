@@ -129,11 +129,6 @@ if ( ! function_exists( 'LP_Addon_Course_Review' ) ) {
 		 * Single course assets.
 		 */
 		public function review_assets() {
-			if ( ! learn_press_is_course_archive() ) {
-				wp_enqueue_style( 'course-review', LP_ADDON_COURSE_REVIEW_URL . '/assets/css/course-review.css' );
-				wp_enqueue_style( 'dashicons' );
-			}
-
 			if ( learn_press_is_course() ) {
 				wp_enqueue_script( 'course-review', LP_ADDON_COURSE_REVIEW_URL . '/assets/js/course-review.js', array( 'jquery' ), '', true );
 				wp_enqueue_style( 'course-review', LP_ADDON_COURSE_REVIEW_URL . '/assets/css/course-review.css' );
@@ -191,8 +186,6 @@ if ( ! function_exists( 'LP_Addon_Course_Review' ) ) {
 		}
 
 		public function init_comment_table() {
-			wp_enqueue_style( 'course-review', LP_ADDON_COURSE_REVIEW_URL . '/assets/css/course-review.css' );
-
 			add_filter( 'admin_comment_types_dropdown', array( $this, 'add_comment_type_filter' ) );
 			add_filter( 'comment_text', array( $this, 'add_comment_content_filter' ) );
 			add_filter( 'comment_row_actions', array( $this, 'edit_comment_row_actions' ), 10, 2 );
@@ -231,9 +224,9 @@ if ( ! function_exists( 'LP_Addon_Course_Review' ) ) {
 
 		public function add_comment_post_type_filter() {
 			?>
-			<label class="screen-reader-text"
-				   for="filter-by-comment-post-type"><?php _e( 'Filter by post type' ); ?></label>
-			<select id="filter-by-comment-post-type" name="post_type">
+            <label class="screen-reader-text"
+                   for="filter-by-comment-post-type"><?php _e( 'Filter by post type' ); ?></label>
+            <select id="filter-by-comment-post-type" name="post_type">
 				<?php
 				$comment_post_types = apply_filters( 'learn_press_admin_comment_post_type_types_dropdown', array(
 					''          => __( 'All post type', 'learnpress-course-review' ),
@@ -244,7 +237,7 @@ if ( ! function_exists( 'LP_Addon_Course_Review' ) ) {
 					echo "\t" . '<option value="' . esc_attr( $type ) . '"' . selected( $comment_post_types, $type, false ) . ">$label</option>\n";
 				} ?>
 
-			</select>
+            </select>
 			<?php
 		}
 

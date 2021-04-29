@@ -13,7 +13,7 @@ const DropdownSelectorSelectedChip = ( { onRemoveItem, option } ) => {
 				onRemoveItem( option.value );
 			} }
 			ariaLabel={ sprintf(
-				/* translators: %s is referring to the filter option being removed. */
+				/* Translators: %s is referring to the filter option being removed. */
 				__( 'Remove %s filter', 'woocommerce' ),
 				option.name
 			) }

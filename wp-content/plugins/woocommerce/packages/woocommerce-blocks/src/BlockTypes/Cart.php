@@ -19,62 +19,44 @@ class Cart extends AbstractBlock {
 	protected $block_name = 'cart';
 
 	/**
-	 * Get the editor script handle for this block type.
-	 *
-	 * @param string $key Data to get, or default to everything.
-	 * @return array|string;
+	 * Registers the block type with WordPress.
 	 */
-	protected function get_block_type_editor_script( $key = null ) {
-		$script = [
-			'handle'       => 'wc-' . $this->block_name . '-block',
-			'path'         => $this->asset_api->get_block_asset_build_path( $this->block_name ),
-			'dependencies' => [ 'wc-vendors', 'wc-blocks' ],
-		];
-		return $key ? $script[ $key ] : $script;
+	public function register_block_type() {
+		register_block_type(
+			$this->namespace . '/' . $this->block_name,
+			array(
+				'render_callback' => array( $this, 'render' ),
+				'editor_script'   => 'wc-' . $this->block_name . '-block',
+				'editor_style'    => 'wc-block-editor',
+				'style'           => [ 'wc-block-style', 'wc-block-vendors-style' ],
+				'script'          => 'wc-' . $this->block_name . '-block-frontend',
+				'supports'        => [],
+			)
+		);
 	}
 
-	/**
-	 * Get the frontend script handle for this block type.
-	 *
-	 * @see $this->register_block_type()
-	 * @param string $key Data to get, or default to everything.
-	 * @return array|string
-	 */
-	protected function get_block_type_script( $key = null ) {
-		$script = [
-			'handle'       => 'wc-' . $this->block_name . '-block-frontend',
-			'path'         => $this->asset_api->get_block_asset_build_path( $this->block_name . '-frontend' ),
-			'dependencies' => [],
-		];
-		return $key ? $script[ $key ] : $script;
-	}
-
-	/**
-	 * Enqueue frontend assets for this block, just in time for rendering.
-	 *
-	 * @param array $attributes  Any attributes that currently are available from the block.
-	 */
-	protected function enqueue_assets( array $attributes ) {
-		do_action( 'woocommerce_blocks_enqueue_cart_block_scripts_before' );
-		parent::enqueue_assets( $attributes );
-		do_action( 'woocommerce_blocks_enqueue_cart_block_scripts_after' );
-	}
 
 	/**
 	 * Append frontend scripts when rendering the Cart block.
 	 *
-	 * @param array  $attributes Block attributes.
-	 * @param string $content    Block content.
+	 * @param array|\WP_Block $attributes Block attributes, or an instance of a WP_Block. Defaults to an empty array.
+	 * @param string          $content    Block content. Default empty string.
 	 * @return string Rendered block type output.
 	 */
-	protected function render( $attributes, $content ) {
+	public function render( $attributes = array(), $content = '' ) {
+		$block_attributes = is_a( $attributes, '\WP_Block' ) ? $attributes->attributes : $attributes;
+
+		do_action( 'woocommerce_blocks_enqueue_cart_block_scripts_before' );
+		$this->enqueue_assets( $block_attributes );
+		do_action( 'woocommerce_blocks_enqueue_cart_block_scripts_after' );
+
 		// Deregister core cart scripts and styles.
 		wp_deregister_script( 'wc-cart' );
 		wp_deregister_script( 'wc-password-strength-meter' );
 		wp_deregister_script( 'selectWoo' );
 		wp_deregister_style( 'select2' );
 
-		return $this->inject_html_data_attributes( $content . $this->get_skeleton(), $attributes );
+		return $this->inject_html_data_attributes( $content . $this->get_skeleton(), $block_attributes );
 	}
 
 	/**
@@ -85,39 +67,27 @@ class Cart extends AbstractBlock {
 	 *                           not in the post content on editor load.
 	 */
 	protected function enqueue_data( array $attributes = [] ) {
-		parent::enqueue_data( $attributes );
+		$data_registry = Package::container()->get(
+			AssetDataRegistry::class
+		);
 
-		if ( ! $this->asset_data_registry->exists( 'shippingCountries' ) ) {
-			$this->asset_data_registry->add( 'shippingCountries', $this->deep_sort_with_accents( WC()->countries->get_shipping_countries() ) );
+		if ( ! $data_registry->exists( 'shippingCountries' ) ) {
+			$data_registry->add( 'shippingCountries', $this->deep_sort_with_accents( WC()->countries->get_shipping_countries() ) );
 		}
 
-		if ( ! $this->asset_data_registry->exists( 'shippingStates' ) ) {
-			$this->asset_data_registry->add( 'shippingStates', $this->deep_sort_with_accents( WC()->countries->get_shipping_country_states() ) );
-		}
-
-		if ( ! $this->asset_data_registry->exists( 'countryLocale' ) ) {
-			// Merge country and state data to work around https://github.com/woocommerce/woocommerce/issues/28944.
-			$country_locale = wc()->countries->get_country_locale();
-			$states         = wc()->countries->get_states();
-
-			foreach ( $states as $country => $states ) {
-				if ( empty( $states ) ) {
-					$country_locale[ $country ]['state']['required'] = false;
-					$country_locale[ $country ]['state']['hidden']   = true;
-				}
-			}
-			$this->asset_data_registry->add( 'countryLocale', $country_locale );
+		if ( ! $data_registry->exists( 'shippingStates' ) ) {
+			$data_registry->add( 'shippingStates', $this->deep_sort_with_accents( WC()->countries->get_shipping_country_states() ) );
 		}
 
 		$permalink = ! empty( $attributes['checkoutPageId'] ) ? get_permalink( $attributes['checkoutPageId'] ) : false;
 
-		if ( $permalink && ! $this->asset_data_registry->exists( 'page-' . $attributes['checkoutPageId'] ) ) {
-			$this->asset_data_registry->add( 'page-' . $attributes['checkoutPageId'], $permalink );
+		if ( $permalink && ! $data_registry->exists( 'page-' . $attributes['checkoutPageId'] ) ) {
+			$data_registry->add( 'page-' . $attributes['checkoutPageId'], $permalink );
 		}
 
 		// Hydrate the following data depending on admin or frontend context.
 		if ( ! is_admin() && ! WC()->is_rest_api_request() ) {
-			$this->hydrate_from_api();
+			$this->hydrate_from_api( $data_registry );
 		}
 
 		do_action( 'woocommerce_blocks_cart_enqueue_data' );
@@ -144,11 +114,24 @@ class Cart extends AbstractBlock {
 	}
 
 	/**
-	 * Hydrate the cart block with data from the API.
+	 * Register/enqueue scripts used for this block.
+	 *
+	 * @param array $attributes  Any attributes that currently are available from the block.
+	 *                           Note, this will be empty in the editor context when the block is
+	 *                           not in the post content on editor load.
 	 */
-	protected function hydrate_from_api() {
-		if ( ! $this->asset_data_registry->exists( 'cartData' ) ) {
-			$this->asset_data_registry->add( 'cartData', WC()->api->get_endpoint_data( '/wc/store/cart' ) );
+	protected function enqueue_scripts( array $attributes = [] ) {
+		Assets::register_block_script( $this->block_name . '-frontend', $this->block_name . '-block-frontend' );
+	}
+
+	/**
+	 * Hydrate the cart block with data from the API.
+	 *
+	 * @param AssetDataRegistry $data_registry Data registry instance.
+	 */
+	protected function hydrate_from_api( AssetDataRegistry $data_registry ) {
+		if ( ! $data_registry->exists( 'cartData' ) ) {
+			$data_registry->add( 'cartData', WC()->api->get_endpoint_data( '/wc/store/cart' ) );
 		}
 	}
 
@@ -165,6 +148,7 @@ class Cart extends AbstractBlock {
 							<tr class="wc-block-cart-items__header">
 								<th class="wc-block-cart-items__header-image"><span /></th>
 								<th class="wc-block-cart-items__header-product"><span /></th>
+								<th class="wc-block-cart-items__header-quantity"><span /></th>
 								<th class="wc-block-cart-items__header-total"><span /></th>
 							</tr>
 						</thead>
@@ -175,13 +159,33 @@ class Cart extends AbstractBlock {
 								</td>
 								<td class="wc-block-cart-item__product">
 									<div class="wc-block-cart-item__product-name"></div>
-									<div class="wc-block-cart-item__individual-price"></div>
 									<div class="wc-block-cart-item__product-metadata"></div>
-									<div class="wc-block-components-quantity-selector">
-										<input class="wc-block-components-quantity-selector__input" type="number" step="1" min="0" value="1" />
-										<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--minus">－</button>
-										<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--plus">＋</button>
-									</div>
+								</td>
+								<td class="wc-block-cart-item__quantity">
+								<div class="wc-block-components-quantity-selector">
+									<input class="wc-block-components-quantity-selector__input" type="number" step="1" min="0" value="1" />
+									<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--minus">－</button>
+									<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--plus">＋</button>
+								</div>
+								</td>
+								<td class="wc-block-cart-item__total">
+									<div class="wc-block-cart-item__price"></div>
+								</td>
+							</tr>
+							<tr class="wc-block-cart-items__row">
+								<td class="wc-block-cart-item__image">
+									<div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" width="1" height="1" /></div>
+								</td>
+								<td class="wc-block-cart-item__product">
+									<div class="wc-block-cart-item__product-name">&nbsp;</div>
+									<div class="wc-block-cart-item__product-metadata">&nbsp;</div>
+								</td>
+								<td class="wc-block-cart-item__quantity">
+								<div class="wc-block-components-quantity-selector">
+									<input class="wc-block-components-quantity-selector__input" type="number" step="1" min="0" value="1" />
+									<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--minus">－</button>
+									<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--plus">＋</button>
+								</div>
 								</td>
 								<td class="wc-block-cart-item__total">
 									<div class="wc-block-cart-item__price"></div>
@@ -193,31 +197,14 @@ class Cart extends AbstractBlock {
 								</td>
 								<td class="wc-block-cart-item__product">
 									<div class="wc-block-cart-item__product-name"></div>
-									<div class="wc-block-cart-item__individual-price"></div>
 									<div class="wc-block-cart-item__product-metadata"></div>
-									<div class="wc-block-components-quantity-selector">
-										<input class="wc-block-components-quantity-selector__input" type="number" step="1" min="0" value="1" />
-										<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--minus">－</button>
-										<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--plus">＋</button>
-									</div>
 								</td>
-								<td class="wc-block-cart-item__total">
-									<div class="wc-block-cart-item__price"></div>
-								</td>
-							</tr>
-							<tr class="wc-block-cart-items__row">
-								<td class="wc-block-cart-item__image">
-									<div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" width="1" height="1" /></div>
-								</td>
-								<td class="wc-block-cart-item__product">
-									<div class="wc-block-cart-item__product-name"></div>
-									<div class="wc-block-cart-item__individual-price"></div>
-									<div class="wc-block-cart-item__product-metadata"></div>
-									<div class="wc-block-components-quantity-selector">
-										<input class="wc-block-components-quantity-selector__input" type="number" step="1" min="0" value="1" />
-										<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--minus">－</button>
-										<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--plus">＋</button>
-									</div>
+								<td class="wc-block-cart-item__quantity">
+								<div class="wc-block-components-quantity-selector">
+									<input class="wc-block-components-quantity-selector__input" type="number" step="1" min="0" value="1" />
+									<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--minus">－</button>
+									<button class="wc-block-components-quantity-selector__button wc-block-components-quantity-selector__button--plus">＋</button>
+								</div>
 								</td>
 								<td class="wc-block-cart-item__total">
 									<div class="wc-block-cart-item__price"></div>

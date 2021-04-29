@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <script type="text/template" id="tmpl-elementor-panel-elements-category">
 	<div class="elementor-panel-category-title">{{{ title }}}</div>
-	<div class="elementor-panel-category-items elementor-responsive-panel"></div>
+	<div class="elementor-panel-category-items"></div>
 </script>
 
 <script type="text/template" id="tmpl-elementor-panel-element-search">

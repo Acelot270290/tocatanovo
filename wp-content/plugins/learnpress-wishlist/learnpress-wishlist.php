@@ -1,18 +1,15 @@
 <?php
-/**
- * Plugin Name: LearnPress - Course Wishlist
- * Plugin URI: http://thimpress.com/learnpress
- * Description: Wishlist feature.
- * Author: ThimPress
- * Version: 4.0.1
- * Author URI: http://thimpress.com
- * Tags: learnpress
- * Text Domain: learnpress-wishlist
- * Domain Path: /languages/
- * Require_LP_Version: 3.0.0
- *
- * @package LearnPress-Course-Wishlist
- */
+/*
+Plugin Name: LearnPress - Course Wishlist
+Plugin URI: http://thimpress.com/learnpress
+Description: Wishlist feature.
+Author: ThimPress
+Version: 3.0.2
+Author URI: http://thimpress.com
+Tags: learnpress
+Text Domain: learnpress-wishlist
+Domain Path: /languages/
+*/
 
 /**
  * Prevent loading this file directly
@@ -20,52 +17,20 @@
 defined( 'ABSPATH' ) || exit();
 
 define( 'LP_ADDON_WISHLIST_FILE', __FILE__ );
+define( 'LP_ADDON_WISHLIST_VER', '3.0.2' );
+define( 'LP_ADDON_WISHLIST_REQUIRE_VER', '3.0.0' );
 
 /**
  * Class LP_Addon_Wishlist_Preload
  */
 class LP_Addon_Wishlist_Preload {
-	/**
-	 * @var array|string[]
-	 */
-	public static $addon_info = array();
 
 	/**
 	 * LP_Addon_Wishlist_Preload constructor.
 	 */
 	public function __construct() {
-		// Set Base name plugin.
-		define( 'LP_ADDON_WISHLIST_BASENAME', plugin_basename( LP_ADDON_WISHLIST_FILE ) );
-
-		// Set version addon for LP check .
-		include_once ABSPATH . 'wp-admin/includes/plugin.php';
-		self::$addon_info = get_file_data(
-			LP_ADDON_WISHLIST_FILE,
-			array(
-				'Name'               => 'Plugin Name',
-				'Require_LP_Version' => 'Require_LP_Version',
-				'Version'            => 'Version',
-			)
-		);
-
-		define( 'LP_ADDON_WISHLIST_VER', self::$addon_info['Version'] );
-		define( 'LP_ADDON_WISHLIST_REQUIRE_VER', self::$addon_info['Require_LP_Version'] );
-
-		// Check LP activated .
-		if ( ! is_plugin_active( 'learnpress/learnpress.php' ) ) {
-			add_action( 'admin_notices', array( $this, 'show_note_errors_require_lp' ) );
-
-			deactivate_plugins( LP_ADDON_WISHLIST_BASENAME );
-
-			if ( isset( $_GET['activate'] ) ) {
-				unset( $_GET['activate'] );
-			}
-
-			return;
-		}
-
-		// Sure LP loaded.
 		add_action( 'learn-press/ready', array( $this, 'load' ) );
+		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 	}
 
 	/**
@@ -73,13 +38,33 @@ class LP_Addon_Wishlist_Preload {
 	 */
 	public function load() {
 		LP_Addon::load( 'LP_Addon_Wishlist', 'inc/load.php', __FILE__ );
+		remove_action( 'admin_notices', array( $this, 'admin_notices' ) );
 	}
 
-	public function show_note_errors_require_lp() {
+	/**
+	 * Admin notice
+	 */
+	public function admin_notices() {
 		?>
-		<div class="notice notice-error">
-			<p><?php echo( 'Please active <strong>LP version ' . LP_ADDON_WISHLIST_REQUIRE_VER . ' or later</strong> before active <strong>' . self::$addon_info['Name'] . '</strong>' ); ?></p>
-		</div>
+        <div class="error">
+            <p><?php echo wp_kses(
+					sprintf(
+						__( '<strong>%s</strong> addon version %s requires %s version %s or higher is <strong>installed</strong> and <strong>activated</strong>.', 'learnpress-wishlist' ),
+						__( 'LearnPress Wishlist', 'learnpress-wishlist' ),
+						LP_ADDON_WISHLIST_VER,
+						sprintf( '<a href="%s" target="_blank"><strong>%s</strong></a>', admin_url( 'plugin-install.php?tab=search&type=term&s=learnpress' ), __( 'LearnPress', 'learnpress-wishlist' ) ),
+						LP_ADDON_WISHLIST_REQUIRE_VER
+					),
+					array(
+						'a'      => array(
+							'href'  => array(),
+							'blank' => array()
+						),
+						'strong' => array()
+					)
+				); ?>
+            </p>
+        </div>
 		<?php
 	}
 }

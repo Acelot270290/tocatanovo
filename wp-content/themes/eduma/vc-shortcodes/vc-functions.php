@@ -75,7 +75,48 @@ vc_add_shortcode_param( 'dropdown_multiple', 'thim_vc_dropdown_multiple_form_fie
 
 
 
+function thim_sc_get_list_image_size() {
+	global $_wp_additional_image_sizes;
 
+	$sizes                        = array();
+	$get_intermediate_image_sizes = get_intermediate_image_sizes();
+
+	// Create the full array with sizes and crop info
+	foreach ( $get_intermediate_image_sizes as $_size ) {
+
+		if ( in_array( $_size, array( 'thumbnail', 'medium', 'large' ) ) ) {
+
+			$sizes[ $_size ]['width']  = get_option( $_size . '_size_w' );
+			$sizes[ $_size ]['height'] = get_option( $_size . '_size_h' );
+			$sizes[ $_size ]['crop']   = (bool) get_option( $_size . '_crop' );
+
+		} elseif ( isset( $_wp_additional_image_sizes[ $_size ] ) ) {
+
+			$sizes[ $_size ] = array(
+				'width'  => $_wp_additional_image_sizes[ $_size ]['width'],
+				'height' => $_wp_additional_image_sizes[ $_size ]['height'],
+				'crop'   => $_wp_additional_image_sizes[ $_size ]['crop']
+			);
+
+		}
+
+	}
+
+	$image_size                                          = array();
+	$image_size[ esc_html__( "No Image", 'eduma' ) ]     = 'none';
+	$image_size[ esc_html__( "Custom Image", 'eduma' ) ] = 'custom_image';
+	if ( ! empty( $sizes ) ) {
+		foreach ( $sizes as $key => $value ) {
+			if ( $value['width'] && $value['height'] ) {
+				$image_size[ $value['width'] . 'x' . $value['height'] ] = $key;
+			} else {
+				$image_size[ $key ] = $key;
+			}
+		}
+	}
+
+	return $image_size;
+}
 
 /**
  * Custom excerpt
@@ -106,7 +147,7 @@ function thim_sc_get_the_excerpt( $length ) {
 }
 
 // Get list Instructor
-//if (  class_exists( 'LP_Co_Instructor_Preload' ) ) {
+//if ( thim_plugin_active( 'learnpress-co-instructor/learnpress-co-instructor.php' ) ) {
 //    function thim_sc_get_instructors() {
 //        $co_instructors = thim_get_all_courses_instructors();
 //        $ins[''] = esc_html__( 'Select', 'eduma' );
@@ -120,6 +161,30 @@ function thim_sc_get_the_excerpt( $length ) {
 //    }
 //}
 
+function thim_sc_get_course_categories( $cats = false ) {
+	$args  = array(
+		'pad_counts'   => 1,
+		'hierarchical' => 1,
+		'hide_empty'   => 1,
+		'orderby'      => 'name',
+		'menu_order'   => false
+	);
+	$terms = get_terms( 'course_category', $args );
+	if ( ! $cats ) {
+		$cats = array();
+	}
+  	if ( is_wp_error( $terms ) ) {
+	} else {
+		if ( empty( $terms ) ) {
+		} else {
+			foreach ( $terms as $term ) {
+				$cats[ $term->name ] = $term->term_id;
+ 			}
+		}
+	}
+
+	return $cats;
+}
 
 function thim_sc_get_event_categories( $cats = false ) {
 	$event_category = get_terms( 'tp_event_category', array(

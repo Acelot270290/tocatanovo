@@ -16,11 +16,11 @@ if ( ! function_exists( 'learn_press_course_wishlist_template' ) ) {
 	/**
 	 * Get wishlist template.
 	 *
-	 * @param      $name
+	 * @param $name
 	 * @param null $args
 	 */
 	function learn_press_course_wishlist_template( $name, $args = null ) {
-		LP_Addon_Wishlist::instance()->get_template( $name, $args );
+		LP_Addon_Wishlist::instance()->get_template($name, $args);
 		//learn_press_get_template( $name, $args, learn_press_template_path() . '/addons/wishlist/', LP_ADDON_WISHLIST_TEMPLATE );
 	}
 }
@@ -29,13 +29,11 @@ if ( ! function_exists( 'learn_press_wishlist_get_template' ) ) {
 	/**
 	 * Get template.
 	 *
-	 * @param      $name
+	 * @param $name
 	 * @param null $args
 	 */
 	function learn_press_wishlist_get_template( $name, $args = null ) {
-
 		learn_press_get_template( $name, $args, learn_press_template_path() . '/addons/wishlist/', LP_ADDON_WISHLIST_PATH . '/templates/' );
-
 	}
 }
 
@@ -224,23 +222,5 @@ if ( learn_press_buddypress_is_active() ) {
 	}
 }
 
-function learn_press_course_wishlist_loop_stars() {
-	if ( LP_COURSE_CPT !== get_post_type() ) {
-		return;
-	}
 
-	$filled = learn_press_user_wishlist_has_course();
-	?>
-    <div class="course-wishlist">
-        <span class="course-wishlist__star<?php echo $filled ? ' filled' : ''; ?>"></span>
-        <a class="course-wishlist__btn"><?php esc_html_e( 'Add to Wishlist', 'learnpress-wishlist' ); ?></a>
-    </div>
-	<?php
-}
 
-//add_action( 'learn-press/before-courses-loop-item', 'learn_press_course_wishlist_loop_stars', 51 );
-//
-//
-//add_action( 'learn-press/before-course-summary-sidebar', function () {
-//	LP_Addon_Wishlist::instance()->wishlist_button();
-//}, 50 );

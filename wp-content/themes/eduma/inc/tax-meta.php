@@ -39,9 +39,7 @@ if ( is_admin() ) {
 	}
 
 	$my_meta = new Tax_Meta_Class( $config );
-	if ( $taxonomy == 'course_category' ) {
-		$my_meta->addColor( $cate_prefix . 'text_color', array( 'name' => esc_html__( 'Text Color', 'eduma' ), 'desc' => esc_html__( 'Use for widget Course layout Category Item Tabs Slider', 'eduma' ) ) );
-	}
+
 	$my_meta->addImage( $prefix . $cate_prefix . 'icon', array( 'name' => __( 'Icon', 'eduma' ),'std'=>array() ) );
 	$my_meta->addImage( $prefix . $cate_prefix . 'thumnail', array( 'name' => esc_html__( 'Thumbnail', 'eduma' ), 'std'=>array() ) );
 	$my_meta->addWysiwyg( $prefix . $cate_prefix . 'content', array('name'=> __( 'Content', 'eduma' ) ) );

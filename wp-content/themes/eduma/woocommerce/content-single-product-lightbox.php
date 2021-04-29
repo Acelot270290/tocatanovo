@@ -32,12 +32,12 @@ global $product,$post;
 						$image            = get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ) );
 						$image_title      = esc_attr( get_the_title( get_post_thumbnail_id() ) );
 						$image_link       = wp_get_attachment_url( get_post_thumbnail_id() );
-						$attachment_count = count( $product->get_gallery_image_ids() );
+						$attachment_count = count( $product->get_gallery_attachment_ids() );
 						echo '<li>';
 						echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '%s', $image ), $post->ID );
 						echo '</li>';
 					}
-					$attachment_ids = $product->get_gallery_image_ids();
+					$attachment_ids = $product->get_gallery_attachment_ids();
 					?>
 					<?php
 					$loop = 0;

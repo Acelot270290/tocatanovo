@@ -77,10 +77,10 @@ class Widget_Image_Gallery extends Widget_Base {
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
-	 * @since 3.1.0
+	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function register_controls() {
+	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_gallery',
 			[
@@ -332,14 +332,6 @@ class Widget_Image_Gallery extends Widget_Base {
 				'condition' => [
 					'gallery_display_caption' => '',
 				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Text_Shadow::get_type(),
-			[
-				'name' => 'caption_shadow',
-				'selector' => '{{WRAPPER}} .gallery-item .gallery-caption',
 			]
 		);
 

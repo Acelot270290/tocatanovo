@@ -11,8 +11,10 @@ import {
 	__experimentalDeRegisterPaymentMethod,
 	__experimentalDeRegisterExpressPaymentMethod,
 } from '@woocommerce/blocks-registry';
-import { default as fetchMock } from 'jest-fetch-mock';
-
+import {
+	CheckoutExpressPayment,
+	SavedPaymentMethodOptions,
+} from '@woocommerce/base-components/payment-methods';
 /**
  * Internal dependencies
  */
@@ -20,15 +22,10 @@ import {
 	usePaymentMethodDataContext,
 	PaymentMethodDataProvider,
 } from '../payment-method-data-context';
-import {
-	CheckoutExpressPayment,
-	SavedPaymentMethodOptions,
-} from '../../../../../blocks/cart-checkout/payment-methods';
 import { defaultCartState } from '../../../../../data/default-states';
 
 jest.mock( '@woocommerce/settings', () => {
 	const originalModule = jest.requireActual( '@woocommerce/settings' );
-
 	return {
 		// @ts-ignore We know @woocommerce/settings is an object.
 		...originalModule,
@@ -63,9 +60,6 @@ const registerMockPaymentMethods = () => {
 			edit: <div>A payment method</div>,
 			icons: null,
 			canMakePayment: () => true,
-			supports: {
-				features: [ 'products' ],
-			},
 			ariaLabel: name,
 		} );
 	} );
@@ -78,9 +72,7 @@ const registerMockPaymentMethods = () => {
 			icons: null,
 			canMakePayment: () => true,
 			supports: {
-				showSavedCards: true,
-				showSaveOption: true,
-				features: [ 'products' ],
+				savePaymentInfo: true,
 			},
 			ariaLabel: name,
 		} );
@@ -107,9 +99,6 @@ const registerMockPaymentMethods = () => {
 			edit: <div>An express payment method</div>,
 			canMakePayment: () => true,
 			paymentMethodId: name,
-			supports: {
-				features: [ 'products' ],
-			},
 		} );
 	} );
 };
@@ -130,11 +119,10 @@ describe( 'Testing Payment Method Data Context Provider', () => {
 			if ( req.url.match( /wc\/store\/cart/ ) ) {
 				return Promise.resolve( JSON.stringify( previewCart ) );
 			}
-			return Promise.resolve( '' );
 		} );
 		// need to clear the store resolution state between tests.
 		await dispatch( storeKey ).invalidateResolutionForStore();
-		await dispatch( storeKey ).receiveCart( defaultCartState.cartData );
+		await dispatch( storeKey ).receiveCart( defaultCartState );
 	} );
 	afterEach( async () => {
 		resetMockPaymentMethods();

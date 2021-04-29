@@ -1,10 +1,9 @@
 <?php
 $number_post = $instance['number_post'];
-$columns     = $instance['columns'] ? $instance['columns'] : 4;
-$pagination  = ( ! empty( $instance['show_pagination'] ) && $instance['show_pagination'] == 'no' ) ? 0 : 1;
+$columns    = $instance['columns'] ? $instance['columns'] : 4;
+$pagination = ( !empty( $instance['show_pagination'] ) && $instance['show_pagination'] == 'no' ) ? 0 : 1;
 
 $css_animation = $instance['css_animation'];
-$css_animation = thim_getCSSAnimation( $css_animation );
 
 $our_team_args = array(
 	'posts_per_page'      => $number_post,
@@ -25,26 +24,16 @@ if ( $instance['cat_id'] && $instance['cat_id'] != 'all' ) {
 }
 
 $our_team = new WP_Query( $our_team_args );
-$html     = $extral_url = '';
+$html     = '';
 if ( $our_team->have_posts() ) {
 	$html .= '<div class="wrapper-lists-our-team ' . $css_animation . '">';
-	if ( is_array( $instance['link'] ) ) {
-		$link       = $instance['link']['url'];
-		$extral_url = isset($instance['link']['rel']) ? ' rel="nofollow"' : '';
-		$extral_url .= isset($instance['link']['target']) ? ' target="_blank"' : '';
-	} else {
-		$link       = $instance['link'];
-		$extral_url = isset( $instance['nofollow'] ) ? ' rel="nofollow"' : '';
-		$extral_url .= isset( $instance['is_external'] ) ? ' target="_blank"' : '';
-	}
-	if ( empty( $link ) ) {
-		$link       = "#";
-		$extral_url = '';
-	}
 	if ( $instance['text_link'] && $instance['text_link'] != '' ) {
-		$html .= '<a class="join-our-team" href="' . $link . '" title="' . $instance['text_link'] . '"' . $extral_url . '>' . $instance['text_link'] . '</a>';
+		if ( $instance['text_link'] && $instance['text_link'] != '' ) {
+			$html .= '<a class="join-our-team" href="' . $instance['link'] . '" title="' . $instance['text_link'] . '">' . $instance['text_link'] . '</a>';
+		} else {
+			$html .= '<a class="join-our-team" href="#" title="' . $instance['text_link'] . '">' . $instance['text_link'] . '</a>';
+		}
 	}
-
 	$html .= '<div class="thim-carousel-wrapper" data-visible="' . $columns . '" data-pagination="' . $pagination . '" >';
 	while ( $our_team->have_posts() ): $our_team->the_post();
 		$team_id      = get_the_ID();
@@ -75,7 +64,7 @@ if ( $our_team->have_posts() ) {
 		}
 		$html .= '</div></div>';
 		$html .= '<div class="content-team">';
-		if ( ! empty( $instance['link_member'] ) ) {
+		if ( !empty( $instance['link_member'] ) ) {
 			$html .= '<h4 class="title"><a href="' . esc_url( get_permalink() ) . '">' . get_the_title() . '</a></h4>';
 		} else {
 			$html .= '<h4 class="title">' . get_the_title() . '</h4>';

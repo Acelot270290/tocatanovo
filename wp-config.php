@@ -1,5 +1,5 @@
 <?php
-define( 'WP_CACHE', false /* Modified by NitroPack */ );
+define( 'WP_CACHE', true );
 /**
  * The base configuration for WordPress
  *
@@ -21,13 +21,13 @@ define( 'WP_CACHE', false /* Modified by NitroPack */ );
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'novotocata' );
+define( 'DB_NAME', 'u635961131_tocata' );
 
 /** MySQL database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', 'u635961131_tocata' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', '' );
+define( 'DB_PASSWORD', 'Acelot270290' );
 
 /** MySQL hostname */
 define( 'DB_HOST', 'localhost' );

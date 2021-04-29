@@ -16,7 +16,7 @@ class Screen {
 	/**
 	 * Class instance.
 	 *
-	 * @var Screen instance
+	 * @var Menu instance
 	 */
 	protected static $instance = null;
 
@@ -151,15 +151,6 @@ class Screen {
 	public function add_body_class( $classes ) {
 		if ( self::is_woocommerce_page() ) {
 			$classes .= ' has-woocommerce-navigation';
-
-			/**
-			 * Adds the ability to skip disabling of the WP toolbar.
-			 *
-			 * @param boolean $bool WP Toolbar disabled.
-			 */
-			if ( apply_filters( 'woocommerce_navigation_wp_toolbar_disabled', true ) ) {
-				$classes .= ' is-wp-toolbar-disabled';
-			}
 		}
 
 		return $classes;

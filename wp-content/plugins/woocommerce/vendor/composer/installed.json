@@ -20,7 +20,7 @@
         "require-dev": {
             "yoast/phpunit-polyfills": "0.2.0"
         },
-        "time": "2021-03-30T15:15:59+00:00",
+        "time": "2021-02-05T19:07:06+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Automattic\\Jetpack\\Autoloader\\CustomAutoloaderPlugin",
@@ -41,7 +41,7 @@
         ],
         "description": "Creates a custom autoloader for a plugin or theme.",
         "support": {
-            "source": "https://github.com/Automattic/jetpack-autoloader/tree/2.10.1"
+            "source": "https://github.com/Automattic/jetpack-autoloader/tree/v2.9.1"
         }
     },
     {
@@ -75,10 +75,7 @@
         "license": [
             "GPL-2.0-or-later"
         ],
-        "description": "A wrapper for defining constants in a more testable way.",
-        "support": {
-            "source": "https://github.com/Automattic/jetpack-constants/tree/v1.5.1"
-        }
+        "description": "A wrapper for defining constants in a more testable way."
     },
     {
         "name": "composer/installers",
@@ -211,10 +208,6 @@
             "zend",
             "zikula"
         ],
-        "support": {
-            "issues": "https://github.com/composer/installers/issues",
-            "source": "https://github.com/composer/installers/tree/v1.10.0"
-        },
         "funding": [
             {
                 "url": "https://packagist.com",
@@ -532,30 +525,30 @@
     },
     {
         "name": "woocommerce/woocommerce-admin",
-        "version": "2.1.5",
-        "version_normalized": "2.1.5.0",
+        "version": "1.9.0",
+        "version_normalized": "1.9.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/woocommerce/woocommerce-admin.git",
-            "reference": "71c233d8463f551430edbe1877e51d19a4bb2df6"
+            "reference": "cb2fa7ad034200acba6ee3ef0f332453d2533144"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/woocommerce/woocommerce-admin/zipball/71c233d8463f551430edbe1877e51d19a4bb2df6",
-            "reference": "71c233d8463f551430edbe1877e51d19a4bb2df6",
+            "url": "https://api.github.com/repos/woocommerce/woocommerce-admin/zipball/cb2fa7ad034200acba6ee3ef0f332453d2533144",
+            "reference": "cb2fa7ad034200acba6ee3ef0f332453d2533144",
             "shasum": ""
         },
         "require": {
-            "automattic/jetpack-autoloader": "^2.9.1",
+            "automattic/jetpack-autoloader": "^2.2.0",
             "composer/installers": "^1.9.0",
-            "php": ">=7.0"
+            "php": ">=5.6|>=7.0"
         },
         "require-dev": {
             "phpunit/phpunit": "7.5.20",
             "suin/phpcs-psr4-sniff": "^2.2",
             "woocommerce/woocommerce-sniffs": "0.1.0"
         },
-        "time": "2021-04-02T16:48:38+00:00",
+        "time": "2021-01-28T00:59:01+00:00",
         "type": "wordpress-plugin",
         "extra": {
             "scripts-description": {
@@ -575,36 +568,32 @@
             "GPL-3.0-or-later"
         ],
         "description": "A modern, javascript-driven WooCommerce Admin experience.",
-        "homepage": "https://github.com/woocommerce/woocommerce-admin",
-        "support": {
-            "issues": "https://github.com/woocommerce/woocommerce-admin/issues",
-            "source": "https://github.com/woocommerce/woocommerce-admin/tree/v2.1.5"
-        }
+        "homepage": "https://github.com/woocommerce/woocommerce-admin"
     },
     {
         "name": "woocommerce/woocommerce-blocks",
-        "version": "v4.7.2",
-        "version_normalized": "4.7.2.0",
+        "version": "v4.0.0",
+        "version_normalized": "4.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/woocommerce/woocommerce-gutenberg-products-block.git",
-            "reference": "942e58553b1a299ad04842e7f0d7465d9e029ac3"
+            "reference": "f5b2485254f36f0b85fd0f30c28e17bdf44a8d1e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/woocommerce/woocommerce-gutenberg-products-block/zipball/942e58553b1a299ad04842e7f0d7465d9e029ac3",
-            "reference": "942e58553b1a299ad04842e7f0d7465d9e029ac3",
+            "url": "https://api.github.com/repos/woocommerce/woocommerce-gutenberg-products-block/zipball/f5b2485254f36f0b85fd0f30c28e17bdf44a8d1e",
+            "reference": "f5b2485254f36f0b85fd0f30c28e17bdf44a8d1e",
             "shasum": ""
         },
         "require": {
-            "automattic/jetpack-autoloader": "^2.9.1",
+            "automattic/jetpack-autoloader": "^2.0.0",
             "composer/installers": "^1.7.0"
         },
         "require-dev": {
             "phpunit/phpunit": "6.5.14",
             "woocommerce/woocommerce-sniffs": "0.1.0"
         },
-        "time": "2021-04-13T16:06:16+00:00",
+        "time": "2020-12-08T13:17:01+00:00",
         "type": "wordpress-plugin",
         "extra": {
             "scripts-description": {
@@ -631,7 +620,7 @@
         ],
         "support": {
             "issues": "https://github.com/woocommerce/woocommerce-gutenberg-products-block/issues",
-            "source": "https://github.com/woocommerce/woocommerce-gutenberg-products-block/tree/v4.7.2"
+            "source": "https://github.com/woocommerce/woocommerce-gutenberg-products-block/tree/v4.0.0"
         }
     }
 ]

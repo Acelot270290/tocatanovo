@@ -51,7 +51,19 @@ if ( $featured ) {
 }
 
 if ( $sort == 'popular' ) {
-     $post_in = eduma_lp_get_popular_courses( $limit );
+//	$query = $wpdb->prepare( "
+//					SELECT DISTINCT p.ID, COUNT(*) AS number_enrolled
+//					FROM {$wpdb->prefix}learnpress_user_items ui
+//					INNER JOIN {$wpdb->posts} p ON p.ID = ui.item_id
+//					WHERE ui.item_type = %s
+//						AND ( ui.status = %s OR ui.status = %s )
+//						AND p.post_status = %s
+//					ORDER BY number_enrolled %s
+//				", LP_COURSE_CPT, 'enrolled', 'finished', 'publish', 'DESC'
+//	);
+//
+//	$post_in = $wpdb->get_col( $query );
+    $post_in = eduma_lp_get_popular_courses( $limit );
 	$courses = array_intersect_assoc( $courses, $post_in );
 }
 
@@ -76,34 +88,32 @@ echo '<div class="thim-course-megamenu">';
 foreach ( $courses as $course_id ) {
 	$post = get_post( $course_id );
 	setup_postdata( $post );
-
-// 	 $course = learn_press_get_course( $course_id );
+	$course = learn_press_get_course( $course_id );
 	?>
 	<div class="lpr_course <?php echo 'course-grid-' . $columns; ?>">
 		<div class="course-item">
 			<?php
 			echo '<div class="course-thumbnail">';
-			echo '<a class="thumb" href="' . esc_url( get_the_permalink($course_id) ) . '" >';
-			echo thim_get_feature_image( get_post_thumbnail_id( $course_id), 'full', apply_filters( 'thim_course_thumbnail_width', 450 ), apply_filters( 'thim_course_thumbnail_height', 450 ), get_the_title($course_id) );
+			echo '<a class="thumb" href="' . esc_url( get_the_permalink() ) . '" >';
+			echo thim_get_feature_image( get_post_thumbnail_id( $post->ID ), 'full', apply_filters( 'thim_course_thumbnail_width', 450 ), apply_filters( 'thim_course_thumbnail_height', 450 ), get_the_title() );
 			echo '</a>';
 			echo '</div>';
 			?>
 			<div class="thim-course-content">
 				<h2 class="course-title">
-					<a href="<?php echo esc_url( get_the_permalink($course_id) ); ?>"> <?php echo get_the_title($course_id); ?></a>
+					<a href="<?php echo esc_url( get_the_permalink() ); ?>"> <?php echo get_the_title(); ?></a>
 				</h2>
 
 				<div class="course-meta">
 					<?php learn_press_courses_loop_item_price(); ?>
 				</div>
 				<?php
-				echo '<a class="course-readmore" href="' . esc_url( get_the_permalink($course_id) ) . '">' . esc_html__( 'Read More', 'eduma' ) . '</a>';
+				echo '<a class="course-readmore" href="' . esc_url( get_the_permalink() ) . '">' . esc_html__( 'Read More', 'eduma' ) . '</a>';
 				?>
 			</div>
 		</div>
 	</div>
 	<?php
-	wp_reset_postdata();
 }
 
 echo '</div>';

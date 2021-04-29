@@ -31,21 +31,20 @@ class FeaturedCategory extends AbstractDynamicBlock {
 	/**
 	 * Render the Featured Category block.
 	 *
-	 * @param array  $attributes Block attributes.
-	 * @param string $content    Block content.
+	 * @param array  $attributes Block attributes. Default empty array.
+	 * @param string $content    Block content. Default empty string.
 	 * @return string Rendered block type output.
 	 */
-	protected function render( $attributes, $content ) {
-		$id       = absint( isset( $attributes['categoryId'] ) ? $attributes['categoryId'] : 0 );
+	public function render( $attributes = array(), $content = '' ) {
+		$id       = isset( $attributes['categoryId'] ) ? (int) $attributes['categoryId'] : 0;
 		$category = get_term( $id, 'product_cat' );
-
 		if ( ! $category || is_wp_error( $category ) ) {
 			return '';
 		}
-
 		$attributes = wp_parse_args( $attributes, $this->defaults );
-
-		$attributes['height'] = $attributes['height'] ? $attributes['height'] : wc_get_theme_support( 'featured_block::default_height', 500 );
+		if ( ! $attributes['height'] ) {
+			$attributes['height'] = wc_get_theme_support( 'featured_block::default_height', 500 );
+		}
 
 		$title = sprintf(
 			'<h2 class="wc-block-featured-category__title">%s</h2>',
@@ -57,15 +56,15 @@ class FeaturedCategory extends AbstractDynamicBlock {
 			wc_format_content( $category->description )
 		);
 
-		$output  = sprintf( '<div class="%1$s" style="%2$s">', esc_attr( $this->get_classes( $attributes ) ), esc_attr( $this->get_styles( $attributes, $category ) ) );
-		$output .= '<div class="wc-block-featured-category__wrapper">';
+		$output = sprintf( '<div class="%1$s" style="%2$s">', esc_attr( $this->get_classes( $attributes ) ), esc_attr( $this->get_styles( $attributes, $category ) ) );
+
 		$output .= $title;
 		if ( $attributes['showDesc'] ) {
 			$output .= $desc_str;
 		}
 		$output .= '<div class="wc-block-featured-category__link">' . $content . '</div>';
 		$output .= '</div>';
-		$output .= '</div>';
+
 		return $output;
 	}
 

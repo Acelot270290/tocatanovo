@@ -17,6 +17,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
     }
 
 
+
     /**
      * {@inheritdoc}
      */
@@ -27,10 +28,10 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
     }
 
 
+
     /**
      * Sort to the left the best option for saving new translation files
-     * @param Loco_mvc_ViewParams[]
-     * @return Loco_mvc_ViewParams|null
+     * @return Loco_mvc_ViewParams
      */
     private function sortPreferred( array $choices ){
         usort( $choices, array(__CLASS__,'_onSortPreferred') );
@@ -38,15 +39,12 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         if( $best && ! $best['disabled'] ){
             return $best;
         }
-        return null;
     }
 
+    
 
     /**
      * @internal
-     * @param Loco_mvc_ViewParams
-     * @param Loco_mvc_ViewParams
-     * @return int
      */
     public static function _onSortPreferred( Loco_mvc_ViewParams $a, Loco_mvc_ViewParams $b ){
         $x = self::scoreFileChoice($a);
@@ -57,7 +55,6 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
     
     /**
      * Score an individual file choice for sorting preferred
-     * @param Loco_mvc_ViewParams
      * @return int
      */
     private static function scoreFileChoice( Loco_mvc_ViewParams $p ){
@@ -75,6 +72,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
     }
 
 
+
     /**
      * @internal
      * @param int
@@ -87,6 +85,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         $y = $order[$b];
         return $x === $y ? 0 : ( $x > $y ? -1 : 1 );
     }
+
 
 
     /**
@@ -195,7 +194,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             $meta = Loco_gettext_Metadata::load($potfile);
             $total = $meta->getTotal();
             // translators: 1: Number of strings; 2: Name of POT file; e.g. "100 strings found in file.pot"
-            $summary = sprintf( _n('%1$s string found in %2$s','%1$s strings found in %2$s',$total,'loco-translate'), number_format($total), $potfile->basename() );
+            $summary = sprintf( _n('One string found in %2$s','%s strings found in %s',$total,'loco-translate'), number_format($total), $potfile->basename() );
             $this->set( 'pot', new Loco_mvc_ViewParams( array(
                 'name' => $potfile->basename(),
                 'path' => $meta->getPath(false),
@@ -223,8 +222,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                     return $this->view('admin/errors/no-tokenizer');
                 }
                 $nfiles = count( $project->findSourceFiles() );
-                // translators: Were %s is number of source files that will be scanned
-                $summary = sprintf( _n('%s source file will be scanned for translatable strings','%s source files will be scanned for translatable strings',$nfiles,'loco-translate'), number_format_i18n($nfiles) );
+                $summary = sprintf( _n('1 source file will be scanned for translatable strings','%s source files will be scanned for translatable strings',$nfiles,'loco-translate'), number_format_i18n($nfiles) );
             }
             // else prompt for template creation before continuing
             else {
@@ -328,4 +326,5 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         return $this->view( 'admin/init/init-po', array() );
     }
 
+    
 }

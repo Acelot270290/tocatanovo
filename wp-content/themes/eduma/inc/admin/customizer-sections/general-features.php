@@ -94,27 +94,6 @@ thim_customizer()->add_field(
 		),
 	)
 );
-thim_customizer()->add_field(
-	array(
-		'id'          => 'thim_to_top_position',
-		'type'        => 'select',
- 		'label'    => esc_html__( 'Icon To Top Position', 'eduma' ),
- 		'priority' => 41,
-		'multiple' => 0,
-		'section'  => 'advanced',
-		'choices'  => array(
-			''                => esc_html__( 'Default', 'eduma' ),
-			'show_in_copyright'     => esc_html__( 'Show in copyright', 'eduma' ),
- 		),
-		'active_callback' => array(
-			array(
-				'setting'  => 'thim_show_to_top',
-				'operator' => '===',
-				'value'    => true,
-			),
-		),
-	)
-);
 
 // Feature: Preload
 thim_customizer()->add_field( array(

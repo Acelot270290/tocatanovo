@@ -27,7 +27,13 @@ function thim_shortcode_courses_searching( $atts ) {
 	$args['before_title'] = '<h3 class="widget-title">';
 	$args['after_title']  = '</h3>';
 
-    $layout = $instance['layout'] . '-v3.php';
+    if ( thim_is_new_learnpress( '3.0' ) ) {
+        $layout = $instance['layout'] . '-v3.php';
+    } else if ( thim_is_new_learnpress( '2.0' ) ) {
+        $layout = $instance['layout'] . '-v2.php';
+    } else {
+        $layout = $instance['layout'] . '-v1.php';
+    }
 
 	$widget_template       = THIM_DIR . 'inc/widgets/courses-searching/tpl/' . $layout;
 	$child_widget_template = THIM_CHILD_THEME_DIR . 'inc/widgets/courses-searching/' . $layout;

@@ -6,15 +6,12 @@
  *
  * @author   ThimPress
  * @package  Learnpress/Templates
- * @version  4.0.1
+ * @version  4.0.0
  */
 
 defined( 'ABSPATH' ) || exit();
 
-/**
- * @var LP_Course_Section $section
- */
-if ( ! isset( $section ) || ! isset( $can_view_content_course ) ) {
+if ( ! isset( $section ) ) {
 	return;
 }
 
@@ -26,14 +23,9 @@ if ( ! apply_filters( 'learn-press/section-visible', true, $section, $course ) )
 
 $user        = learn_press_get_current_user();
 $user_course = $user->get_course_data( get_the_ID() );
-/**
- * List items of section
- *
- * @var LP_Course_Item[]
- */
-$items = $section->get_items();
-?>
+$items       = $section->get_items();
 
+?>
 <li<?php $section->main_class(); ?> id="section-<?php echo $section->get_slug(); ?>"
 									data-id="<?php echo $section->get_slug(); ?>"
 									data-section-id="<?php echo $section->get_id(); ?>">

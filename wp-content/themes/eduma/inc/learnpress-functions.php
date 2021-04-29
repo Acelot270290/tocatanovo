@@ -1,28 +1,29 @@
 <?php
 
-if ( ! function_exists( 'thim_learnpress_page_title' ) ) {
-	function thim_learnpress_page_title( $echo = true ) {
+if (!function_exists('thim_learnpress_page_title')) {
+	function thim_learnpress_page_title($echo = true)
+	{
 		$title = '';
-		if ( get_post_type() == 'lp_course' && ! is_404() && ! is_search() || learn_press_is_courses() || learn_press_is_course_taxonomy() ) {
-			if ( learn_press_is_course_taxonomy() ) {
-				$title = learn_press_single_term_title( '', false );
+		if (get_post_type() == 'lp_course' && !is_404() && !is_search() || learn_press_is_courses() || learn_press_is_course_taxonomy()) {
+			if (learn_press_is_course_taxonomy()) {
+				$title = learn_press_single_term_title('', false);
 			} else {
-				$title = esc_html__( 'All Courses', 'eduma' );
+				$title = esc_html__('All Courses', 'eduma');
 			}
 		}
 
-		if ( get_post_type() == 'lp_course' && is_search() ) {
-			$title = esc_attr__( 'Search results for:', 'eduma' ) . ' ' . esc_attr( get_search_query() );
+		if (get_post_type() == 'lp_course' && is_search()) {
+			$title = esc_attr__('Search results for:', 'eduma') . ' ' . esc_attr(get_search_query());
 		}
 
-		if ( get_post_type() == 'lp_quiz' && ! is_404() && ! is_search() ) {
-			if ( is_tax() ) {
-				$title = learn_press_single_term_title( '', false );
+		if (get_post_type() == 'lp_quiz' && !is_404() && !is_search()) {
+			if (is_tax()) {
+				$title = learn_press_single_term_title('', false);
 			} else {
-				$title = esc_html__( 'Quiz', 'eduma' );
+				$title = esc_html__('Quiz', 'eduma');
 			}
 		}
-		if ( $echo ) {
+		if ($echo) {
 			echo $title;
 		} else {
 			return $title;
@@ -33,11 +34,12 @@ if ( ! function_exists( 'thim_learnpress_page_title' ) ) {
 /**
  * Breadcrumb for LearnPress
  */
-if ( ! function_exists( 'thim_learnpress_breadcrumb' ) ) {
-	function thim_learnpress_breadcrumb() {
+if (!function_exists('thim_learnpress_breadcrumb')) {
+	function thim_learnpress_breadcrumb()
+	{
 
 		// Do not display on the homepage
-		if ( is_front_page() || is_404() ) {
+		if (is_front_page() || is_404()) {
 			return;
 		}
 
@@ -48,88 +50,88 @@ if ( ! function_exists( 'thim_learnpress_breadcrumb' ) ) {
 
 		// Home page
 		echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-  				<a itemprop="item" href="' . esc_url( get_home_url() ) . '" title="' . esc_attr__( 'Home', 'eduma' ) . '">
-					 <span itemprop="name">' . esc_html__( 'Home', 'eduma' ) . '</span>
+  				<a itemprop="item" href="' . esc_url(get_home_url()) . '" title="' . esc_attr__('Home', 'eduma') . '">
+					 <span itemprop="name">' . esc_html__('Home', 'eduma') . '</span>
    				</a>
   				<meta itemprop="position" content="1" />
  			</li>';
 
-		if ( is_single() ) {
-			$position   = 3;
-			$categories = get_the_terms( $post, 'course_category' );
-			if ( isset( $categories[0] ) ) {
+		if (is_single()) {
+			$position = 3;
+			$categories = get_the_terms($post, 'course_category');
+			if (isset($categories[0])) {
 				$cate_obj = $categories[0];
 			}
-			if ( class_exists( 'WPSEO_Primary_Term' ) ) {
-				$primary_term = new WPSEO_Primary_Term( 'course_category', get_the_ID() );
-				$primary      = $primary_term->get_primary_term();
-				if ( $primary ) {
-					$cate_obj = get_term_by( 'id', $primary, 'course_category' );
+			if (class_exists('WPSEO_Primary_Term')) {
+				$primary_term = new WPSEO_Primary_Term('course_category', get_the_ID());
+				$primary = $primary_term->get_primary_term();
+				if ($primary) {
+					$cate_obj = get_term_by('id', $primary, 'course_category');
 				}
 			}
 
-			if ( get_post_type() == 'lp_course' ) {
+			if (get_post_type() == 'lp_course') {
 				// All courses
 				echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
- 						<a itemprop="item" href="' . esc_url( get_post_type_archive_link( 'lp_course' ) ) . '" title="' . esc_attr__( 'All courses', 'eduma' ) . '">
-							<span itemprop="name">' . esc_html__( 'All courses', 'eduma' ) . '</span>
+ 						<a itemprop="item" href="' . esc_url(get_post_type_archive_link('lp_course')) . '" title="' . esc_attr__('All courses', 'eduma') . '">
+							<span itemprop="name">' . esc_html__('All courses', 'eduma') . '</span>
  						</a>
 						<meta itemprop="position" content="2" />
   					</li>';
 			} else {
 				echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
- 							<a itemprop="item" href="' . esc_url( get_permalink( get_post_meta( $post->ID, '_lp_course', true ) ) ) . '" title="' . esc_attr( get_the_title( get_post_meta( $post->ID, '_lp_course', true ) ) ) . '">
-								<span itemprop="name">' . esc_html( get_the_title( get_post_meta( $post->ID, '_lp_course', true ) ) ) . '</span>
+ 							<a itemprop="item" href="' . esc_url(get_permalink(get_post_meta($post->ID, '_lp_course', true))) . '" title="' . esc_attr(get_the_title(get_post_meta($post->ID, '_lp_course', true))) . '">
+								<span itemprop="name">' . esc_html(get_the_title(get_post_meta($post->ID, '_lp_course', true))) . '</span>
  							</a>
 							<meta itemprop="position" content="2" />
 						</li>';
 			}
 
 			// Single post (Only display the first category)
-			if ( isset( $cate_obj ) ) {
+			if (isset($cate_obj)) {
 				echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
- 						<a itemprop="item" href="' . esc_url( get_term_link( $cate_obj ) ) . '" title="' . esc_attr( $cate_obj->name ) . '">
-							<span itemprop="name">' . esc_html( $cate_obj->name ) . '</span>
+ 						<a itemprop="item" href="' . esc_url(get_term_link($cate_obj)) . '" title="' . esc_attr($cate_obj->name) . '">
+							<span itemprop="name">' . esc_html($cate_obj->name) . '</span>
   						</a>
  						<meta itemprop="position" content="3" />
 					</li>';
 				$position = " 4";
 			}
 			echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
- 						<span itemprop="name">' . esc_html( get_the_title() ) . '</span>
- 						<meta itemprop="position" content="' . esc_attr( $position ) . '" />
+ 						<span itemprop="name">' . esc_html(get_the_title()) . '</span>
+ 						<meta itemprop="position" content="' . esc_attr($position) . '" />
  					</li>';
 
 		} else {
-			if ( learn_press_is_course_taxonomy() || learn_press_is_course_tag() ) {
+			if (learn_press_is_course_taxonomy() || learn_press_is_course_tag()) {
 				// All courses
 				echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-							<a itemprop="item" href="' . esc_url( get_post_type_archive_link( 'lp_course' ) ) . '" title="' . esc_attr__( 'All courses', 'eduma' ) . '">
-								<span itemprop="name">' . esc_html__( 'All courses', 'eduma' ) . '</span>
+							<a itemprop="item" href="' . esc_url(get_post_type_archive_link('lp_course')) . '" title="' . esc_attr__('All courses', 'eduma') . '">
+								<span itemprop="name">' . esc_html__('All courses', 'eduma') . '</span>
 							</a>
 						<meta itemprop="position" content="2"/>
 						</li>';
 
 				// Category page
 				echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
-						<span itemprop="name" title="' . esc_attr( learn_press_single_term_title( '', false ) ) . '">' . esc_html( learn_press_single_term_title( '', false ) ) . '</span>
+						<span itemprop="name" title="' . esc_attr(learn_press_single_term_title('', false)) . '">' . esc_html(learn_press_single_term_title('', false)) . '</span>
 						<meta itemprop="position" content="3"/></li>';
 			} else {
-				if ( ! empty( $_REQUEST['s'] ) && ! empty( $_REQUEST['ref'] ) && ( $_REQUEST['ref'] == 'course' ) ) {
+				if (!empty($_REQUEST['s']) && !empty($_REQUEST['ref']) && ($_REQUEST['ref'] == 'course')) {
 					// All courses
 					echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-						<a itemprop="item" href="' . esc_url( get_post_type_archive_link( 'lp_course' ) ) . '" title="' . esc_attr__( 'All courses', 'eduma' ) . '">
-						<span itemprop="name">' . esc_html__( 'All courses', 'eduma' ) . '</span></a>
+						<a itemprop="item" href="' . esc_url(get_post_type_archive_link('lp_course')) . '" title="' . esc_attr__('All courses', 'eduma') . '">
+						<span itemprop="name">' . esc_html__('All courses', 'eduma') . '</span></a>
 						<meta itemprop="position" content="2"/>
 					</li>';
 
 					// Search result
 					echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-						<span itemprop="name" title="' . esc_attr__( 'Search results for:', 'eduma' ) . ' ' . esc_attr( get_search_query() ) . '">' . esc_html__( 'Search results for:', 'eduma' ) . ' ' . esc_html( get_search_query() ) . '</span>
+						<span itemprop="name" title="' . esc_attr__('Search results for:', 'eduma') . ' ' . esc_attr(get_search_query()) . '">' . esc_html__('Search results for:', 'eduma') . ' ' . esc_html(get_search_query()) . '</span>
 						<meta itemprop="position" content="3"/></li>';
 				} else {
 					echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-							<span itemprop="name" title="' . esc_attr__( 'All courses', 'eduma' ) . '">' . esc_html__( 'All courses', 'eduma' ) . '</span>
+							<span itemprop="name" title="' . esc_attr__('All courses', 'eduma') . '">' . esc_html__('All courses', 'eduma') . '</span>
 							<meta itemprop="position" content="2"/></li>';
 				}
 			}
@@ -146,80 +148,81 @@ if ( ! function_exists( 'thim_learnpress_breadcrumb' ) ) {
  *
  * @param $course_id
  */
-if ( ! function_exists( 'thim_co_instructors' ) ) {
-	function thim_co_instructors( $course_id, $author_id ) {
-		if ( ! $course_id ) {
+if (!function_exists('thim_co_instructors')) {
+	function thim_co_instructors($course_id, $author_id)
+	{
+		if (!$course_id) {
 			return;
 		}
 
-		if ( class_exists( 'LP_Co_Instructor_Preload' ) && thim_is_version_addons_instructor( '3' ) ) {
-			$instructors = get_post_meta( $course_id, '_lp_co_teacher' );
-			$instructors = array_diff( $instructors, array( $author_id ) );
-			if ( $instructors ) {
-				foreach ( $instructors as $instructor ) {
+		if (thim_plugin_active('learnpress-co-instructor/learnpress-co-instructor.php') && thim_is_version_addons_instructor('3')) {
+			$instructors = get_post_meta($course_id, '_lp_co_teacher');
+			$instructors = array_diff($instructors, array($author_id));
+			if ($instructors) {
+				foreach ($instructors as $instructor) {
 					//Check if instructor not exist
-					$user = get_userdata( $instructor );
-					if ( $user === false ) {
+					$user = get_userdata($instructor);
+					if ($user === false) {
 						break;
 					}
-					$lp_info = get_the_author_meta( 'lp_info', $instructor );
-					$link    = learn_press_user_profile_link( $instructor );
+					$lp_info = get_the_author_meta('lp_info', $instructor);
+					$link = learn_press_user_profile_link($instructor);
 					?>
 					<div class="thim-about-author thim-co-instructor" itemprop="contributor" itemscope
 						 itemtype="http://schema.org/Person">
 						<div class="author-wrapper">
 							<div class="author-avatar">
-								<a href="<?php echo esc_url( $link ); ?>"><?php echo get_avatar( $instructor, 110 ); ?></a>
+								<a href="<?php echo esc_url($link); ?>"><?php echo get_avatar($instructor, 110); ?></a>
 							</div>
 							<div class="author-bio">
 								<div class="author-top">
-									<a itemprop="url" class="name" href="<?php echo esc_url( $link ); ?>">
+									<a itemprop="url" class="name" href="<?php echo esc_url($link); ?>">
 										<span
-											itemprop="name"><?php echo get_the_author_meta( 'display_name', $instructor ); ?></span>
+											itemprop="name"><?php echo get_the_author_meta('display_name', $instructor); ?></span>
 									</a>
-									<?php if ( isset( $lp_info['major'] ) && $lp_info['major'] ) : ?>
-										<p class="job"><?php echo esc_html( $lp_info['major'] ); ?></p>
+									<?php if (isset($lp_info['major']) && $lp_info['major']) : ?>
+										<p class="job"><?php echo esc_html($lp_info['major']); ?></p>
 									<?php endif; ?>
 								</div>
 								<ul class="thim-author-social">
-									<?php if ( isset( $lp_info['facebook'] ) && $lp_info['facebook'] ) : ?>
+									<?php if (isset($lp_info['facebook']) && $lp_info['facebook']) : ?>
 										<li>
-											<a href="<?php echo esc_url( $lp_info['facebook'] ); ?>" class="facebook"><i
+											<a href="<?php echo esc_url($lp_info['facebook']); ?>" class="facebook"><i
 													class="fa fa-facebook"></i></a>
 										</li>
 									<?php endif; ?>
 
-									<?php if ( isset( $lp_info['twitter'] ) && $lp_info['twitter'] ) : ?>
+									<?php if (isset($lp_info['twitter']) && $lp_info['twitter']) : ?>
 										<li>
-											<a href="<?php echo esc_url( $lp_info['twitter'] ); ?>" class="twitter"><i
+											<a href="<?php echo esc_url($lp_info['twitter']); ?>" class="twitter"><i
 													class="fa fa-twitter"></i></a>
 										</li>
 									<?php endif; ?>
 
-									<?php if ( isset( $lp_info['google'] ) && $lp_info['google'] ) : ?>
+									<?php if (isset($lp_info['google']) && $lp_info['google']) : ?>
 										<li>
-											<a href="<?php echo esc_url( $lp_info['google'] ); ?>"
+											<a href="<?php echo esc_url($lp_info['google']); ?>"
 											   class="google-plus"><i class="fa fa-google-plus"></i></a>
 										</li>
 									<?php endif; ?>
 
-									<?php if ( isset( $lp_info['instagram'] ) && $lp_info['instagram'] ) : ?>
+									<?php if (isset($lp_info['instagram']) && $lp_info['instagram']) : ?>
 										<li>
-											<a href="<?php echo esc_url( $lp_info['instagram'] ); ?>" class="instagram"><i
+											<a href="<?php echo esc_url($lp_info['instagram']); ?>" class="instagram"><i
 													class="fa fa-instagram"></i></a>
 										</li>
 									<?php endif; ?>
 
-									<?php if ( isset( $lp_info['linkedin'] ) && $lp_info['linkedin'] ) : ?>
+									<?php if (isset($lp_info['linkedin']) && $lp_info['linkedin']) : ?>
 										<li>
-											<a href="<?php echo esc_url( $lp_info['linkedin'] ); ?>" class="linkedin"><i
+											<a href="<?php echo esc_url($lp_info['linkedin']); ?>" class="linkedin"><i
 													class="fa fa-linkedin"></i></a>
 										</li>
 									<?php endif; ?>
 
-									<?php if ( isset( $lp_info['youtube'] ) && $lp_info['youtube'] ) : ?>
+									<?php if (isset($lp_info['youtube']) && $lp_info['youtube']) : ?>
 										<li>
-											<a href="<?php echo esc_url( $lp_info['youtube'] ); ?>" class="youtube"><i
+											<a href="<?php echo esc_url($lp_info['youtube']); ?>" class="youtube"><i
 													class="fa fa-youtube"></i></a>
 										</li>
 									<?php endif; ?>
@@ -227,7 +230,7 @@ if ( ! function_exists( 'thim_co_instructors' ) ) {
 
 							</div>
 							<div class="author-description" itemprop="description">
-								<?php echo get_the_author_meta( 'description', $instructor ); ?>
+								<?php echo get_the_author_meta('description', $instructor); ?>
 							</div>
 						</div>
 					</div>
@@ -242,121 +245,53 @@ if ( ! function_exists( 'thim_co_instructors' ) ) {
  * Display ratings count
  */
 
-if ( ! function_exists( 'thim_course_ratings_count' ) ) {
-	function thim_course_ratings_count( $course_id = null ) {
-		if ( ! class_exists( 'LP_Addon_Course_Review_Preload' ) || ! thim_is_version_addons_review( '3' ) ) {
+if (!function_exists('thim_course_ratings_count')) {
+	function thim_course_ratings_count($course_id = null)
+	{
+		if (!thim_plugin_active('learnpress-course-review/learnpress-course-review.php') || !thim_is_version_addons_review('3')) {
 			return;
 		}
-		if ( ! $course_id ) {
+		if (!$course_id) {
 			$course_id = get_the_ID();
 		}
-		$ratings = learn_press_get_course_rate_total( $course_id ) ? learn_press_get_course_rate_total( $course_id ) : 0;
+		$ratings = learn_press_get_course_rate_total($course_id) ? learn_press_get_course_rate_total($course_id) : 0;
 		echo '<div class="course-comments-count">';
 		echo '<div class="value"><i class="fa fa-comment"></i>';
-		echo esc_html( $ratings );
+		echo esc_html($ratings);
 		echo '</div>';
 		echo '</div>';
-	}
-}
-
-/**
- * Display review button
- *
- * @param $course_id
- */
-if ( ! function_exists( 'thim_review_button' ) ) {
-	function thim_review_button( $course_id ) {
-		if ( ! class_exists( 'LP_Addon_Course_Review_Preload' ) || ! thim_is_version_addons_review( '3' ) ) {
-			return;
-		}
-
-		if ( ! get_current_user_id() ) {
-			return;
-		}
-		$user = learn_press_get_current_user();
-		if ( $user->has_course_status( $course_id, array( 'enrolled', 'completed', 'finished' ) ) ) {
-			if ( ! learn_press_get_user_rate( $course_id ) ) {
-				?>
-				<div class="add-review">
-					<h3 class="title"><?php esc_html_e( 'Leave A Review', 'eduma' ); ?></h3>
-
-					<p class="description"><?php esc_html_e( 'Please provide as much detail as you can to justify your rating and to help others.', 'eduma' ); ?></p>
-					<?php do_action( 'learn_press_before_review_fields' ); ?>
-					<form method="post">
-						<div>
-							<label for="review-title"><?php esc_html_e( 'Title', 'eduma' ); ?>
-								<span class="required">*</span></label>
-							<input required type="text" id="review-title" name="review-course-title"/>
-						</div>
-						<div>
-
-							<label><?php esc_html_e( 'Rating', 'eduma' ); ?>
-								<span class="required">*</span></label>
-
-							<div class="review-stars-rated">
-								<ul class="review-stars">
-									<li><span class="fa fa-star-o"></span></li>
-									<li><span class="fa fa-star-o"></span></li>
-									<li><span class="fa fa-star-o"></span></li>
-									<li><span class="fa fa-star-o"></span></li>
-									<li><span class="fa fa-star-o"></span></li>
-								</ul>
-								<ul class="review-stars filled" style="width: 100%">
-									<li><span class="fa fa-star"></span></li>
-									<li><span class="fa fa-star"></span></li>
-									<li><span class="fa fa-star"></span></li>
-									<li><span class="fa fa-star"></span></li>
-									<li><span class="fa fa-star"></span></li>
-								</ul>
-							</div>
-						</div>
-						<div>
-							<label for="review-content"><?php esc_html_e( 'Comment', 'eduma' ); ?>
-								<span class="required">*</span></label>
-							<textarea required id="review-content" name="review-course-content"></textarea>
-						</div>
-						<input type="hidden" id="review-course-value" name="review-course-value" value="5"/>
-						<input type="hidden" id="comment_course_ID" name="comment_course_ID"
-							   value="<?php echo get_the_ID(); ?>"/>
-						<button type="submit"><?php esc_html_e( 'Submit Review', 'eduma' ); ?></button>
-					</form>
-					<?php do_action( 'learn_press_after_review_fields' ); ?>
-				</div>
-				<?php
-			}
-		}
-
 	}
 }
 
 /**
  * Display course ratings
  */
-if ( ! function_exists( 'thim_course_ratings' ) ) {
-	function thim_course_ratings() {
+if (!function_exists('thim_course_ratings')) {
+	function thim_course_ratings()
+	{
 
-		if ( ! class_exists( 'LP_Addon_Course_Review_Preload' ) || ! thim_is_version_addons_review( '3' ) ) {
+		if (!thim_plugin_active('learnpress-course-review/learnpress-course-review.php') || !thim_is_version_addons_review('3')) {
 			return;
 		}
 		$_reviewCount = $_aggregateRating = $rating_meta = '';
-		$course_id    = get_the_ID();
-		$course_rate  = learn_press_get_course_rate( $course_id );
-		$ratings      = learn_press_get_course_rate_total( $course_id );
-		if ( is_single() && $ratings > 0 ) {
+		$course_id = get_the_ID();
+		$course_rate = learn_press_get_course_rate($course_id);
+		$ratings = learn_press_get_course_rate_total($course_id);
+		if (is_single() && $ratings > 0) {
 			$_aggregateRating = 'itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"';
-			$_reviewCount     = 'itemprop="reviewCount"';
-			$rating_meta      = '<meta itemprop="ratingValue" content="' . esc_attr( $course_rate ) . '"/>
-						<meta itemprop="ratingCount" content="' . esc_attr( $ratings ) . '"/>
+			$_reviewCount = 'itemprop="reviewCount"';
+			$rating_meta = '<meta itemprop="ratingValue" content="' . esc_attr($course_rate) . '"/>
+						<meta itemprop="ratingCount" content="' . esc_attr($ratings) . '"/>
 						<div itemprop="itemReviewed" itemscope="" itemtype="http://schema.org/Organization">
-							<meta itemprop="name" content="' . get_the_title( $course_id ) . '"/>
+							<meta itemprop="name" content="' . get_the_title($course_id) . '"/>
 						</div>';
 		}
 		?>
 		<div class="course-review">
-			<label><?php esc_html_e( 'Review', 'eduma' ); ?></label>
+			<label><?php esc_html_e('Review', 'eduma'); ?></label>
 			<div class="value"<?php echo $_aggregateRating; ?>>
-				<?php thim_print_rating( $course_rate ); ?>
-				<span><?php $ratings ? printf( _n( '(%1$s review)', '(%1$s reviews)', $ratings, 'eduma' ), '<span ' . $_reviewCount . '>' . number_format_i18n( $ratings ) . '</span>' ) : printf( __( '(%1$s review)', 'eduma' ), '<span ' . $_reviewCount . '>0</span>' ); ?></span>
+				<?php thim_print_rating($course_rate); ?>
+				<span><?php $ratings ? printf(_n('(%1$s review)', '(%1$s reviews)', $ratings, 'eduma'), '<span ' . $_reviewCount . '>' . number_format_i18n($ratings) . '</span>') : printf(__('(%1$s review)', 'eduma'), '<span ' . $_reviewCount . '>0</span>'); ?></span>
 				<?php
 				echo $rating_meta;
 				?>
@@ -366,9 +301,10 @@ if ( ! function_exists( 'thim_course_ratings' ) ) {
 	}
 }
 
-if ( ! function_exists( 'thim_print_rating' ) ) {
-	function thim_print_rating( $rate ) {
-		if ( ! class_exists( 'LP_Addon_Course_Review_Preload' ) || ! thim_is_version_addons_review( '3' ) ) {
+if (!function_exists('thim_print_rating')) {
+	function thim_print_rating($rate)
+	{
+		if (!thim_plugin_active('learnpress-course-review/learnpress-course-review.php') || !thim_is_version_addons_review('3')) {
 			return;
 		}
 
@@ -382,7 +318,7 @@ if ( ! function_exists( 'thim_print_rating' ) ) {
 				<li><span class="fa fa-star-o"></span></li>
 			</ul>
 			<ul class="review-stars filled"
-				style="<?php echo esc_attr( 'width: calc(' . ( $rate * 20 ) . '% - 2px)' ) ?>">
+				style="<?php echo esc_attr('width: calc(' . ($rate * 20) . '% - 2px)') ?>">
 				<li><span class="fa fa-star"></span></li>
 				<li><span class="fa fa-star"></span></li>
 				<li><span class="fa fa-star"></span></li>
@@ -398,23 +334,24 @@ if ( ! function_exists( 'thim_print_rating' ) ) {
 /**
  * Display course ratings
  */
-if ( ! function_exists( 'thim_course_ratings_meta' ) ) {
-	function thim_course_ratings_meta() {
+if (!function_exists('thim_course_ratings_meta')) {
+	function thim_course_ratings_meta()
+	{
 
-		if ( ! class_exists( 'LP_Addon_Course_Review_Preload' ) || ! thim_is_version_addons_review( '3' ) ) {
+		if (!thim_plugin_active('learnpress-course-review/learnpress-course-review.php') || !thim_is_version_addons_review('3')) {
 			return;
 		}
 
-		$course_id   = get_the_ID();
-		$course_rate = learn_press_get_course_rate( $course_id );
-		$ratings     = learn_press_get_course_rate_total( $course_id );
+		$course_id = get_the_ID();
+		$course_rate = learn_press_get_course_rate($course_id);
+		$ratings = learn_press_get_course_rate_total($course_id);
 		?>
 		<div class="course-review">
-			<label><?php esc_html_e( 'Review', 'eduma' ); ?></label>
+			<label><?php esc_html_e('Review', 'eduma'); ?></label>
 
 			<div class="value">
-				<?php echo $course_rate; ?> <?php esc_html_e( 'Stars', 'eduma' ); ?>
-				<span><?php $ratings ? printf( _n( '(%1$s review)', '(%1$s reviews)', $ratings, 'eduma' ), number_format_i18n( $ratings ) ) : printf( __( '(%1$s review)', 'eduma' ), '<span itemprop="reviewCount">0</span>' ); ?></span>
+				<?php echo $course_rate; ?> <?php esc_html_e('Stars', 'eduma'); ?>
+				<span><?php $ratings ? printf(_n('(%1$s review)', '(%1$s reviews)', $ratings, 'eduma'), number_format_i18n($ratings)) : printf(__('(%1$s review)', 'eduma'), '<span itemprop="reviewCount">0</span>'); ?></span>
 			</div>
 		</div>
 		<?php
@@ -423,43 +360,45 @@ if ( ! function_exists( 'thim_course_ratings_meta' ) ) {
 /**
  * Breadcrumb for Courses Collection
  */
-if ( ! function_exists( 'thim_courses_collection_breadcrumb' ) ) {
-	function thim_courses_collection_breadcrumb() {
+if (!function_exists('thim_courses_collection_breadcrumb')) {
+	function thim_courses_collection_breadcrumb()
+	{
 
 		// Build the breadcrums
 		echo '<ul itemprop="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList" id="breadcrumbs" class="breadcrumbs">';
 
 		// Home page
-		echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . esc_html( get_home_url() ) . '" title="' . esc_attr__( 'Home', 'eduma' ) . '"><span itemprop="name">' . esc_html__( 'Home', 'eduma' ) . '</span></a></li>';
+		echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . esc_html(get_home_url()) . '" title="' . esc_attr__('Home', 'eduma') . '"><span itemprop="name">' . esc_html__('Home', 'eduma') . '</span></a></li>';
 
-		if ( is_single() ) {
-			if ( get_post_type() == 'lp_collection' ) {
-				echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . esc_url( get_post_type_archive_link( 'lp_collection' ) ) . '" title="' . esc_attr__( 'Collections', 'eduma' ) . '"><span itemprop="name">' . esc_html__( 'Collections', 'eduma' ) . '</span></a></li>';
+		if (is_single()) {
+			if (get_post_type() == 'lp_collection') {
+				echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="' . esc_url(get_post_type_archive_link('lp_collection')) . '" title="' . esc_attr__('Collections', 'eduma') . '"><span itemprop="name">' . esc_html__('Collections', 'eduma') . '</span></a></li>';
 			}
-			echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name" title="' . esc_attr( get_the_title() ) . '">' . esc_html( get_the_title() ) . '</span></li>';
+			echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name" title="' . esc_attr(get_the_title()) . '">' . esc_html(get_the_title()) . '</span></li>';
 		} else {
-			echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name">' . esc_html__( 'Collections', 'eduma' ) . '</span></li>';
+			echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name">' . esc_html__('Collections', 'eduma') . '</span></li>';
 		}
 
 		echo '</ul>';
 	}
 }
 
-if ( ! function_exists( 'thim_content_item_edit_link' ) ) {
-	function thim_content_item_edit_link() {
-		$course      = LP_Global::course();
+if (!function_exists('thim_content_item_edit_link')) {
+	function thim_content_item_edit_link()
+	{
+		$course = LP_Global::course();
 		$course_item = LP_Global::course_item();
-		$user        = LP_Global::user();
-		if ( $user->can_edit_item( $course_item->get_id(), $course->get_id() ) ): ?>
+		$user = LP_Global::user();
+		if ($user->can_edit_item($course_item->get_id(), $course->get_id())): ?>
 			<p class="edit-course-item-link">
-				<a href="<?php echo get_edit_post_link( $course_item->get_id() ); ?>"><i
-						class="fa fa-pencil-square-o"></i> <?php _e( 'Edit item', 'eduma' ); ?>
+				<a href="<?php echo get_edit_post_link($course_item->get_id()); ?>"><i
+						class="fa fa-pencil-square-o"></i> <?php _e('Edit item', 'eduma'); ?>
 				</a>
 			</p>
 		<?php endif;
 	}
 }
-add_action( 'learn-press/after-course-item-content', 'thim_content_item_edit_link', 3 );
+add_action('learn-press/after-course-item-content', 'thim_content_item_edit_link', 3);
 
 if ( ! function_exists( 'thim_content_item_lesson_media' ) ) {
 	function thim_content_item_lesson_media() {
@@ -470,23 +409,17 @@ if ( ! function_exists( 'thim_content_item_lesson_media' ) ) {
 		$can_view_item = $user->can_view_item( $course_item->get_id(), $course->get_id() );
 		$media_intro   = get_post_meta( $item->get_id(), '_lp_lesson_video_intro', true );
 		if ( ! empty( $media_intro ) && ! $course_item->is_blocked() && $can_view_item ) {
- 			?>
-  			<div class="learn-press-video-intro">
-				<div class="video-content">
+			?>
+            <div class="learn-press-video-intro">
+                <div class="video-content">
 					<?php
-					if ( wp_oembed_get( $media_intro ) ) {
-						echo '<div class="responsive-iframe">' . wp_oembed_get( $media_intro ) . '</div>';
-					} else {
-						echo str_replace(
-							array( "<iframe", "</iframe>" ), array(
-							'<div class="responsive-iframe"><iframe',
-							"</iframe></div>"
-						), do_shortcode( $media_intro )
-						);
-					}
+					echo str_replace( array( "<iframe", "</iframe>" ), array(
+						'<div class="responsive-iframe"><iframe',
+						"</iframe></div>"
+					), apply_filters( 'the_content', $media_intro ) );
 					?>
-				</div>
-			</div>
+                </div>
+            </div>
 			<?php
 		}
 	}
@@ -499,17 +432,13 @@ add_action( 'learn-press/before-course-item-content', 'thim_content_item_lesson_
 if ( ! function_exists( 'thim_before_curiculumn_item_func' ) ) {
 	function thim_before_curiculumn_item_func() {
 		$args = array();
-		$args = wp_parse_args(
-			$args, apply_filters(
-			'learn_press_breadcrumb_defaults', array(
+		$args = wp_parse_args( $args, apply_filters( 'learn_press_breadcrumb_defaults', array(
 			'delimiter'   => '<i class="fa-angle-right fa"></i>',
 			'wrap_before' => '<nav class="thim-font-heading learn-press-breadcrumb" ' . ( is_single() ? 'itemprop="breadcrumb"' : '' ) . '>',
 			'wrap_after'  => '</nav>',
 			'before'      => '',
 			'after'       => '',
-		)
-		)
-		);
+		) ) );
 
 		$breadcrumbs = new LP_Breadcrumb();
 
@@ -540,18 +469,18 @@ if ( ! function_exists( 'thim_item_meta_duration' ) ) {
 
 		if ( is_a( $duration, 'LP_Duration' ) && $duration->get() ) {
 			$format = array(
-				'day'    => '%s ' . _x( 'day', 'duration', 'eduma' ),
-				'hour'   => '%s ' . _x( 'hour', 'duration', 'eduma' ),
-				'minute' => '%s ' . _x( 'min', 'duration', 'eduma' ),
-				'second' => '%s ' . _x( 'sec', 'duration', 'eduma' ),
+				'day' => '%s ' . _x('day', 'duration', 'eduma'),
+				'hour' => '%s ' . _x('hour', 'duration', 'eduma'),
+				'minute' => '%s ' . _x('min', 'duration', 'eduma'),
+				'second' => '%s ' . _x('sec', 'duration', 'eduma'),
 			);
 
 			if ( 1 == absint( $duration->to_timer( $format, true ) ) ) {
 				$format = array(
-					'day'    => '%s ' . _x( 'day', 'duration', 'eduma' ),
-					'hour'   => '%s ' . _x( 'hour', 'duration', 'eduma' ),
-					'minute' => '%s ' . _x( 'min', 'duration', 'eduma' ),
-					'second' => '%s ' . _x( 'sec', 'duration', 'eduma' ),
+					'day' => '%s ' . _x('day', 'duration', 'eduma'),
+					'hour' => '%s ' . _x('hour', 'duration', 'eduma'),
+					'minute' => '%s ' . _x('min', 'duration', 'eduma'),
+					'second' => '%s ' . _x('sec', 'duration', 'eduma'),
 				);
 			}
 
@@ -562,7 +491,7 @@ if ( ! function_exists( 'thim_item_meta_duration' ) ) {
 		}
 	}
 }
-add_action( 'learn-press/course-section-item/before-lp_lesson-meta', 'thim_item_meta_duration', 5 );
+add_action('learn-press/course-section-item/before-lp_lesson-meta', 'thim_item_meta_duration', 5);
 
 /**
  * Add format icon before curriculum items
@@ -570,153 +499,153 @@ add_action( 'learn-press/course-section-item/before-lp_lesson-meta', 'thim_item_
  * @param $lesson_or_quiz
  * @param $enrolled
  */
-if ( ! function_exists( 'thim_add_format_icon' ) ) {
-	function thim_add_format_icon( $item ) {
-		$format = get_post_format( $item->get_id() );
-		if ( get_post_type( $item->get_id() ) == 'lp_quiz' || get_post_type( $item->get_id() ) == 'lp_h5p' ) {
-			echo '<span class="course-format-icon"><i class="fa fa-puzzle-piece"></i></span>';
-		} elseif ( get_post_type( $item->get_id() ) == 'lp_assignment' ) {
-			echo '<span class="course-format-icon"><i class="fa fa-book"></i></span>';
-		} elseif ( $format == 'video' ) {
-			echo '<span class="course-format-icon"><i class="fa fa-play-circle"></i></span>';
-		} elseif ( $format == 'image' ) {
-			echo '<span class="course-format-icon"><i class="fa fa-file-image-o"></i></span>';
-		} elseif ( $format == 'link' ) {
-			echo '<span class="course-format-icon"><i class="fa fa-link"></i></span>';
-		} elseif ( $format == 'gallery' ) {
-			echo '<span class="course-format-icon"><i class="fa fa-images"></i></span>';
-		} elseif ( $format == 'audio' ) {
-			echo '<span class="course-format-icon"><i class="fa fa-volume-up"></i></span>';
-		} else {
-			echo '<span class="course-format-icon"><i class="fa fa-file-o"></i></span>';
-		}
-	}
+if (!function_exists('thim_add_format_icon')) {
+    function thim_add_format_icon($item)
+    {
+        $format = get_post_format($item->get_id());
+        if (get_post_type($item->get_id()) == 'lp_quiz' || get_post_type($item->get_id()) == 'lp_h5p') {
+            echo '<span class="course-format-icon"><i class="fa fa-puzzle-piece"></i></span>';
+        } elseif (get_post_type($item->get_id()) == 'lp_assignment') {
+            echo '<span class="course-format-icon"><i class="fa fa-book"></i></span>';
+        } elseif ($format == 'video') {
+            echo '<span class="course-format-icon"><i class="fa fa-play-circle"></i></span>';
+        } elseif ($format == 'image') {
+            echo '<span class="course-format-icon"><i class="fa fa-file-image-o"></i></span>';
+        } elseif ($format == 'link') {
+            echo '<span class="course-format-icon"><i class="fa fa-link"></i></span>';
+        } elseif ($format == 'gallery') {
+            echo '<span class="course-format-icon"><i class="fa fa-images"></i></span>';
+        } elseif ($format == 'audio') {
+            echo '<span class="course-format-icon"><i class="fa fa-volume-up"></i></span>';
+        } else {
+            echo '<span class="course-format-icon"><i class="fa fa-file-o"></i></span>';
+        }
+    }
 }
 
-add_action( 'learn_press_before_section_item_title', 'thim_add_format_icon', 10, 1 );
+add_action('learn_press_before_section_item_title', 'thim_add_format_icon', 10, 1);
 
-if ( ! function_exists( 'thim_course_tabs_content' ) ) {
-	function thim_course_tabs_content( $defaults ) {
-		$arr                = array();
-		$course             = learn_press_get_course();
-		$user               = learn_press_get_current_user();
-		$theme_options_data = get_theme_mods();
-		$group_tab          = isset( $theme_options_data['group_tabs_course'] ) && is_array( $theme_options_data['group_tabs_course'] ) ? $theme_options_data['group_tabs_course'] : array(
-			'description',
-			'curriculum',
-			'instructor',
-			'announcements',
-			'students-list',
-			'review'
-		);
+if (!function_exists('thim_course_tabs_content')) {
+    function thim_course_tabs_content($defaults)
+    {
+        $arr = array();
+        $course = learn_press_get_course();
+        $user = learn_press_get_current_user();
+        $theme_options_data = get_theme_mods();
+        $group_tab = isset($theme_options_data['group_tabs_course']) && is_array($theme_options_data['group_tabs_course']) ? $theme_options_data['group_tabs_course'] : array(
+            'description',
+            'curriculum',
+            'instructor',
+            'announcements',
+            'students-list',
+            'review'
+        );
 
-		//active tab
-		$request_tab = ! empty( $_REQUEST['tab'] ) ? $_REQUEST['tab'] : '';
-		$has_active  = false;
-		if ( $request_tab != '' ) {
-			foreach ( $defaults as $k => $v ) {
-				$v['id'] = ! empty( $v['id'] ) ? $v['id'] : 'tab-' . $k;
+        //active tab
+        $request_tab = !empty($_REQUEST['tab']) ? $_REQUEST['tab'] : '';
+        $has_active = false;
+        if ($request_tab != '') {
+            foreach ($defaults as $k => $v) {
+                $v['id'] = !empty($v['id']) ? $v['id'] : 'tab-' . $k;
 
-				if ( $request_tab === $v['id'] ) {
-					$v['active'] = true;
-					$has_active  = $k;
-				}
-				$defaults[$k] = $v;
-			}
-		} else {
-			/**
-			 * Active Curriculum tab if user has enrolled course
-			 */
-			if ( $course && $user->has_course_status(
-					$course->get_id(), array(
-					'enrolled',
-					'finished'
-				)
-				) && ! empty( $defaults['curriculum'] ) && array_keys( $group_tab, "curriculum" )
-			) {
-				$defaults['curriculum']['active'] = true;
-				$has_active                       = 'curriculum';
-			}
-		}
-		foreach ( $defaults as $k => $v ) {
-			switch ( $k ) {
-				case 'overview':
-					$v['icon']  = 'fa-bookmark';
-					$new_prioty = array_keys( $group_tab, "description" );
-					if ( $new_prioty ) {
-						if ( isset( $theme_options_data['default_tab_course'] ) && $theme_options_data['default_tab_course'] == 'description' && ! $has_active ) {
-							$v['active'] = true;
-						}
-						$v['priority'] = $new_prioty[0];
-						$arr[$k]       = $v;
-					}
-					break;
-				case 'curriculum':
-					$v['icon']  = 'fa-cube';
-					$new_prioty = array_keys( $group_tab, "curriculum" );
-					if ( $new_prioty ) {
-						if ( isset( $theme_options_data['default_tab_course'] ) && $theme_options_data['default_tab_course'] == 'curriculum' && ! $has_active ) {
-							$v['active'] = true;
-						}
-						$v['priority'] = $new_prioty[0];
-						$arr[$k]       = $v;
-					}
-					break;
-				case 'instructor':
-					$v['icon']  = 'fa-user';
-					$new_prioty = array_keys( $group_tab, "instructor" );
-					if ( $new_prioty ) {
-						if ( isset( $theme_options_data['default_tab_course'] ) && $theme_options_data['default_tab_course'] == 'instructor' && ! $has_active ) {
-							$v['active'] = true;
-						}
-						$v['priority'] = $new_prioty[0];
-						$arr[$k]       = $v;
-					}
-					break;
-				case 'announcements':
-					$v['icon'] = 'fa-envelope';
+                if ($request_tab === $v['id']) {
+                    $v['active'] = true;
+                    $has_active = $k;
+                }
+                $defaults[$k] = $v;
+            }
+        } else {
+            /**
+             * Active Curriculum tab if user has enrolled course
+             */
+            if ($course && $user->has_course_status($course->get_id(), array(
+                    'enrolled',
+                    'finished'
+                )) && !empty($defaults['curriculum']) && array_keys($group_tab, "curriculum")
+            ) {
+                $defaults['curriculum']['active'] = true;
+                $has_active = 'curriculum';
+            }
+        }
+        foreach ($defaults as $k => $v) {
+            switch ($k) {
+                case 'overview':
+                    $v['icon'] = 'fa-bookmark';
+                    $new_prioty = array_keys($group_tab, "description");
+                    if ($new_prioty) {
+                        if (isset($theme_options_data['default_tab_course']) && $theme_options_data['default_tab_course'] == 'description' && !$has_active) {
+                            $v['active'] = true;
+                        }
+                        $v['priority'] = $new_prioty[0];
+                        $arr[$k] = $v;
+                    }
+                    break;
+                case 'curriculum':
+                    $v['icon'] = 'fa-cube';
+                    $new_prioty = array_keys($group_tab, "curriculum");
+                    if ($new_prioty) {
+                        if (isset($theme_options_data['default_tab_course']) && $theme_options_data['default_tab_course'] == 'curriculum' && !$has_active) {
+                            $v['active'] = true;
+                        }
+                        $v['priority'] = $new_prioty[0];
+                        $arr[$k] = $v;
+                    }
+                    break;
+                case 'instructor':
+                    $v['icon'] = 'fa-user';
+                    $new_prioty = array_keys($group_tab, "instructor");
+                    if ($new_prioty) {
+                        if (isset($theme_options_data['default_tab_course']) && $theme_options_data['default_tab_course'] == 'instructor' && !$has_active) {
+                            $v['active'] = true;
+                        }
+                        $v['priority'] = $new_prioty[0];
+                        $arr[$k] = $v;
+                    }
+                    break;
+                case 'announcements':
+                    $v['icon'] = 'fa-envelope';
 
-					if ( isset( $theme_options_data['default_tab_course'] ) && $theme_options_data['default_tab_course'] == '0' ) {
-						$theme_options_data['default_tab_course'] = 'announcements';
-					}
-					$new_prioty = array_keys( $group_tab, "announcements" );
-					if ( $new_prioty ) {
-						if ( isset( $theme_options_data['default_tab_course'] ) && $theme_options_data['default_tab_course'] == 'announcements' && ! $has_active ) {
-							$v['active'] = true;
-						}
-						$v['priority'] = $new_prioty[0];
-						$arr[$k]       = $v;
-					}
-					break;
-				case 'students-list':
-					$v['icon']  = 'fa-list';
-					$new_prioty = array_keys( $group_tab, "students-list" );
-					if ( $new_prioty ) {
-						if ( isset( $theme_options_data['default_tab_course'] ) && $theme_options_data['default_tab_course'] == 'students-list' && ! $has_active ) {
-							$v['active'] = true;
-						}
-						$v['priority'] = $new_prioty[0];
-						$arr[$k]       = $v;
-					}
-					break;
-				case 'reviews':
-					$v['icon']  = 'fa-comments';
-					$new_prioty = array_keys( $group_tab, "review" );
-					if ( $new_prioty ) {
-						if ( isset( $theme_options_data['default_tab_course'] ) && $theme_options_data['default_tab_course'] == 'review' && ! $has_active ) {
-							$v['active'] = true;
-						}
-						$v['priority'] = $new_prioty[0];
-						$arr[$k]       = $v;
-					}
-					break;
-			}
-		}
+                    if (isset($theme_options_data['default_tab_course']) && $theme_options_data['default_tab_course'] == '0') {
+                        $theme_options_data['default_tab_course'] = 'announcements';
+                    }
+                    $new_prioty = array_keys($group_tab, "announcements");
+                    if ($new_prioty) {
+                        if (isset($theme_options_data['default_tab_course']) && $theme_options_data['default_tab_course'] == 'announcements' && !$has_active) {
+                            $v['active'] = true;
+                        }
+                        $v['priority'] = $new_prioty[0];
+                        $arr[$k] = $v;
+                    }
+                    break;
+                case 'students-list':
+                    $v['icon'] = 'fa-list';
+                    $new_prioty = array_keys($group_tab, "students-list");
+                    if ($new_prioty) {
+                        if (isset($theme_options_data['default_tab_course']) && $theme_options_data['default_tab_course'] == 'students-list' && !$has_active) {
+                            $v['active'] = true;
+                        }
+                        $v['priority'] = $new_prioty[0];
+                        $arr[$k] = $v;
+                    }
+                    break;
+                case 'reviews':
+                    $v['icon'] = 'fa-comments';
+                    $new_prioty = array_keys($group_tab, "review");
+                    if ($new_prioty) {
+                        if (isset($theme_options_data['default_tab_course']) && $theme_options_data['default_tab_course'] == 'review' && !$has_active) {
+                            $v['active'] = true;
+                        }
+                        $v['priority'] = $new_prioty[0];
+                        $arr[$k] = $v;
+                    }
+                    break;
+            }
+        }
 
-		return $arr;
-	}
+        return $arr;
+    }
 }
-add_filter( 'learn-press/course-tabs', 'thim_course_tabs_content', 9999 );
+add_filter('learn-press/course-tabs', 'thim_course_tabs_content', 9999);
 
 /**
  * Display feature certificate
@@ -726,7 +655,7 @@ add_filter( 'learn-press/course-tabs', 'thim_course_tabs_content', 9999 );
 if ( ! function_exists( 'thim_course_certificate' ) ) {
 	function thim_course_certificate( $course_id ) {
 
-		if ( class_exists( 'LP_Addon_Certificates_Preload' ) && thim_is_version_addons_certificates( '3' ) ) {
+		if ( thim_plugin_active( 'learnpress-certificates/learnpress-certificates.php' ) && thim_is_version_addons_certificates( '3' ) ) {
 			?>
 			<li class="cert-feature">
 				<i class="fa fa-rebel"></i>
@@ -751,58 +680,58 @@ if ( ! function_exists( 'thim_course_info' ) ) {
 		$course_duration    = get_post_meta( $course_id, 'thim_course_duration', true );
 
 		?>
-		<div class="thim-course-info">
-			<h3 class="title"><?php esc_html_e( 'Course Features', 'eduma' ); ?></h3>
-			<ul>
-				<li class="lectures-feature">
-					<i class="fa fa-files-o"></i>
-					<span class="label"><?php esc_html_e( 'Lectures', 'eduma' ); ?></span>
-					<span
-						class="value"><?php echo $course->get_curriculum_items( 'lp_lesson' ) ? count( $course->get_curriculum_items( 'lp_lesson' ) ) : 0; ?></span>
-				</li>
-				<li class="quizzes-feature">
-					<i class="fa fa-puzzle-piece"></i>
-					<span class="label"><?php esc_html_e( 'Quizzes', 'eduma' ); ?></span>
-					<span
-						class="value"><?php echo $course->get_curriculum_items( 'lp_quiz' ) ? count( $course->get_curriculum_items( 'lp_quiz' ) ) : 0; ?></span>
-				</li>
+        <div class="thim-course-info">
+            <h3 class="title"><?php esc_html_e( 'Course Features', 'eduma' ); ?></h3>
+            <ul>
+                <li class="lectures-feature">
+                    <i class="fa fa-files-o"></i>
+                    <span class="label"><?php esc_html_e( 'Lectures', 'eduma' ); ?></span>
+                    <span
+                            class="value"><?php echo $course->get_curriculum_items( 'lp_lesson' ) ? count( $course->get_curriculum_items( 'lp_lesson' ) ) : 0; ?></span>
+                </li>
+                <li class="quizzes-feature">
+                    <i class="fa fa-puzzle-piece"></i>
+                    <span class="label"><?php esc_html_e( 'Quizzes', 'eduma' ); ?></span>
+                    <span
+                            class="value"><?php echo $course->get_curriculum_items( 'lp_quiz' ) ? count( $course->get_curriculum_items( 'lp_quiz' ) ) : 0; ?></span>
+                </li>
 				<?php if ( ! empty( $course_duration ) ): ?>
-					<li class="duration-feature">
-						<i class="fa fa-clock-o"></i>
-						<span class="label"><?php esc_html_e( 'Duration', 'eduma' ); ?></span>
-						<span class="value"><?php echo $course_duration; ?></span>
-					</li>
+                    <li class="duration-feature">
+                        <i class="fa fa-clock-o"></i>
+                        <span class="label"><?php esc_html_e( 'Duration', 'eduma' ); ?></span>
+                        <span class="value"><?php echo $course_duration; ?></span>
+                    </li>
 				<?php endif; ?>
 				<?php if ( ! empty( $course_skill_level ) ): ?>
-					<li class="skill-feature">
-						<i class="fa fa-level-up"></i>
-						<span class="label"><?php esc_html_e( 'Skill level', 'eduma' ); ?></span>
-						<span class="value"><?php echo esc_html( $course_skill_level ); ?></span>
-					</li>
+                    <li class="skill-feature">
+                        <i class="fa fa-level-up"></i>
+                        <span class="label"><?php esc_html_e( 'Skill level', 'eduma' ); ?></span>
+                        <span class="value"><?php echo esc_html( $course_skill_level ); ?></span>
+                    </li>
 				<?php endif; ?>
 				<?php if ( ! empty( $course_language ) ): ?>
-					<li class="language-feature">
-						<i class="fa fa-language"></i>
-						<span class="label"><?php esc_html_e( 'Language', 'eduma' ); ?></span>
-						<span class="value"><?php echo esc_html( $course_language ); ?></span>
-					</li>
+                    <li class="language-feature">
+                        <i class="fa fa-language"></i>
+                        <span class="label"><?php esc_html_e( 'Language', 'eduma' ); ?></span>
+                        <span class="value"><?php echo esc_html( $course_language ); ?></span>
+                    </li>
 				<?php endif; ?>
-				<li class="students-feature">
-					<i class="fa fa-users"></i>
-					<span class="label"><?php esc_html_e( 'Students', 'eduma' ); ?></span>
+                <li class="students-feature">
+                    <i class="fa fa-users"></i>
+                    <span class="label"><?php esc_html_e( 'Students', 'eduma' ); ?></span>
 					<?php $user_count = $course->get_users_enrolled() ? $course->get_users_enrolled() : 0; ?>
-					<span class="value"><?php echo esc_html( $user_count ); ?></span>
-				</li>
+                    <span class="value"><?php echo esc_html( $user_count ); ?></span>
+                </li>
 				<?php thim_course_certificate( $course_id ); ?>
-				<li class="assessments-feature">
-					<i class="fa fa-check-square-o"></i>
-					<span class="label"><?php esc_html_e( 'Assessments', 'eduma' ); ?></span>
-					<span
-						class="value"><?php echo ( get_post_meta( $course_id, '_lp_course_result', true ) == 'evaluate_lesson' ) ? esc_html__( 'Yes', 'eduma' ) : esc_html__( 'Self', 'eduma' ); ?></span>
-				</li>
-			</ul>
+                <li class="assessments-feature">
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="label"><?php esc_html_e( 'Assessments', 'eduma' ); ?></span>
+                    <span
+                            class="value"><?php echo ( get_post_meta( $course_id, '_lp_course_result', true ) == 'evaluate_lesson' ) ? esc_html__( 'Yes', 'eduma' ) : esc_html__( 'Self', 'eduma' ); ?></span>
+                </li>
+            </ul>
 			<?php do_action( 'thim_after_course_info' ); ?>
-		</div>
+        </div>
 		<?php
 	}
 }
@@ -810,13 +739,14 @@ if ( ! function_exists( 'thim_course_info' ) ) {
 /**
  * Display the link to course forum
  */
-if ( ! function_exists( 'thim_course_forum_link' ) ) {
-	function thim_course_forum_link() {
+if (!function_exists('thim_course_forum_link')) {
+    function thim_course_forum_link()
+    {
 
-		if ( ( thim_plugin_active( 'bbpress/bbpress.php' ) && thim_plugin_active( 'learnpress-bbpress/learnpress-bbpress.php' ) ) && thim_is_version_addons_bbpress( '3' ) ) {
-			LP_Addon_bbPress::instance()->forum_link();
-		}
-	}
+        if ((thim_plugin_active('bbpress/bbpress.php') && thim_plugin_active('learnpress-bbpress/learnpress-bbpress.php')) && thim_is_version_addons_bbpress('3')) {
+            LP_Addon_bbPress::instance()->forum_link();
+        }
+    }
 }
 
 /*
@@ -864,139 +794,140 @@ if ( ! function_exists( 'thim_custom_link_login_frontend_editor' ) ) {
 /**
  * Display related courses
  */
-if ( ! function_exists( 'thim_related_courses' ) ) {
-	function thim_related_courses() {
-		$related_courses    = thim_get_related_courses( 5 );
-		$theme_options_data = get_theme_mods();
-		$style_content      = isset( $theme_options_data['thim_layout_content_page'] ) ? $theme_options_data['thim_layout_content_page'] : 'normal';
+if (!function_exists('thim_related_courses')) {
+    function thim_related_courses()
+    {
+        $related_courses = thim_get_related_courses(5);
+        $theme_options_data = get_theme_mods();
+        $style_content = isset($theme_options_data['thim_layout_content_page']) ? $theme_options_data['thim_layout_content_page'] : 'normal';
 
-		if ( $related_courses ) {
-			$layout_grid = get_theme_mod( 'thim_learnpress_cate_layout_grid', '' );
-			$cls_layout  = ( $layout_grid != '' && $layout_grid != 'layout_courses_1' ) ? ' cls_courses_2' : ' ';
-			?>
-			<div class="thim-ralated-course <?php echo $cls_layout; ?>">
+        if ($related_courses) {
+            $layout_grid = get_theme_mod('thim_learnpress_cate_layout_grid', '');
+            $cls_layout = ($layout_grid != '' && $layout_grid != 'layout_courses_1') ? ' cls_courses_2' : ' ';
+            ?>
+            <div class="thim-ralated-course <?php echo $cls_layout; ?>">
 
-				<?php if ( $style_content == 'new-1' ) { ?>
-					<div class="sc_heading clone_title  text-left">
-						<h2 class="title"><?php esc_html_e( 'You May Like', 'eduma' ); ?></h2>
-						<div class="clone"><?php esc_html_e( 'You May Like', 'eduma' ); ?></div>
-					</div>
-				<?php } else { ?>
-					<h3 class="related-title">
-						<?php esc_html_e( 'You May Like', 'eduma' ); ?>
-					</h3>
-				<?php } ?>
+                <?php if ($style_content == 'new-1') { ?>
+                    <div class="sc_heading clone_title  text-left">
+                        <h2 class="title"><?php esc_html_e('You May Like', 'eduma'); ?></h2>
+                        <div class="clone"><?php esc_html_e('You May Like', 'eduma'); ?></div>
+                    </div>
+                <?php } else { ?>
+                    <h3 class="related-title">
+                        <?php esc_html_e('You May Like', 'eduma'); ?>
+                    </h3>
+                <?php } ?>
 
-				<div class="thim-course-grid">
-					<div class="thim-carousel-wrapper" data-visible="3" data-itemtablet="2" data-itemmobile="1"
-						 data-pagination="1">
-						<?php foreach ( $related_courses as $course_item ) : ?>
-							<?php
-							$course                     = learn_press_get_course( $course_item->ID );
-							$is_required                = $course->is_required_enroll();
-							$course_des                 = get_post_meta( $course_item->ID, '_lp_coming_soon_msg', true );
-							$course_item_excerpt_length = get_theme_mod( 'thim_learnpress_excerpt_length', 25 );
-							?>
-							<article class="lpr_course">
-								<div class="course-item">
-									<div class="course-thumbnail">
-										<a class="thumb" href="<?php echo get_the_permalink( $course_item->ID ); ?>">
-											<?php
-											if ( $layout_grid != '' && $layout_grid != 'layout_courses_1' ) {
-												echo thim_get_feature_image( get_post_thumbnail_id( $course_item->ID ), 'full', 320, 220, get_the_title( $course_item->ID ) );
-											} else {
-												echo thim_get_feature_image( get_post_thumbnail_id( $course_item->ID ), 'full', 450, 450, get_the_title( $course_item->ID ) );
-											}
-											?>
-										</a>
-										<?php do_action( 'thim_inner_thumbnail_course' ); ?>
-										<?php echo '<a class="course-readmore" href="' . esc_url( get_the_permalink( $course_item->ID ) ) . '">' . esc_html__( 'Read More', 'eduma' ) . '</a>'; ?>
-									</div>
-									<div class="thim-course-content">
-										<div class="course-author">
-											<?php echo get_avatar( $course_item->post_author, 50 ); ?>
-											<div class="author-contain">
-												<div class="value">
-													<a href="<?php echo esc_url( learn_press_user_profile_link( $course_item->post_author ) ); ?>">
-														<?php echo get_the_author_meta( 'display_name', $course_item->post_author ); ?>
-													</a>
-												</div>
-											</div>
-										</div>
-										<h2 class="course-title">
-											<a rel="bookmark"
-											   href="<?php echo get_the_permalink( $course_item->ID ); ?>"><?php echo esc_html( $course_item->post_title ); ?></a>
-										</h2> <!-- .entry-header -->
+                <div class="thim-course-grid">
+                    <div class="thim-carousel-wrapper" data-visible="3" data-itemtablet="2" data-itemmobile="1"
+                         data-pagination="1">
+                        <?php foreach ($related_courses as $course_item) : ?>
+                            <?php
+                            $course = learn_press_get_course($course_item->ID);
+                            $is_required = $course->is_required_enroll();
+                            $course_des = get_post_meta($course_item->ID, '_lp_coming_soon_msg', true);
+                            $course_item_excerpt_length = get_theme_mod('thim_learnpress_excerpt_length', 25);
+                            ?>
+                            <article class="lpr_course">
+                                <div class="course-item">
+                                    <div class="course-thumbnail">
+                                        <a class="thumb" href="<?php echo get_the_permalink($course_item->ID); ?>">
+                                            <?php
+                                            if ($layout_grid != '' && $layout_grid != 'layout_courses_1') {
+                                                echo thim_get_feature_image(get_post_thumbnail_id($course_item->ID), 'full', 320, 220, get_the_title($course_item->ID));
+                                            } else {
+                                                echo thim_get_feature_image(get_post_thumbnail_id($course_item->ID), 'full', 450, 450, get_the_title($course_item->ID));
+                                            }
+                                            ?>
+                                        </a>
+                                        <?php do_action('thim_inner_thumbnail_course'); ?>
+                                        <?php echo '<a class="course-readmore" href="' . esc_url(get_the_permalink($course_item->ID)) . '">' . esc_html__('Read More', 'eduma') . '</a>'; ?>
+                                    </div>
+                                    <div class="thim-course-content">
+                                        <div class="course-author">
+                                            <?php echo get_avatar($course_item->post_author, 40); ?>
+                                            <div class="author-contain">
+                                                <div class="value">
+                                                    <a href="<?php echo esc_url(learn_press_user_profile_link($course_item->post_author)); ?>">
+                                                        <?php echo get_the_author_meta('display_name', $course_item->post_author); ?>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h2 class="course-title">
+                                            <a rel="bookmark"
+                                               href="<?php echo get_the_permalink($course_item->ID); ?>"><?php echo esc_html($course_item->post_title); ?></a>
+                                        </h2> <!-- .entry-header -->
 
-										<?php if ( class_exists( 'LP_Addon_Coming_Soon_Courses_Preload' ) && learn_press_is_coming_soon( $course_item->ID ) ): ?>
-											<?php if ( intval( $course_item_excerpt_length ) && $course_des ): ?>
-												<div class="course-description">
-													<?php echo wp_trim_words( $course_des, $course_item_excerpt_length ); ?>
-												</div>
-											<?php endif; ?>
+                                        <?php if (thim_plugin_active('learnpress-coming-soon-courses/learnpress-coming-soon-courses.php') && learn_press_is_coming_soon($course_item->ID)): ?>
+                                            <?php if (intval($course_item_excerpt_length) && $course_des): ?>
+                                                <div class="course-description">
+                                                    <?php echo wp_trim_words($course_des, $course_item_excerpt_length); ?>
+                                                </div>
+                                            <?php endif; ?>
 
-											<div
-												class="message message-warning learn-press-message coming-soon-message">
-												<?php esc_html_e( 'Coming soon', 'eduma' ) ?>
-											</div>
-										<?php else: ?>
-											<div class="course-meta">
-												<?php
-												$count_student = $course->get_users_enrolled() ? $course->get_users_enrolled() : 0;
-												?>
-												<div class="course-students">
-													<label><?php esc_html_e( 'Students', 'eduma' ); ?></label>
-													<?php do_action( 'learn_press_begin_course_students' ); ?>
+                                            <div
+                                                    class="message message-warning learn-press-message coming-soon-message">
+                                                <?php esc_html_e('Coming soon', 'eduma') ?>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="course-meta">
+                                                <?php
+                                                $count_student = $course->get_users_enrolled() ? $course->get_users_enrolled() : 0;
+                                                ?>
+                                                <div class="course-students">
+                                                    <label><?php esc_html_e('Students', 'eduma'); ?></label>
+                                                    <?php do_action('learn_press_begin_course_students'); ?>
 
-													<div class="value"><i class="fa fa-group"></i>
-														<?php echo esc_html( $count_student ); ?>
-													</div>
-													<?php do_action( 'learn_press_end_course_students' ); ?>
+                                                    <div class="value"><i class="fa fa-group"></i>
+                                                        <?php echo esc_html($count_student); ?>
+                                                    </div>
+                                                    <?php do_action('learn_press_end_course_students'); ?>
 
-												</div>
-												<?php thim_course_ratings_count( $course_item->ID ); ?>
-												<?php if ( $price = $course->get_price_html() ) {
+                                                </div>
+                                                <?php thim_course_ratings_count($course_item->ID); ?>
+                                                <?php if ($price = $course->get_price_html()) {
 
-													$origin_price = $course->get_origin_price_html();
-													$sale_price   = $course->get_sale_price();
-													$sale_price   = isset( $sale_price ) ? $sale_price : '';
-													$class        = '';
-													if ( $course->is_free() || ! $is_required ) {
-														$class .= ' free-course';
-														$price = esc_html__( 'Free', 'eduma' );
-													}
+                                                    $origin_price = $course->get_origin_price_html();
+                                                    $sale_price = $course->get_sale_price();
+                                                    $sale_price = isset($sale_price) ? $sale_price : '';
+                                                    $class = '';
+                                                    if ($course->is_free() || !$is_required) {
+                                                        $class .= ' free-course';
+                                                        $price = esc_html__('Free', 'eduma');
+                                                    }
 
-													?>
+                                                    ?>
 
-													<div class="course-price" itemprop="offers" itemscope
-														 itemtype="http://schema.org/Offer">
-														<div class="value<?php echo $class; ?>" itemprop="price">
-															<?php
-															if ( $sale_price ) {
-																echo '<span class="course-origin-price">' . $origin_price . '</span>';
-															}
-															?>
-															<?php echo $price; ?>
-														</div>
-														<meta itemprop="priceCurrency"
-															  content="<?php echo learn_press_get_currency(); ?>"/>
-													</div>
-													<?php
-												}
-												?>
-											</div>
+                                                    <div class="course-price" itemprop="offers" itemscope
+                                                         itemtype="http://schema.org/Offer">
+                                                        <div class="value<?php echo $class; ?>" itemprop="price">
+                                                            <?php
+                                                            if ($sale_price) {
+                                                                echo '<span class="course-origin-price">' . $origin_price . '</span>';
+                                                            }
+                                                            ?>
+                                                            <?php echo $price; ?>
+                                                        </div>
+                                                        <meta itemprop="priceCurrency"
+                                                              content="<?php echo learn_press_get_currency(); ?>"/>
+                                                    </div>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </div>
 
-										<?php endif; ?>
-									</div>
-								</div>
-							</article>
-						<?php endforeach; ?>
-					</div>
-				</div>
-			</div>
-			<?php
-		}
-	}
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+    }
 }
 
 if ( ! function_exists( 'thim_get_related_courses' ) ) {
@@ -1067,8 +998,8 @@ if ( ! function_exists( 'thim_display_course_filter' ) ) {
 			return;
 		}
 		?>
-		<aside class="thim-course-filter-wrapper">
-			<form action="" name="thim-course-filter" method="POST" class="thim-course-filter">
+        <aside class="thim-course-filter-wrapper">
+            <form action="" name="thim-course-filter" method="POST" class="thim-course-filter">
 				<?php
 				// Filter courses by categories
 				if ( get_theme_mod( 'thim_filter_by_cate', false ) ) {
@@ -1077,33 +1008,29 @@ if ( ! function_exists( 'thim_display_course_filter' ) ) {
 						return;
 					}
 
-					$course_term = get_terms(
-						apply_filters(
-							'thim_display_cate_filter', array(
-							'taxonomy' => 'course_category',
-							'parent'   => 0
-						)
-						)
-					);
+					$course_term = get_terms( apply_filters( 'thim_display_cate_filter', array(
+						'taxonomy' => 'course_category',
+						'parent'   => 0
+					) ) );
 					if ( is_wp_error( $course_term ) ) {
 						return;
 					}
 					?>
 
-					<h4 class="filter-title"><?php echo esc_html_x( 'Course categories', 'Course filter widget', 'eduma' ); ?></h4>
+                    <h4 class="filter-title"><?php echo esc_html_x( 'Course categories', 'Course filter widget', 'eduma' ); ?></h4>
 
-					<ul class="list-cate-filter">
+                    <ul class="list-cate-filter">
 						<?php
 						foreach ( $course_term as $term ) {
 							$input_id = $term->slug . '_' . $term->term_id;
 							?>
-							<li class="term-item">
-							<input type="checkbox" name="course-cate-filter" id="<?php esc_attr_e( $input_id ); ?>"
-								   value="<?php esc_attr_e( $term->term_id ); ?>">
-							<label for="<?php esc_attr_e( $input_id ) ?>">
+                            <li class="term-item">
+                            <input type="checkbox" name="course-cate-filter" id="<?php esc_attr_e( $input_id ); ?>"
+                                   value="<?php esc_attr_e( $term->term_id ); ?>">
+                            <label for="<?php esc_attr_e( $input_id ) ?>">
 								<?php esc_html_e( $term->name ); ?>
-								<span><?php echo '(' . $term->count . ')'; ?></span>
-							</label>
+                                <span><?php echo '(' . $term->count . ')'; ?></span>
+                            </label>
 							<?php
 							$terms_child = get_term_children( $term->term_id, 'course_category' );
 							if ( $terms_child && ! is_wp_error( $terms_child ) ) {
@@ -1112,44 +1039,42 @@ if ( ! function_exists( 'thim_display_course_filter' ) ) {
 									$term_child     = get_term_by( 'id', $child_id, 'course_category' );
 									$input_child_id = $term_child->slug . '_' . $child_id;
 									?>
-									<li class="term-item">
-										<input type="checkbox" name="course-cate-filter"
-											   id="<?php esc_attr_e( $input_child_id ); ?>"
-											   value="<?php esc_attr_e( $child_id ); ?>">
-										<label for="<?php esc_attr_e( $input_child_id ) ?>">
+                                    <li class="term-item">
+                                        <input type="checkbox" name="course-cate-filter"
+                                               id="<?php esc_attr_e( $input_child_id ); ?>"
+                                               value="<?php esc_attr_e( $child_id ); ?>">
+                                        <label for="<?php esc_attr_e( $input_child_id ) ?>">
 											<?php esc_html_e( $term_child->name ); ?>
-											<span><?php echo '(' . $term_child->count . ')'; ?></span>
-										</label>
-									</li>
+                                            <span><?php echo '(' . $term_child->count . ')'; ?></span>
+                                        </label>
+                                    </li>
 								<?php }
 								echo '</ul>';
 							}
 							?>
-							</li>
+                            </li>
 							<?php
 						}
 						?>
-					</ul>
+                    </ul>
 					<?php
 				}
 
 				// Filter courses by instructors
 				if ( get_theme_mod( 'thim_filter_by_instructor', false ) ) {
 					// TODO can create custom query to optimize speed
-					$course_query = new WP_Query(
-						array(
-							'post_type'      => 'lp_course',
-							'posts_per_page' => - 1,
-						)
-					);
+					$course_query = new WP_Query( array(
+						'post_type'      => 'lp_course',
+						'posts_per_page' => - 1,
+					) );
 					?>
-					<h4 class="filter-title"><?php echo esc_html_x( 'Instructors', 'Course filter widget', 'eduma' ); ?></h4>
+                    <h4 class="filter-title"><?php echo esc_html_x( 'Instructors', 'Course filter widget', 'eduma' ); ?></h4>
 					<?php
 					if ( $course_query->have_posts() ) {
 						global $post;
 						$list_instructor = array();
 						?>
-						<ul class="list-instructor-filter">
+                        <ul class="list-instructor-filter">
 							<?php
 							while ( $course_query->have_posts() ) {
 								$course_query->the_post();
@@ -1157,83 +1082,81 @@ if ( ! function_exists( 'thim_display_course_filter' ) ) {
 								$instructor_id = $post->post_author;
 
 								if ( ! array_key_exists( $instructor_id, $list_instructor ) ) {
-									$list_instructor[$instructor_id] = 1;
+									$list_instructor[ $instructor_id ] = 1;
 								} else {
-									$list_instructor[$instructor_id] += 1;
+									$list_instructor[ $instructor_id ] += 1;
 								}
 							}
 							wp_reset_postdata();
 
 							foreach ( $list_instructor as $instructor_id => $total ) {
 								?>
-								<li class="instructor-item">
-									<input type="checkbox" name="course-instructor-filter"
-										   id="instructor-id_<?php esc_attr_e( $instructor_id ) ?>"
-										   value="<?php esc_attr_e( $instructor_id ); ?>">
-									<label for="instructor-id_<?php esc_attr_e( $instructor_id ) ?>">
+                                <li class="instructor-item">
+                                    <input type="checkbox" name="course-instructor-filter"
+                                           id="instructor-id_<?php esc_attr_e( $instructor_id ) ?>"
+                                           value="<?php esc_attr_e( $instructor_id ); ?>">
+                                    <label for="instructor-id_<?php esc_attr_e( $instructor_id ) ?>">
 										<?php echo get_the_author_meta( 'display_name', $instructor_id ) ?>
-										<span><?php echo '(' . $total . ')'; ?></span>
-									</label>
-								</li>
+                                        <span><?php echo '(' . $total . ')'; ?></span>
+                                    </label>
+                                </li>
 								<?php
 							}
 							?>
-						</ul>
+                        </ul>
 						<?php
 					}
 				}
 
 				// Filter by price
 				if ( get_theme_mod( 'thim_filter_by_price' ) ) {
-					$paid_course_query = new WP_Query(
-						array(
-							'post_type'      => 'lp_course',
-							'posts_per_page' => - 1,
-							'meta_key'       => '_lp_price',
-							'meta_compare'   => 'EXISTS'
-						)
-					);
+					$paid_course_query = new WP_Query( array(
+						'post_type'      => 'lp_course',
+						'posts_per_page' => - 1,
+						'meta_key'       => '_lp_price',
+						'meta_compare'   => 'EXISTS'
+					) );
 
 					$number_paid_course = $paid_course_query->post_count;
 					$number_free_course = $total_course->publish - $number_paid_course;
 					?>
-					<h4 class="filter-title"><?php echo esc_html_x( 'Price', 'Course filter widget', 'eduma' ); ?></h4>
+                    <h4 class="filter-title"><?php echo esc_html_x( 'Price', 'Course filter widget', 'eduma' ); ?></h4>
 
-					<ul class="list-price-filter">
+                    <ul class="list-price-filter">
 						<?php do_action( 'thim_before_course_filters' ); ?>
-						<li class="price-item">
-							<input type="radio" id="price-filter_all" name="course-price-filter" value="all" checked>
-							<label for="price-filter_all">
+                        <li class="price-item">
+                            <input type="radio" id="price-filter_all" name="course-price-filter" value="all" checked>
+                            <label for="price-filter_all">
 								<?php esc_html_e( 'All', 'eduma' ); ?>
-								<span><?php echo '(' . $total_course->publish . ')'; ?></span>
-							</label>
-						</li>
-						<li class="price-item">
-							<input type="radio" id="price-filter_free" name="course-price-filter" value="free">
-							<label for="price-filter_free">
+                                <span><?php echo '(' . $total_course->publish . ')'; ?></span>
+                            </label>
+                        </li>
+                        <li class="price-item">
+                            <input type="radio" id="price-filter_free" name="course-price-filter" value="free">
+                            <label for="price-filter_free">
 								<?php esc_html_e( 'Free', 'eduma' ); ?>
-								<span><?php echo '(' . $number_free_course . ')'; ?></span>
-							</label>
-						</li>
-						<li class="price-item">
-							<input type="radio" id="price-filter_paid" name="course-price-filter" value="paid">
-							<label for="price-filter_paid">
+                                <span><?php echo '(' . $number_free_course . ')'; ?></span>
+                            </label>
+                        </li>
+                        <li class="price-item">
+                            <input type="radio" id="price-filter_paid" name="course-price-filter" value="paid">
+                            <label for="price-filter_paid">
 								<?php esc_html_e( 'Paid', 'eduma' ); ?>
-								<span><?php echo '(' . $number_paid_course . ')'; ?></span>
-							</label>
-						</li>
+                                <span><?php echo '(' . $number_paid_course . ')'; ?></span>
+                            </label>
+                        </li>
 						<?php do_action( 'thim_after_course_filters' ); ?>
-					</ul>
+                    </ul>
 					<?php
 				}
 				?>
 
 				<?php do_action( 'thim_before_button_submit_filter_courses' ); ?>
-				<div class="filter-submit">
-					<button type="submit"><?php esc_html_e( 'Filter Results', 'eduma' ) ?></button>
-				</div>
-			</form>
-		</aside>
+                <div class="filter-submit">
+                    <button type="submit"><?php esc_html_e( 'Filter Results', 'eduma' ) ?></button>
+                </div>
+            </form>
+        </aside>
 		<?php
 	}
 }
@@ -1244,169 +1167,166 @@ add_action( 'thim_before_sidebar_course', 'thim_display_course_filter' );
  * Display thumbnail course
  */
 
-if ( ! function_exists( 'thim_courses_loop_item_thumbnail' ) ) {
-	function thim_courses_loop_item_thumbnail( $course = null ) {
-		$course         = LP_Global::course();
-		$archive_course = LP()->settings->get( 'archive_course_thumbnail' );
-		$size           = LP()->settings->get( 'course_thumbnail_image_size' );
+if (!function_exists('thim_courses_loop_item_thumbnail')) {
+    function thim_courses_loop_item_thumbnail($course = null)
+    {
+        $course = LP_Global::course();
+        $archive_course = LP()->settings->get('archive_course_thumbnail');
+        $size = LP()->settings->get('course_thumbnail_image_size');
 
-		if ( $archive_course == "yes" ) {
-			if ( isset( $size['width'] ) && $size['width'] ) {
-				$with_thumbnail = $size['width'];
-			} else {
-				$with_thumbnail = 450;
-			}
-			if ( isset( $size['height'] ) && $size['height'] ) {
-				$height_thumbnail = $size['height'];
-			} else {
-				$height_thumbnail = 450;
-			}
-		} else {
-			$with_thumbnail   = 450;
-			$height_thumbnail = 450;
-		}
-		echo '<div class="course-thumbnail">';
-		echo '<a class="thumb" href="' . esc_url( get_the_permalink( $course->get_id() ) ) . '" >';
-		echo thim_get_feature_image( get_post_thumbnail_id( $course->get_id() ), 'full', $with_thumbnail, $height_thumbnail, $course->get_title() );
-		echo '</a>';
-		do_action( 'thim_inner_thumbnail_course' );
-		echo '<a class="course-readmore" href="' . esc_url( get_the_permalink( $course->get_id() ) ) . '" >' . esc_html__( 'Read More', 'eduma' ) . '</a>';
-		echo '</div>';
-	}
+        if ($archive_course == "yes") {
+            if (isset($size['width']) && $size['width']) {
+                $with_thumbnail = $size['width'];
+            } else {
+                $with_thumbnail = 450;
+            }
+            if (isset($size['height']) && $size['height']) {
+                $height_thumbnail = $size['height'];
+            } else {
+                $height_thumbnail = 450;
+            }
+        } else {
+            $with_thumbnail = 450;
+            $height_thumbnail = 450;
+        }
+        echo '<div class="course-thumbnail">';
+        echo '<a class="thumb" href="' . esc_url(get_the_permalink($course->get_id())) . '" >';
+        echo thim_get_feature_image(get_post_thumbnail_id($course->get_id()), 'full', $with_thumbnail, $height_thumbnail, $course->get_title());
+        echo '</a>';
+        do_action('thim_inner_thumbnail_course');
+        echo '<a class="course-readmore" href="' . esc_url(get_the_permalink($course->get_id())) . '" >' . esc_html__('Read More', 'eduma') . '</a>';
+        echo '</div>';
+    }
 }
-add_action( 'thim_courses_loop_item_thumb', 'thim_courses_loop_item_thumbnail' );
+add_action('thim_courses_loop_item_thumb', 'thim_courses_loop_item_thumbnail');
 
 /*
  * Change query get courses
  * */
-add_action( 'pre_get_posts', 'thim_course_order_query', 15 );
+add_action('pre_get_posts', 'thim_course_order_query', 15);
 
-if ( ! function_exists( 'thim_course_order_query' ) ) {
-	function thim_course_order_query( $query ) {
-		if ( ! $query->is_main_query() ) {
-			return;
-		}
+if (!function_exists('thim_course_order_query')) {
+    function thim_course_order_query($query)
+    {
+        if (!$query->is_main_query()) {
+            return;
+        }
 
-		if ( ! is_post_type_archive( 'lp_course' ) && ! is_tax( 'course_category' ) ) {
-			return;
-		}
+        if (!is_post_type_archive('lp_course') && !is_tax('course_category')) {
+            return;
+        }
 
-		// Sort
-		if ( isset( $_POST['course_orderby'] ) ) {
-			switch ( $_POST['course_orderby'] ) {
-				case 'alphabetical':
-					$query->set( 'orderby', 'title' );
-					$query->set( 'order', 'ASC' );
+        // Sort
+        if (isset($_POST['course_orderby'])) {
+            switch ($_POST['course_orderby']) {
+                case 'alphabetical':
+                    $query->set('orderby', 'title');
+                    $query->set('order', 'ASC');
 
-					break;
-				case 'most-members':
-					$query->set( 'orderby', 'meta_value_num' );
-					$query->set( 'meta_key', 'thim_real_student_enrolled' );
-					$query->set( 'order', 'DESC' );
+                    break;
+                case 'most-members':
+                    $query->set('orderby', 'meta_value_num');
+                    $query->set('meta_key', 'thim_real_student_enrolled');
+                    $query->set('order', 'DESC');
 
-					break;
-				default:
-					$query->set( 'orderby', 'date' );
-					$query->set( 'order', 'DESC' );
-			}
-		}
+                    break;
+                default:
+                    $query->set('orderby', 'date');
+                    $query->set('order', 'DESC');
+            }
+        }
 
-		// Pagination
-		if ( isset( $_POST['course_paged'] ) ) {
-			$query->set( 'paged', $_POST['course_paged'] );
-		}
+        // Pagination
+        if (isset($_POST['course_paged'])) {
+            $query->set('paged', $_POST['course_paged']);
+        }
 
-		// Filter by categories
-		if ( isset( $_POST['course_cate_filter'] ) && is_array( $_POST['course_cate_filter'] ) ) {
-			$query->set(
-				'tax_query', array(
-				array(
-					'taxonomy' => 'course_category',
-					'field'    => 'term_id',
-					'terms'    => $_POST['course_cate_filter'],
-				)
-			)
-			);
-			//$query->set( 'posts_per_page', - 1 );
-		}
+        // Filter by categories
+        if (isset($_POST['course_cate_filter']) && is_array($_POST['course_cate_filter'])) {
+            $query->set('tax_query', array(
+                array(
+                    'taxonomy' => 'course_category',
+                    'field' => 'term_id',
+                    'terms' => $_POST['course_cate_filter'],
+                )
+            ));
+            //$query->set( 'posts_per_page', - 1 );
+        }
 
-		// Filter by instructor
-		if ( isset( $_POST['course_instructor_filter'] ) && is_array( $_POST['course_instructor_filter'] ) ) {
-			$query->set( 'author__in', $_POST['course_instructor_filter'] );
-		}
+        // Filter by instructor
+        if (isset($_POST['course_instructor_filter']) && is_array($_POST['course_instructor_filter'])) {
+            $query->set('author__in', $_POST['course_instructor_filter']);
+        }
 
-		// Filter by price
-		// TODO query courses has sale price
-		if ( isset( $_POST['course_price_filter'] ) ) {
-			switch ( $_POST['course_price_filter'] ) {
-				case 'free':
-					$query->set(
-						'meta_query', array(
-						array(
-							'key'     => '_lp_price',
-							'compare' => 'NOT EXISTS'
-						)
-					)
-					);
-					break;
-				case 'paid':
-					$query->set(
-						'meta_query', array(
-						array(
-							'key'     => '_lp_price',
-							'compare' => 'EXISTS'
-						)
-					)
-					);
-					break;
-				case 'all':
-					break;
+        // Filter by price
+        // TODO query courses has sale price
+        if (isset($_POST['course_price_filter'])) {
+            switch ($_POST['course_price_filter']) {
+                case 'free':
+                    $query->set('meta_query', array(
+                        array(
+                            'key' => '_lp_price',
+                            'compare' => 'NOT EXISTS'
+                        )
+                    ));
+                    break;
+                case 'paid':
+                    $query->set('meta_query', array(
+                        array(
+                            'key' => '_lp_price',
+                            'compare' => 'EXISTS'
+                        )
+                    ));
+                    break;
+                case 'all':
+                    break;
 
-				default:
+                default:
 
-			}
-		}
-	}
+            }
+        }
+    }
 }
 
 /**
  * Create ajax handle for courses searching
  */
-if ( ! function_exists( 'thim_courses_searching_callback' ) ) {
-	function thim_courses_searching_callback() {
+if (!function_exists('thim_courses_searching_callback')) {
+	function thim_courses_searching_callback()
+	{
 		ob_start();
 		$keyword = $_REQUEST['keyword'];
-		if ( $keyword ) {
-			$keyword   = strtoupper( $keyword );
+		if ($keyword) {
+			$keyword = strtoupper($keyword);
 			$arr_query = array(
-				'post_type'           => 'lp_course',
-				'post_status'         => 'publish',
+				'post_type' => 'lp_course',
+				'post_status' => 'publish',
 				'ignore_sticky_posts' => true,
-				's'                   => $keyword,
-				'posts_per_page'      => '-1'
+				's' => $keyword,
+				'posts_per_page' => '-1'
 			);
 
-			$search = new WP_Query( $arr_query );
+			$search = new WP_Query($arr_query);
 
 			$newdata = array();
-			foreach ( $search->posts as $post ) {
+			foreach ($search->posts as $post) {
 				$newdata[] = array(
-					'id'    => $post->ID,
+					'id' => $post->ID,
 					'title' => $post->post_title,
-					'guid'  => get_permalink( $post->ID ),
+					'guid' => get_permalink($post->ID),
 				);
 			}
 
 			ob_end_clean();
-			if ( count( $search->posts ) ) {
-				echo json_encode( $newdata );
+			if (count($search->posts)) {
+				echo json_encode($newdata);
 			} else {
 				$newdata[] = array(
-					'id'    => '',
-					'title' => '<i>' . esc_html__( 'No course found', 'eduma' ) . '</i>',
-					'guid'  => '#',
+					'id' => '',
+					'title' => '<i>' . esc_html__('No course found', 'eduma') . '</i>',
+					'guid' => '#',
 				);
-				echo json_encode( $newdata );
+				echo json_encode($newdata);
 			}
 			wp_reset_postdata();
 		}
@@ -1414,25 +1334,23 @@ if ( ! function_exists( 'thim_courses_searching_callback' ) ) {
 	}
 }
 
-add_action( 'wp_ajax_nopriv_courses_searching', 'thim_courses_searching_callback' );
-add_action( 'wp_ajax_courses_searching', 'thim_courses_searching_callback' );
+add_action('wp_ajax_nopriv_courses_searching', 'thim_courses_searching_callback');
+add_action('wp_ajax_courses_searching', 'thim_courses_searching_callback');
 /**
  * Show thumbnail single course
  */
-if ( ! function_exists( 'thim_course_thumbnail_item' ) ) {
-	function thim_course_thumbnail_item() {
-		learn_press_get_template( 'single-course/thumbnail.php' );
-	}
+if (!function_exists('thim_course_thumbnail_item')) {
+    function thim_course_thumbnail_item()
+    {
+        learn_press_get_template('single-course/thumbnail.php');
+    }
 }
 
-if ( ! function_exists( 'thim_landing_tabs' ) ) {
-	function thim_landing_tabs() {
-        if ( thim_is_new_learnpress( '4.0.0-beta-0' ) ) {
-            get_template_part( 'learnpress-v4/single-course/tabs/tabs','landing' );
-        } else {
-            get_template_part( 'learnpress-v3/single-course/tabs/tabs','landing' );
-        }
-	}
+if (!function_exists('thim_landing_tabs')) {
+    function thim_landing_tabs()
+    {
+        learn_press_get_template('single-course/tabs/tabs-landing.php');
+    }
 }
 
 if ( ! function_exists( 'show_pass_text' ) ) {
@@ -1675,61 +1593,5 @@ if ( ! function_exists( 'thim_action_callback_learn_press_after_single_course' )
 			}
 		</script>
 		<?php
-	}
-}
-if ( ! function_exists( 'thim_get_all_courses_instructors' ) ) {
-	function thim_get_all_courses_instructors( $limits = 4 ) {
-		$teacher       = array();
-		$args_users    = array(
-			'role'   => 'lp_teacher',
-			'number' => $limits
-		);
-		$my_user_query = new WP_User_Query( $args_users );
-		$users_by_role = $my_user_query->get_results();
-
-		//		$users_by_role = get_users( array( 'role' => 'lp_teacher' ) );
-		if ( $users_by_role ) {
-			foreach ( $users_by_role as $user ) {
-				//				$teacher[] = $user->ID;
-				$teacher[] = array(
-					'user_id' => $user->ID,
-					//					'students'   => $count_students,
-					//					'count_rate' => $count_rate
-				);
-			}
-		}
-		//		$result = array();
-		//		if ( $teacher ) {
-		//			foreach ( $teacher as $id ) {
-		//				$user_curd        = new LP_User_CURD();
-		//				$query_list_table = $user_curd->query_own_courses( $id, array(
-		//					'limit'  => 9999,
-		//					'status' => 'publish'
-		//				) );
-		//				$own_courses      = $query_list_table->get_items();
-		//				$count_students   = $count_rate = 0;
-		//
-		//				foreach ( $own_courses as $course_id ) {
-		//					$course_curd     = new LP_Course_CURD();
-		//					$number_students = $course_curd->get_user_enrolled( $course_id );
-		//
-		//					$count_students += count( $number_students );
-		//					if ( function_exists( 'learn_press_get_course_rate_total' ) ) {
-		//						$rate = learn_press_get_course_rate_total( $course_id );
-		//					} else {
-		//						$rate = 0;
-		//					}
-		//
-		//					$count_rate = $rate ? $rate + $count_rate : $count_rate;
-		//				}
-		//				$result[] = array(
-		//					'user_id'    => $id,
-		//					'students'   => $count_students,
-		//					'count_rate' => $count_rate
-		//				);
-		//			}
-		//		}
-
-		return $teacher;
 	}
 }

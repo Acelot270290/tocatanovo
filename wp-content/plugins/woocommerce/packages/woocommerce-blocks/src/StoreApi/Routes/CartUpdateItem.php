@@ -1,6 +1,8 @@
 <?php
 namespace Automattic\WooCommerce\Blocks\StoreApi\Routes;
 
+use Automattic\WooCommerce\Blocks\StoreApi\Utilities\CartController;
+
 /**
  * CartUpdateItem class.
  *
@@ -50,10 +52,11 @@ class CartUpdateItem extends AbstractCartRoute {
 	 * @return \WP_REST_Response
 	 */
 	protected function get_route_post_response( \WP_REST_Request $request ) {
-		$cart = $this->cart_controller->get_cart_instance();
+		$controller = new CartController();
+		$cart       = $controller->get_cart_instance();
 
 		if ( isset( $request['quantity'] ) ) {
-			$this->cart_controller->set_cart_item_quantity( $request['key'], $request['quantity'] );
+			$controller->set_cart_item_quantity( $request['key'], $request['quantity'] );
 		}
 
 		return rest_ensure_response( $this->schema->get_item_response( $cart ) );

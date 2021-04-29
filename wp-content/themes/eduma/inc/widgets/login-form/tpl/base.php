@@ -79,21 +79,15 @@ $theme_options_data = get_theme_mods();
 						</p>
 					<?php endif; ?>
 
-					<?php
-					if ( isset( $instance['terms'] ) ) {
-						$url = $instance['terms'];
-					} else {
-						$url = isset( $instance['term'] ) ? $instance['term'] : '';
-					}
-					if ( ! empty( $url ) ): ?>
+					<?php if ( ! empty( $instance['term'] ) ): ?>
 						<?php
-						$target = ( isset( $instance['is_external'] ) && ! empty( $instance['is_external'] ) ) ? '_blank' : '_self';
-						$rel    = ( isset( $instance['nofollow'] ) && ! empty( $instance['nofollow'] ) ) ? 'nofollow' : 'dofollow';
+						$target = isset( $instance['is_external'] ) ? $instance['is_external'] : '_blank';
+						$rel    = isset( $instance['nofollow'] ) ? 'nofollow' : 'dofollow';
 						?>
 						<p>
 							<input type="checkbox" class="required" name="term" id="termFormField">
 							<label
-								for="termFormField"><?php printf( __( 'I accept the <a href="%s" target="%s" rel="%s">Terms of Service</a>', 'eduma' ), esc_url( $url ), $target, $rel ); ?></label>
+								for="termFormField"><?php printf( __( 'I accept the <a href="%s" target="%s" rel="%s">Terms of Service</a>', 'eduma' ), esc_url( $instance['term'] ), $target, $rel ); ?></label>
 						</p>
 					<?php endif; ?>
 

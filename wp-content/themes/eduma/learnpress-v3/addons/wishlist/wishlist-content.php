@@ -20,7 +20,7 @@ global $post;
 	</div>
 	<div class="thim-course-content">
 		<div class="course-author">
-			<?php echo get_avatar( $post->post_author, 50 ); ?>
+			<?php echo get_avatar( $post->post_author, 40 ); ?>
 			<div class="author-contain">
 				<div class="value">
 					<a href="<?php echo esc_url( learn_press_user_profile_link( $post->post_author ) ); ?>">

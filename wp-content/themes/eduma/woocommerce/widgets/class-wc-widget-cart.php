@@ -24,10 +24,6 @@ class Thim_Custom_WC_Widget_Cart extends WC_Widget_Cart {
 
 	function widget( $args, $instance ) {
 
-        if ( apply_filters( 'woocommerce_widget_cart_is_hidden', is_cart() || is_checkout() || is_archive() ) ) {
-            return;
-        }
-
 		$before_widget = $args['before_widget'];
 		$after_widget  = $args['after_widget'];
 

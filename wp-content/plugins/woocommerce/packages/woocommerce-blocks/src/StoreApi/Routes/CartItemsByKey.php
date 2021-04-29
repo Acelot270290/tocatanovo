@@ -1,12 +1,14 @@
 <?php
 namespace Automattic\WooCommerce\Blocks\StoreApi\Routes;
 
+use Automattic\WooCommerce\Blocks\StoreApi\Utilities\CartController;
+
 /**
  * CartItemsByKey class.
  *
  * @internal This API is used internally by Blocks--it is still in flux and may be subject to revisions.
  */
-class CartItemsByKey extends AbstractCartRoute {
+class CartItemsByKey extends AbstractRoute {
 	/**
 	 * Get the path of this REST route.
 	 *
@@ -60,7 +62,8 @@ class CartItemsByKey extends AbstractCartRoute {
 	 * @return \WP_REST_Response
 	 */
 	protected function get_route_response( \WP_REST_Request $request ) {
-		$cart_item = $this->cart_controller->get_cart_item( $request['key'] );
+		$controller = new CartController();
+		$cart_item  = $controller->get_cart_item( $request['key'] );
 
 		if ( empty( $cart_item ) ) {
 			throw new RouteException( 'woocommerce_rest_cart_invalid_key', __( 'Cart item does not exist.', 'woocommerce' ), 404 );
@@ -80,13 +83,14 @@ class CartItemsByKey extends AbstractCartRoute {
 	 * @return \WP_REST_Response
 	 */
 	protected function get_route_update_response( \WP_REST_Request $request ) {
-		$cart = $this->cart_controller->get_cart_instance();
+		$controller = new CartController();
+		$cart       = $controller->get_cart_instance();
 
 		if ( isset( $request['quantity'] ) ) {
-			$this->cart_controller->set_cart_item_quantity( $request['key'], $request['quantity'] );
+			$controller->set_cart_item_quantity( $request['key'], $request['quantity'] );
 		}
 
-		return rest_ensure_response( $this->prepare_item_for_response( $this->cart_controller->get_cart_item( $request['key'] ), $request ) );
+		return rest_ensure_response( $this->prepare_item_for_response( $controller->get_cart_item( $request['key'] ), $request ) );
 	}
 
 	/**
@@ -97,8 +101,9 @@ class CartItemsByKey extends AbstractCartRoute {
 	 * @return \WP_REST_Response
 	 */
 	protected function get_route_delete_response( \WP_REST_Request $request ) {
-		$cart      = $this->cart_controller->get_cart_instance();
-		$cart_item = $this->cart_controller->get_cart_item( $request['key'] );
+		$controller = new CartController();
+		$cart       = $controller->get_cart_instance();
+		$cart_item  = $controller->get_cart_item( $request['key'] );
 
 		if ( empty( $cart_item ) ) {
 			throw new RouteException( 'woocommerce_rest_cart_invalid_key', __( 'Cart item does not exist.', 'woocommerce' ), 404 );

@@ -5,42 +5,20 @@ require THIM_DIR . 'inc/admin/require-thim-core.php';
 if ( class_exists( 'TP' ) ) {
 	require THIM_DIR . 'inc/admin/plugins-require.php';
 	require THIM_DIR . 'inc/admin/customizer-options.php';
-	if ( defined( 'THIM_CORE_VERSION' ) && version_compare( THIM_CORE_VERSION, '1.10.6', '<' ) ) {
-		require THIM_DIR . 'inc/widgets/widgets.php';
-		//Visual composer shortcodes
-		if ( class_exists( 'Vc_Manager' ) ) {
-			require THIM_DIR . 'vc-shortcodes/vc-shortcodes.php';
-		}
-		if ( thim_plugin_active( 'elementor/elementor.php' ) ) {
-			require_once THIM_DIR . 'elementor-addons/elementor-addons.php';
-		}
-		add_filter( 'siteorigin_panels_widget_dialog_tabs', 'thim_widget_group', 19 );
-		add_filter( 'thim_core_widget_flat_icons', 'thim_get_list_font_flaticon' );
-	} else {
-		require THIM_DIR . 'inc/widgets/shortcodes.php';
-		require_once THIM_DIR . 'inc/widgets/class-extend-icons.php';
-	}
+ 	require THIM_DIR . 'inc/widgets/widgets.php';
 }
 
+//Visual composer shortcodes
+if ( class_exists( 'Vc_Manager' ) && thim_plugin_active( 'js_composer/js_composer.php' ) ) {
+	require THIM_DIR . 'vc-shortcodes/vc-shortcodes.php';
+}
+if ( thim_plugin_active( 'elementor/elementor.php' ) ) {
+	require_once THIM_DIR . 'elementor-addons/elementor-addons.php';
+}
 
 require THIM_DIR . 'inc/libs/Tax-meta-class/Tax-meta-class.php';
 require THIM_DIR . 'inc/tax-meta.php';
 
-/**
- * @param $tabs
- *
- * @return array
- */
-function thim_widget_group( $tabs ) {
-	$tabs[] = array(
-		'title'  => esc_html__( 'Thim Widget', 'eduma' ),
-		'filter' => array(
-			'groups' => array( 'thim_widget_group' )
-		)
-	);
-
-	return $tabs;
-}
 
 /**
  * Compile Sass from theme customize.
@@ -189,7 +167,6 @@ if ( ! function_exists( 'thim_add_metabox_settings' ) ) {
 					'sidebar-left'  => THIM_URI . 'images/layout/sidebar-left.jpg',
 					'full-content'  => THIM_URI . 'images/layout/body-full.jpg',
 					'sidebar-right' => THIM_URI . 'images/layout/sidebar-right.jpg',
-					'full-width'    => THIM_URI . 'images/layout/content-full.jpg',
 				),
 				'default' => 'sidebar-right',
 				'tab'     => 'layout',
@@ -208,6 +185,12 @@ if ( ! function_exists( 'thim_add_metabox_settings' ) ) {
 	}
 }
 
+
+function thim_eduma_link_check_update_plugins() {
+	return 'https://plugins.thimpress.com/downloads/data/eduma-update-check.json';
+}
+
+add_filter( 'thim_core_ac_api_check_update_plugins', 'thim_eduma_link_check_update_plugins' );
 
 /**
  * List child themes.

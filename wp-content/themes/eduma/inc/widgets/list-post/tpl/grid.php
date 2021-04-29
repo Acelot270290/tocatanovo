@@ -5,7 +5,11 @@ if ( ! empty( $instance['number_posts'] ) ) {
 	$number_posts = $instance['number_posts'];
 }
 $items_vertical = ( ! empty( $instance['item_vertical'] ) && $instance['item_vertical'] > 0 ) ? $instance['item_vertical'] : 0;
- $feature_html = '';
+
+$style = $feature_html = '';
+if ( $instance['style'] != '' ) {
+	$style = $instance['style'];
+}
 
 $query_args = array(
 	'post_type'           => 'post',

@@ -22,15 +22,15 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
 
         /* Summary of new strings after running in-editor Sync
          * xgettext: javascript-format */
-        _n("%s new string added","%s new strings added",0,'loco-translate');
+        _n("1 new string added","%s new strings added",0,'loco-translate');
 
         /* Summary of existing strings that no longer exist after running in-editor Sync
          * xgettext: javascript-format */
-        _n("%s obsolete string removed","%s obsolete strings removed",0,'loco-translate');
+        _n("1 obsolete string removed","%s obsolete strings removed",0,'loco-translate');
 
         /* Summary of existing translations where the source text has changed slightly
          * xgettext: javascript-format */
-        _n("%s string marked Fuzzy","%s strings marked Fuzzy",0,'loco-translate');
+        _n("1 string marked Fuzzy","%s strings marked Fuzzy",0,'loco-translate');
 
         /* Message appears after sync operation, where %s refers to a POT file.
          * xgettext: javascript-format */
@@ -51,11 +51,11 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         __("Translation progress %s%%",'loco-translate');
 
         // xgettext: javascript-format
-        _n("Translation job aborted with %s string remaining","Translation job aborted with %s strings remaining",0,'loco-translate');
+        _n("Translation job aborted with one string remaining","Translation job aborted with %s strings remaining",0,'loco-translate');
 
         /* 1: Number of strings; 2: Service provider; e.g. "50 strings translated via Google Translate"
          * xgettext: javascript-format */
-        _n("%1\$s string translated via %2\$s","%1\$s strings translated via %2\$s",0,'loco-translate');
+        _n("%s string translated via %s","%s strings translated via %s",0,'loco-translate');
 
         // xgettext: javascript-format
         _n("%s string updated","%s strings updated",0,'loco-translate');
@@ -80,7 +80,7 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
 
         /* Shows total string count at top of editor
          * xgettext: javascript-format */
-        _n("%s string","%s strings",0,'loco-translate');
+        _n("1 string","%s strings",0,'loco-translate');
 
         /* Shows percentage translated at top of editor
          * xgettext: javascript-format */

@@ -1,22 +1,13 @@
 <?php
 // Title
-$icon = $icon_size = $icon_position = '';
 $title      = $instance['title'];
 $url        = $instance['url'];
 $new_window = $instance['new_window'];
+
 $custom_style = isset( $instance['custom_style'] ) && $instance['custom_style'] != 'default' ? ' custom_style' : '';
 
-if(isset($instance['icon']) && !empty($instance['icon']['icon'])){
-	$icon      = $instance['icon']['icon'];
-}
-
-if(isset($instance['icon']['icon_size']) && !empty($instance['icon']['icon_size'])){
-	$icon_size      = $instance['icon']['icon_size'];
-}
-
-if(isset($instance['icon']['icon_position']) && !empty($instance['icon']['icon_position'])){
-	$icon_position      = $instance['icon']['icon_position'];
-}
+$icon      = $instance['icon']['icon'];
+$icon_size = $instance['icon']['icon_size'];
 
 $button_size = $instance['layout']['button_size'];
 $rounding    = $instance['layout']['rounding'];
@@ -72,15 +63,14 @@ if ( !empty( $custom_style ) ) {
 
 // Icon
 if ( $icon ) {
-	if ( strpos( $icon, 'fa' ) !== false ) {
-         $icon = '<i class="' . $icon . '"' . $icon_size . '></i> ';
+    if ( thim_plugin_active( 'elementor/elementor.php') ){
+        $icon = '<i class="' . $icon . '"' . $icon_size . '></i> ';
     }else{
-        $icon = '<i class="fa fa-'.$icon.'"' . $icon_size . '></i> ';
+        $icon = '<i class="fa fa-' . $icon . '"' . $icon_size . '></i> ';
     }
 }
 
-
-if ( $icon_position == 'after' ) {
+if ( !empty( $instance['icon']['icon_position'] ) && $instance['icon']['icon_position'] == 'after' ) {
 	$content_button = $title . $icon;
 	$custom_style .= ' position-after';
 } else {

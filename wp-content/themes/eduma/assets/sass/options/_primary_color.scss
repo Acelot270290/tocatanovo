@@ -253,14 +253,7 @@ ul.curriculum-sections .section .section-content .course-assignment .course-item
 .woocommerce div.product form.cart .group_table td label a:hover,
 .woocommerce-page div.product form.cart .group_table td label a:hover,.vczapi-shortcode-meeting-table .btn-join-link-shortcode,
 #popup-sidebar #learn-press-course-curriculum ul.curriculum-sections .section-header .section-meta .step,
-#learn-press-course-curriculum ul.curriculum-sections .section-header .section-meta .step,
-.list-event-layout-6 .thim-event-layout-6 .item-slider .image .date,
-.thim-list-posts.style_2 .item-post .block-content .info .author a:hover,
-.thim-list-posts.style_2 .item-post .block-content .info .comments a:hover,
-.list-post-read-more-style_2:before,
-.thim-testimonial-carousel.testimonial-carousel_style_2 .item .content:hover:before,
-.thim-newlleter-homepage-restaurant .mc4wp-form .mc4wp-form-fields .mc4wp-form-custom i,
-.thim-newlleter-homepage-restaurant .mc4wp-form .label-inline .mc4wp-form-custom i{
+#learn-press-course-curriculum ul.curriculum-sections .section-header .section-meta .step {
 	color: $thim_thim_body_primary_color;
 }
 
@@ -467,9 +460,7 @@ body.course-item-popup #learn-press-content-item #course-item-content-header,
 .thim-courses-collection .owl-controls .owl-buttons>div:hover:before,
 .grad-slider .custom.tparrows:hover,
 button, .form_developer_course .content .submit_row,
-.elementor-widget-thim-icon-box .line-heading,
-.list-event-layout-6 .thim-event-layout-6 .item-slider:hover .event-wrapper .link-event:before,
-.list-post-read-more-style_2:hover{
+.elementor-widget-thim-icon-box .line-heading {
 	background-color: $thim_thim_body_primary_color;
 }
 
@@ -585,8 +576,7 @@ footer#colophon .footer .thim-footer-location .social a:hover,
 .thim-widget-tab .thim-widget-step .tab-content-step .tab-pane .readmore,
 .thim-instructors-new .owl-controls .owl-buttons>div:hover,
 .mc4wp-form .mc4wp-form-fields button[type=submit], .mc4wp-form .mc4wp-form-fields input[type=submit],
-.loop-pagination li .page-numbers.current,
-.thim-widget-icon-box.custom-title-slider-gradient .layout_text_number:hover .smicon-read:before{
+.loop-pagination li .page-numbers.current {
 	border-color: $thim_thim_body_primary_color;
 }
 
@@ -654,7 +644,7 @@ form.lp-checkout .logged-in,
 }
 
 .thim-owl-carousel-post .info{
-	background-color: rgba(red($thim_thim_body_primary_color), green($thim_thim_body_primary_color), blue($thim_thim_body_primary_color), 0.95);
+	background-color: rgba(red($thim_thim_body_primary_color), green($thim_thim_body_primary_color), blue($thim_thim_body_primary_color), 0.92);
 }
 
 .body-grad-layout #back-to-top:hover {
@@ -714,9 +704,4 @@ a.color_primary {
 			}
 		}
 	}
-}
-
-.thim-newlleter-homepage-restaurant .mc4wp-form .mc4wp-form-fields input[type=submit]:hover{
-	background-color: $thim_thim_body_primary_color !important;
-	border-color: $thim_thim_body_primary_color !important;
 }

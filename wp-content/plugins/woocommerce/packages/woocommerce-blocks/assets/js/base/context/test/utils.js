@@ -16,13 +16,15 @@ describe( 'assertValidContextValue', () => {
 		},
 	};
 	it.each`
-		testValue
-		${ {} }
-		${ 10 }
-		${ { amountKetchup: '10' } }
+		testValue                                         | expectedMessage     | expectError
+		${ {} }                                           | ${ 'expected' }     | ${ true }
+		${ 10 }                                           | ${ 'expected' }     | ${ true }
+		${ { amountKetchup: 20 } }                        | ${ 'not expected' } | ${ false }
+		${ { amountKetchup: '10' } }                      | ${ 'expected' }     | ${ true }
+		${ { cheeseburger: 'fries', amountKetchup: 20 } } | ${ 'not expected' } | ${ false }
 	`(
-		'The value of $testValue is expected to trigger an Error',
-		( { testValue } ) => {
+		'The value of $testValue is $expectedMessage to trigger an Error',
+		( { testValue, expectError } ) => {
 			const invokeTest = () => {
 				assertValidContextValue(
 					contextName,
@@ -30,24 +32,11 @@ describe( 'assertValidContextValue', () => {
 					testValue
 				);
 			};
-			expect( invokeTest ).toThrow();
-		}
-	);
-	it.each`
-		testValue
-		${ { amountKetchup: 20 } }
-		${ { cheeseburger: 'fries', amountKetchup: 20 } }
-	`(
-		'The value of $testValue is not expected to trigger an Error',
-		( { testValue } ) => {
-			const invokeTest = () => {
-				assertValidContextValue(
-					contextName,
-					validationMap,
-					testValue
-				);
-			};
-			expect( invokeTest ).not.toThrow();
+			if ( expectError ) {
+				expect( invokeTest ).toThrow();
+			} else {
+				expect( invokeTest ).not.toThrow();
+			}
 		}
 	);
 } );

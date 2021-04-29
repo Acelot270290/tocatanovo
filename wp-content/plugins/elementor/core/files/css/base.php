@@ -11,6 +11,7 @@ use Elementor\Core\DynamicTags\Tag;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Element_Base;
 use Elementor\Plugin;
+use Elementor\Core\Responsive\Responsive;
 use Elementor\Stylesheet;
 use Elementor\Icons_Manager;
 
@@ -701,11 +702,12 @@ abstract class Base extends Base_File {
 	private function init_stylesheet() {
 		$this->stylesheet_obj = new Stylesheet();
 
-		$active_breakpoints = Plugin::$instance->breakpoints->get_active_breakpoints();
+		$breakpoints = Responsive::get_breakpoints();
 
-		foreach ( $active_breakpoints as $breakpoint_name => $breakpoint ) {
-			$this->stylesheet_obj->add_device( $breakpoint_name, $breakpoint->get_value() );
-		}
+		$this->stylesheet_obj
+			->add_device( 'mobile', 0 )
+			->add_device( 'tablet', $breakpoints['md'] )
+			->add_device( 'desktop', $breakpoints['lg'] );
 	}
 
 	/**
@@ -782,14 +784,6 @@ abstract class Base extends Base_File {
 			$property_name = str_replace( '_', '-', $property_name );
 
 			$value = "var( --e-global-$control[groupType]-$id-$property_name )";
-
-			if ( $control['groupPrefix'] . 'font_family' === $control['name'] ) {
-				$default_generic_fonts = Plugin::$instance->kits_manager->get_current_settings( 'default_generic_fonts' );
-
-				if ( $default_generic_fonts ) {
-					$value  .= ", $default_generic_fonts";
-				}
-			}
 		} else {
 			$value = "var( --e-global-$control[type]-$id )";
 		}

@@ -1,4 +1,4 @@
-/*! elementor - v3.2.1 - 21-04-2021 */
+/*! elementor - v3.0.8.1 - 14-09-2020 */
 @charset "UTF-8";
 .elementor-control-unit-1 {
   width: 27px; }
@@ -255,7 +255,6 @@
   margin-top: 20px; }
 
 .elementor-control {
-  --control-title-size: 12px;
   background-color: #fff;
   position: relative;
   padding: 0 20px 15px; }
@@ -277,7 +276,7 @@
         -ms-flex-direction: column;
             flex-direction: column; }
   .elementor-control .elementor-control-title {
-    font-size: var(--control-title-size);
+    font-size: 12px;
     line-height: 1;
     margin-right: 5px; }
   .elementor-control .elementor-control-spinner {
@@ -462,13 +461,12 @@
     font-size: 9px; }
 
 .elementor-control-responsive-switchers {
+  margin-right: 5px;
   --selected-option: 0;
   --pointer-position: var(--selected-option);
   position: relative;
   width: 2em;
-  height: 2em;
-  margin: calc( -2em + var(--control-title-size)) 0;
-  margin-right: 5px; }
+  height: 2em; }
   .elementor-control-responsive-switchers__holder {
     position: absolute;
     width: 100%;
@@ -906,7 +904,8 @@ a.elementor-responsive-switcher {
   display: none; }
 
 .elementor-control-type-gallery.elementor-control-dynamic .elementor-control-gallery-clear {
-  border-left: 1px solid #d5dadf; }
+  border: solid #d5dadf;
+  border-width: 0 1px; }
 
 .elementor-control-type-gallery .elementor-control-gallery-clear {
   cursor: pointer;
@@ -924,10 +923,9 @@ a.elementor-responsive-switcher {
           border-radius: 0 3px 0 0; }
 
 .e-global__popover {
-  width: 288px;
+  width: 270px;
   z-index: 1;
-  font-size: 12px;
-  padding-left: 10px; }
+  font-size: 12px; }
   .e-global__popover-toggle {
     border: 1px solid #d5dadf;
     border-right: 0;
@@ -997,6 +995,7 @@ a.elementor-responsive-switcher {
     width: 7px; }
   .e-global__preview-items-container::-webkit-scrollbar-thumb {
     background-color: #c2cbd2;
+    outline: 1px solid #556068;
     -webkit-border-radius: 10px;
             border-radius: 10px; }
 
@@ -1038,7 +1037,7 @@ a.elementor-responsive-switcher {
     margin-top: 5px; }
   .e-global__color:last-child {
     margin-bottom: 10px; }
-  .e-global__color-preview-container {
+  .e-global__color-preview {
     height: 20px;
     width: 20px;
     -webkit-border-radius: 3px;
@@ -1046,23 +1045,7 @@ a.elementor-responsive-switcher {
     border: 1px solid rgba(0, 0, 0, 0.1);
     margin-right: 10px;
     -ms-flex-negative: 0;
-        flex-shrink: 0;
-    position: relative; }
-  .e-global__color-preview-color, .e-global__color-preview-transparent-bg {
-    -webkit-border-radius: 3px;
-            border-radius: 3px;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0; }
-  .e-global__color-preview-transparent-bg {
-    background-image: -webkit-linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd), -webkit-linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd);
-    background-image: -o-linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd), -o-linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd);
-    background-image: linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd), linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd);
-    -webkit-background-size: 12px 12px;
-            background-size: 12px 12px;
-    background-position: 0 0, 6px 6px; }
+        flex-shrink: 0; }
   .e-global__color-title {
     font-weight: 500;
     color: #6d7882;
@@ -1080,7 +1063,7 @@ a.elementor-responsive-switcher {
     color: #c2cbd2; }
   .e-global__color .pcr-button {
     background-color: #fff; }
-  .e-global__color.e-global__preview-item--selected .e-global__color-preview-container {
+  .e-global__color.e-global__preview-item--selected .e-global__color-preview {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1091,12 +1074,11 @@ a.elementor-responsive-switcher {
         -ms-flex-align: center;
             align-items: center;
     color: #ffffff; }
-    .e-global__color.e-global__preview-item--selected .e-global__color-preview-container:before {
+    .e-global__color.e-global__preview-item--selected .e-global__color-preview:before {
       font-family: 'eicons';
       font-size: 13px;
       content: '\e90e';
-      text-shadow: 0px 0px 1px #000;
-      z-index: 1; }
+      text-shadow: 0px 0px 1px #000; }
 
 .e-global__preview-item {
   cursor: pointer;
@@ -1146,9 +1128,6 @@ a.elementor-responsive-switcher {
 
 .e-control-global.elementor-control .elementor-control-input-wrapper {
   direction: ltr; }
-
-.e-control-global .elementor-control-spinner {
-  margin-right: 4px; }
 
 .elementor-control-type-hidden {
   display: none !important; }
@@ -1217,9 +1196,9 @@ a.elementor-responsive-switcher {
   background-position: center; }
 
 .elementor-control-media-area {
-  background-image: -webkit-linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd), -webkit-linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd);
-  background-image: -o-linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd), -o-linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd);
-  background-image: linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd), linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0, #ddd);
+  background-image: -webkit-linear-gradient(45deg, #ddd 25%, transparent 25%, transparent 75%, #ddd 75%, #ddd), -webkit-linear-gradient(45deg, #ddd 25%, transparent 25%, transparent 75%, #ddd 75%, #ddd);
+  background-image: -o-linear-gradient(45deg, #ddd 25%, transparent 25%, transparent 75%, #ddd 75%, #ddd), -o-linear-gradient(45deg, #ddd 25%, transparent 25%, transparent 75%, #ddd 75%, #ddd);
+  background-image: linear-gradient(45deg, #ddd 25%, transparent 25%, transparent 75%, #ddd 75%, #ddd), linear-gradient(45deg, #ddd 25%, transparent 25%, transparent 75%, #ddd 75%, #ddd);
   -webkit-background-size: 16px 16px;
           background-size: 16px 16px;
   background-position: 0 0, 8px 8px;
@@ -1881,33 +1860,27 @@ a.elementor-responsive-switcher {
 .elementor-tab-close {
   display: none !important; }
 
-.elementor-control-type-textarea.elementor-control-dynamic-value .elementor-control-dynamic-switcher,
-.elementor-control-type-code.elementor-control-dynamic-value .elementor-control-dynamic-switcher {
+.elementor-control-type-textarea.elementor-control-dynamic-value .elementor-control-dynamic-switcher {
   -webkit-border-radius: 0 3px 3px 0;
           border-radius: 0 3px 3px 0;
   border-left-width: 0; }
 
-.elementor-control-type-textarea .elementor-control-dynamic-switcher,
-.elementor-control-type-code .elementor-control-dynamic-switcher {
+.elementor-control-type-textarea .elementor-control-dynamic-switcher {
   -webkit-border-radius: 0px 3px;
           border-radius: 0px 3px; }
 
-.elementor-control-type-textarea:not(.elementor-control-dynamic-value) .elementor-control-dynamic-switcher,
-.elementor-control-type-code:not(.elementor-control-dynamic-value) .elementor-control-dynamic-switcher {
+.elementor-control-type-textarea:not(.elementor-control-dynamic-value) .elementor-control-dynamic-switcher {
   position: absolute;
   top: 0;
   right: 0; }
 
-.elementor-control-type-textarea .elementor-control-input-wrapper,
-.elementor-control-type-code .elementor-control-input-wrapper {
+.elementor-control-type-textarea .elementor-control-input-wrapper {
   position: relative; }
 
-.elementor-control-type-textarea textarea,
-.elementor-control-type-code textarea {
+.elementor-control-type-textarea textarea {
   display: block;
   font-family: inherit; }
-  .elementor-control-type-textarea textarea:focus + .elementor-control-dynamic-switcher,
-  .elementor-control-type-code textarea:focus + .elementor-control-dynamic-switcher {
+  .elementor-control-type-textarea textarea:focus + .elementor-control-dynamic-switcher {
     display: none; }
 
 .elementor-control-type-url.elementor-control-dynamic .elementor-input {
@@ -2087,6 +2060,9 @@ a.elementor-responsive-switcher {
 
 .elementor-control-type-wp_widget .quicktags-toolbar input {
   width: auto; }
+
+.elementor-control-type-wysiwyg.elementor-rich-editing-disabled .wp-editor-container {
+  margin-top: 10px; }
 
 .elementor-control-type-wysiwyg * {
   -webkit-box-sizing: content-box;

@@ -28,7 +28,7 @@ const EMIT_TYPES = {
  *
  * @return {Object} An object with the add to cart form emitter registration
  */
-const emitterObservers = ( dispatcher ) => ( {
+const emitterSubscribers = ( dispatcher ) => ( {
 	onAddToCartAfterProcessingWithSuccess: emitterCallback(
 		EMIT_TYPES.ADD_TO_CART_AFTER_PROCESSING_WITH_SUCCESS,
 		dispatcher
@@ -43,4 +43,10 @@ const emitterObservers = ( dispatcher ) => ( {
 	),
 } );
 
-export { EMIT_TYPES, emitterObservers, reducer, emitEvent, emitEventWithAbort };
+export {
+	EMIT_TYPES,
+	emitterSubscribers,
+	reducer,
+	emitEvent,
+	emitEventWithAbort,
+};

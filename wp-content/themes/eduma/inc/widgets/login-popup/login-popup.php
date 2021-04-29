@@ -10,7 +10,7 @@ if ( ! class_exists( 'Thim_Login_Popup_Widget' ) ) {
 				'login-popup',
 				esc_html__( 'Thim: Login Popup', 'eduma' ),
 				array(
-					'panels_groups' => array( 'thim_builder_so_widgets' ),
+					'panels_groups' => array( 'thim_widget_group' ),
 					'panels_icon'   => 'thim-widget-icon thim-widget-icon-login-popup'
 				),
 				array(),
@@ -36,28 +36,27 @@ if ( ! class_exists( 'Thim_Login_Popup_Widget' ) ) {
 						'default' => 'Profile',
 					),
 					'layout'        => array(
-						'type'          => 'select',
-						'label'         => esc_html__( 'Layout', 'eduma' ),
-						'default'       => 'base',
-						'options'       => array(
+						'type'    => 'select',
+						'label'   => esc_html__( 'Layout', 'eduma' ),
+						'default' => 'base',
+						'options' => array(
 							'base' => esc_html__( 'Default', 'eduma' ),
 							'icon' => esc_html__( 'Icon', 'eduma' ),
-						)
+						),
 					),
-
-					'captcha'   => array(
+					'captcha'       => array(
 						'type'        => 'checkbox',
 						'label'       => esc_html__( 'Use captcha?', 'eduma' ),
 						'description' => esc_html__( 'Use captcha in register and login form.', 'eduma' ),
 						'default'     => false
 					),
-					'term'      => array(
+					'term'          => array(
 						'type'        => 'text',
 						'label'       => esc_html__( 'Terms of Service link', 'eduma' ),
 						'description' => esc_html__( 'Leave empty to disable this field.', 'eduma' ),
 						'default'     => '',
 					),
-					'shortcode' => array(
+					'shortcode'     => array(
 						'type'        => 'text',
 						'label'       => esc_html__( 'Shortcode', 'eduma' ),
 						'description' => esc_html__( 'Enter shortcode to show in form Login.', 'eduma' ),
@@ -83,7 +82,7 @@ if ( ! class_exists( 'Thim_Login_Popup_Widget' ) ) {
 		}
 
 		function thim_display_login_popup_form() {
-			$instance = $this->ins;
+ 			$instance = $this->ins;
 
 			if ( ! is_user_logged_in() ) {
 				$registration_enabled = get_option( 'users_can_register' );

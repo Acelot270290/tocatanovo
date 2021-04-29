@@ -3,9 +3,9 @@ Contributors: thimpress, tunnhn, phonglq.foobla, thongta, kendy73, leehld, tungn
 Donate link:
 Tags: elearning, education, course, lms, learning management system
 Requires at least: 5.3
-Tested up to: 5.7
+Tested up to: 5.6
 Requires PHP: 7.0
-Stable tag: 3.2.8.8
+Stable tag: 3.2.8.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -196,10 +196,6 @@ https://www.transifex.com/projects/p/learnpress/
 8. Add-ons of LearnPress.
 
 == Changelog ==
-
-= 3.2.8.8 =
-~ Fix compatible PHP 8.0.3.
-~ Fix Yoat SEO course category title not working.
 
 = 3.2.8.7 =
 ~ Fix: start quiz 404

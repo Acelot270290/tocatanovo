@@ -11,6 +11,7 @@ import {
 	withSpokenMessages,
 } from '@wordpress/components';
 import { SearchListItem } from '@woocommerce/components';
+import { Fragment } from '@wordpress/element';
 import PropTypes from 'prop-types';
 import ProductCategoryControl from '@woocommerce/editor-components/product-category-control';
 import { Icon, review } from '@woocommerce/icons';
@@ -61,7 +62,7 @@ const ReviewsByCategoryEditor = ( {
 				{ ...args }
 				showCount
 				aria-label={ sprintf(
-					/* translators: %1$s is the search term name, %2$d is the number of products returned for search query. */
+					// Translators: %1$s is the search term name, %2$d is the number of products returned for search query.
 					_n(
 						'%1$s, has %2$d product',
 						'%1$s, has %2$d products',
@@ -174,7 +175,7 @@ const ReviewsByCategoryEditor = ( {
 	}
 
 	return (
-		<>
+		<Fragment>
 			{ getBlockControls( editMode, setAttributes ) }
 			{ getInspectorControls() }
 			<EditorContainerBlock
@@ -191,7 +192,7 @@ const ReviewsByCategoryEditor = ( {
 				) }
 				noReviewsPlaceholder={ NoReviewsPlaceholder }
 			/>
-		</>
+		</Fragment>
 	);
 };
 

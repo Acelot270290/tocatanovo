@@ -3,7 +3,6 @@ namespace Automattic\WooCommerce\Blocks\StoreApi\Schemas;
 
 use Automattic\WooCommerce\Blocks\StoreApi\Utilities\CartController;
 use Automattic\WooCommerce\Blocks\Domain\Services\ExtendRestApi;
-use WP_Error;
 
 
 /**
@@ -32,49 +31,42 @@ class CartSchema extends AbstractSchema {
 	 *
 	 * @var CartItemSchema
 	 */
-	public $item_schema;
+	protected $item_schema;
 
 	/**
 	 * Coupon schema instance.
 	 *
 	 * @var CartCouponSchema
 	 */
-	public $coupon_schema;
-
-	/**
-	 * Fee schema instance.
-	 *
-	 * @var CartFeeSchema
-	 */
-	public $fee_schema;
+	protected $coupon_schema;
 
 	/**
 	 * Shipping rates schema instance.
 	 *
 	 * @var CartShippingRateSchema
 	 */
-	public $shipping_rate_schema;
+	protected $shipping_rate_schema;
 
 	/**
 	 * Shipping address schema instance.
 	 *
 	 * @var ShippingAddressSchema
 	 */
-	public $shipping_address_schema;
+	protected $shipping_address_schema;
 
 	/**
 	 * Billing address schema instance.
 	 *
 	 * @var BillingAddressSchema
 	 */
-	public $billing_address_schema;
+	protected $billing_address_schema;
 
 	/**
 	 * Error schema instance.
 	 *
 	 * @var ErrorSchema
 	 */
-	public $error_schema;
+	protected $error_schema;
 
 	/**
 	 * Constructor.
@@ -82,7 +74,6 @@ class CartSchema extends AbstractSchema {
 	 * @param ExtendRestApi          $extend Rest Extending instance.
 	 * @param CartItemSchema         $item_schema Item schema instance.
 	 * @param CartCouponSchema       $coupon_schema Coupon schema instance.
-	 * @param CartFeeSchema          $fee_schema Fee schema instance.
 	 * @param CartShippingRateSchema $shipping_rate_schema Shipping rates schema instance.
 	 * @param ShippingAddressSchema  $shipping_address_schema Shipping address schema instance.
 	 * @param BillingAddressSchema   $billing_address_schema Billing address schema instance.
@@ -92,7 +83,6 @@ class CartSchema extends AbstractSchema {
 		ExtendRestApi $extend,
 		CartItemSchema $item_schema,
 		CartCouponSchema $coupon_schema,
-		CartFeeSchema $fee_schema,
 		CartShippingRateSchema $shipping_rate_schema,
 		ShippingAddressSchema $shipping_address_schema,
 		BillingAddressSchema $billing_address_schema,
@@ -100,7 +90,6 @@ class CartSchema extends AbstractSchema {
 	) {
 		$this->item_schema             = $item_schema;
 		$this->coupon_schema           = $coupon_schema;
-		$this->fee_schema              = $fee_schema;
 		$this->shipping_rate_schema    = $shipping_rate_schema;
 		$this->shipping_address_schema = $shipping_address_schema;
 		$this->billing_address_schema  = $billing_address_schema;
@@ -140,14 +129,20 @@ class CartSchema extends AbstractSchema {
 				'type'        => 'object',
 				'context'     => [ 'view', 'edit' ],
 				'readonly'    => true,
-				'properties'  => $this->force_schema_readonly( $this->shipping_address_schema->get_properties() ),
+				'items'       => [
+					'type'       => 'object',
+					'properties' => $this->force_schema_readonly( $this->shipping_address_schema->get_properties() ),
+				],
 			],
 			'billing_address'         => [
 				'description' => __( 'Current set billing address for the customer.', 'woocommerce' ),
 				'type'        => 'object',
 				'context'     => [ 'view', 'edit' ],
 				'readonly'    => true,
-				'properties'  => $this->force_schema_readonly( $this->billing_address_schema->get_properties() ),
+				'items'       => [
+					'type'       => 'object',
+					'properties' => $this->force_schema_readonly( $this->billing_address_schema->get_properties() ),
+				],
 			],
 			'items'                   => [
 				'description' => __( 'List of cart items.', 'woocommerce' ),
@@ -188,16 +183,6 @@ class CartSchema extends AbstractSchema {
 				'type'        => 'boolean',
 				'context'     => [ 'view', 'edit' ],
 				'readonly'    => true,
-			],
-			'fees'                    => [
-				'description' => __( 'List of cart fees.', 'woocommerce' ),
-				'type'        => 'array',
-				'context'     => [ 'view', 'edit' ],
-				'readonly'    => true,
-				'items'       => [
-					'type'       => 'object',
-					'properties' => $this->force_schema_readonly( $this->fee_schema->get_properties() ),
-				],
 			],
 			'totals'                  => [
 				'description' => __( 'Cart total amounts provided using the smallest unit of the currency.', 'woocommerce' ),
@@ -303,12 +288,6 @@ class CartSchema extends AbstractSchema {
 					'properties' => $this->force_schema_readonly( $this->error_schema->get_properties() ),
 				],
 			],
-			'payment_requirements'    => [
-				'description' => __( 'List of required payment gateway features to process the order.', 'woocommerce' ),
-				'type'        => 'array',
-				'context'     => [ 'view', 'edit' ],
-				'readonly'    => true,
-			],
 			self::EXTENDING_KEY       => $this->get_extended_schema( self::IDENTIFIER ),
 		];
 	}
@@ -330,21 +309,17 @@ class CartSchema extends AbstractSchema {
 		// calculated so we can avoid returning costs and rates prematurely.
 		$has_calculated_shipping = $cart->show_shipping();
 
-		// Get shipping packages to return in the response from the cart.
-		$shipping_packages = $has_calculated_shipping ? $controller->get_shipping_packages() : [];
-
 		return [
-			'coupons'                 => $this->get_item_responses_from_schema( $this->coupon_schema, $cart->get_applied_coupons() ),
-			'shipping_rates'          => $this->get_item_responses_from_schema( $this->shipping_rate_schema, $shipping_packages ),
+			'coupons'                 => array_values( array_map( [ $this->coupon_schema, 'get_item_response' ], array_filter( $cart->get_applied_coupons() ) ) ),
+			'shipping_rates'          => $has_calculated_shipping ? array_values( array_map( [ $this->shipping_rate_schema, 'get_item_response' ], $controller->get_shipping_packages() ) ) : [],
 			'shipping_address'        => $this->shipping_address_schema->get_item_response( wc()->customer ),
 			'billing_address'         => $this->billing_address_schema->get_item_response( wc()->customer ),
-			'items'                   => $this->get_item_responses_from_schema( $this->item_schema, $cart->get_cart() ),
+			'items'                   => array_values( array_map( [ $this->item_schema, 'get_item_response' ], array_filter( $cart->get_cart() ) ) ),
 			'items_count'             => $cart->get_cart_contents_count(),
 			'items_weight'            => wc_get_weight( $cart->get_cart_contents_weight(), 'g' ),
 			'needs_payment'           => $cart->needs_payment(),
 			'needs_shipping'          => $cart->needs_shipping(),
 			'has_calculated_shipping' => $has_calculated_shipping,
-			'fees'                    => $this->get_item_responses_from_schema( $this->fee_schema, $cart->get_fees() ),
 			'totals'                  => (object) $this->prepare_currency_response(
 				[
 					'total_items'        => $this->prepare_money_response( $cart->get_subtotal(), wc_get_price_decimals() ),
@@ -363,7 +338,6 @@ class CartSchema extends AbstractSchema {
 				]
 			),
 			'errors'                  => $cart_errors,
-			'payment_requirements'    => $this->extend->get_payment_requirements(),
 			self::EXTENDING_KEY       => $this->get_extended_data( self::IDENTIFIER ),
 		];
 	}
@@ -396,12 +370,7 @@ class CartSchema extends AbstractSchema {
 	 */
 	protected function get_cart_errors( $cart ) {
 		$controller    = new CartController();
-		$item_errors   = array_filter(
-			$controller->get_cart_item_errors(),
-			function ( WP_Error $error ) {
-				return $error->has_errors();
-			}
-		);
+		$item_errors   = $controller->get_cart_item_errors();
 		$coupon_errors = $controller->get_cart_coupon_errors();
 
 		return array_values( array_map( [ $this->error_schema, 'get_item_response' ], array_merge( $item_errors, $coupon_errors ) ) );

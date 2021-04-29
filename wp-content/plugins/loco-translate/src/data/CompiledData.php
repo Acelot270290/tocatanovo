@@ -22,7 +22,6 @@ class Loco_data_CompiledData implements ArrayAccess, Countable, IteratorAggregat
 
     
     /**
-     * @param string
      * @return Loco_data_CompiledData
      */
     public static function get( $name ){
@@ -75,5 +74,4 @@ class Loco_data_CompiledData implements ArrayAccess, Countable, IteratorAggregat
     public function getIterator(){
         return new ArrayIterator( $this->data );
     }
-
 }

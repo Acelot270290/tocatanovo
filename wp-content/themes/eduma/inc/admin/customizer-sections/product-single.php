@@ -31,22 +31,22 @@ thim_customizer()->add_field(
 	)
 );
 
-//thim_customizer()->add_field(
-//    array(
-//        'type'     => 'select',
-//        'id'       => 'thim_woo_single_style_heading_title',
-//        'label'    => esc_html__( 'Style Heading title', 'eduma' ),
-//        'tooltip'  => esc_html__( 'Select style for Heading title.', 'eduma' ),
-//        'default'  => '',
-//        'priority' => 14,
-//        'multiple' => 0,
-//        'section'  => 'product_single',
-//        'choices'  => array(
-//            'style_heading_1' => esc_html__( 'Style Heading 1', 'eduma' ),
-//            'style_heading_2' => esc_html__( 'Style Heading 2', 'eduma' ),
-//         ),
-//    )
-//);
+thim_customizer()->add_field(
+    array(
+        'type'     => 'select',
+        'id'       => 'thim_woo_single_style_heading_title',
+        'label'    => esc_html__( 'Style Heading title', 'eduma' ),
+        'tooltip'  => esc_html__( 'Select style for Heading title.', 'eduma' ),
+        'default'  => '',
+        'priority' => 14,
+        'multiple' => 0,
+        'section'  => 'product_single',
+        'choices'  => array(
+            'style_heading_1' => esc_html__( 'Style Heading 1', 'eduma' ),
+            'style_heading_2' => esc_html__( 'Style Heading 2', 'eduma' ),
+        ),
+    )
+);
 
 // Enable or disable breadcrumbs
 thim_customizer()->add_field(

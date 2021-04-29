@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Template for displaying loop wishlist title.
  *
@@ -14,8 +13,8 @@
  * Prevent loading this file directly
  */
 defined( 'ABSPATH' ) || exit();
-global $post;;
-$course = learn_press_get_course( $post->ID );
+global $post;
+$course = learn_press_get_course( $post );
 ?>
 <?php echo $course->get_image(); ?>
 <h3><?php the_title(); ?></h3>

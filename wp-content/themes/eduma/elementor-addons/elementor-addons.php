@@ -67,4 +67,4 @@ function thim_add_new_elements() {
 	}
 }
 
- add_action( 'elementor/widgets/widgets_registered', 'thim_add_new_elements' );
+add_action( 'elementor/widgets/widgets_registered', 'thim_add_new_elements' );

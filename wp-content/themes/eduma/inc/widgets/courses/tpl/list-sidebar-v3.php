@@ -62,7 +62,7 @@ if ( $the_query->have_posts() ) :
 					<h3 class="course-title">
 						<a href="<?php echo esc_url( get_the_permalink() ); ?>"> <?php echo get_the_title(); ?></a>
 					</h3>
-					<?php if ( class_exists( 'LP_Addon_Coming_Soon_Courses_Preload' ) && learn_press_is_coming_soon( get_the_ID() ) ): ?>
+					<?php if ( thim_plugin_active( 'learnpress-coming-soon-courses/learnpress-coming-soon-courses.php' ) && learn_press_is_coming_soon( get_the_ID() ) ): ?>
 						<div class="message message-warning learn-press-message coming-soon-message">
 							<?php esc_html_e( 'Coming soon', 'eduma' ) ?>
 						</div>

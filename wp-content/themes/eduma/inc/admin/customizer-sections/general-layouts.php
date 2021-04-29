@@ -56,33 +56,32 @@ thim_customizer()->add_field(
 
 // Select All Content Page Layout
 thim_customizer()->add_field(
-	array(
-		'type'     => 'select',
-		'id'       => 'thim_layout_content_page',
-		'label'    => esc_html__( 'Layout Content', 'eduma' ),
-		'default'  => 'normal',
-		'section'  => 'content_layout',
-		'priority' => 70,
-		'choices'  => array(
-			'normal'         => esc_html__( 'Normal', 'eduma' ),
-			'new-1'          => esc_html__( 'Layout 1 - New Demo', 'eduma' ),
-			'layout_style_2' => esc_html__( 'Layout 2', 'eduma' ),
-		),
-	)
+    array(
+        'type'            => 'select',
+        'id'              => 'thim_layout_content_page',
+        'label'           => esc_html__( 'Layout Content', 'eduma' ),
+        'default'         => 'normal',
+        'section'  => 'content_layout',
+        'priority'        => 70,
+        'choices'         => array(
+            'normal'    => esc_html__( 'Normal', 'eduma' ),
+            'new-1'  => esc_html__( 'New Demo', 'eduma' ),
+        ),
+    )
 );
 
 // Select All Page Layout
 thim_customizer()->add_field(
 	array(
-		'type'     => 'select',
-		'id'       => 'thim_size_body',
-		'label'    => esc_html__( 'Size Body', 'eduma' ),
-		'default'  => 'normal',
+		'type'            => 'select',
+		'id'              => 'thim_size_body',
+		'label'           => esc_html__( 'Size Body', 'eduma' ),
+		'default'         => 'normal',
 		'section'  => 'content_layout',
-		'priority' => 80,
-		'choices'  => array(
-			'normal' => esc_html__( 'Normal', 'eduma' ),
-			'wide'   => esc_html__( 'Wide', 'eduma' ),
+		'priority'        => 80,
+		'choices'         => array(
+			'normal'    => esc_html__( 'Normal', 'eduma' ),
+			'wide'  => esc_html__( 'Wide', 'eduma' ),
 		),
 	)
 );

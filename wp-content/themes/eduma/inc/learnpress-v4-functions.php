@@ -16,30 +16,25 @@ if ( ! function_exists( 'thim_remove_learnpress_hooks' ) ) {
 		//		add_action( 'thim_single_course_payment', LP()->template( 'course' )->func( 'course_enroll_button' ), 20 );
 		add_action( 'thim_single_course_meta', LP()->template( 'course' )->callback( 'single-course/instructor' ), 5 );
 		add_action( 'thim_single_course_meta', LP()->template( 'course' )->callback( 'single-course/meta/category' ), 15 );
-//		add_action( 'thim_single_course_meta', 'thim_course_forum_link', 20 );
+		add_action( 'thim_single_course_meta', 'thim_course_forum_link', 20 );
 		add_action( 'thim_single_course_meta', 'thim_course_ratings', 25 );
 		add_action( 'thim_single_course_meta', LP()->template( 'course' )->func( 'user_progress' ), 30 );
-
-        add_action( 'thim_single_course_featured_review', LP()->template( 'course' )->func( 'course_featured_review' ), 5 );
-
-        add_action( 'learnpress/template/pages/profile/before-content', 'thim_wapper_page_title', 5 );
-        add_action( 'learnpress/template/pages/checkout/before-content', 'thim_wapper_page_title', 5 );
 
 		add_action( 'thim_single_course_before_meta', 'thim_course_thumbnail_item', 5 );
 
 		add_action(
 			'init', function () {
-			if ( class_exists( 'LP_Addon_Wishlist' ) && is_user_logged_in() && thim_is_version_addons_wishlist( '3' ) ) {
+			if ( thim_plugin_active( 'learnpress-wishlist/learnpress-wishlist.php' ) && class_exists( 'LP_Addon_Wishlist' ) && is_user_logged_in() && thim_is_version_addons_wishlist( '3' ) ) {
 				$instance_addon = LP_Addon_Wishlist::instance();
 				remove_action( 'learn-press/after-course-buttons', array( $instance_addon, 'wishlist_button' ), 100 );
 				add_action( 'thim_after_course_info', array( $instance_addon, 'wishlist_button' ), 10 );
 				add_action( 'thim_inner_thumbnail_course', array( $instance_addon, 'wishlist_button' ), 10 );
 			}
-			if ( class_exists( 'LP_Addon_bbPress' )  ) {
+			if ( thim_plugin_active( 'learnpress-bbpress/learnpress-bbpress.php' ) && class_exists( 'LP_Addon_bbPress' ) && thim_is_version_addons_bbpress( '3' ) ) {
 				$instance_addon = LP_Addon_bbPress::instance();
 				remove_action( 'learn-press/single-course-summary', array( $instance_addon, 'forum_link' ), 0 );
 			}
-			if ( class_exists( 'LP_Addon_Woo_Payment' )  ) {
+			if ( thim_plugin_active( 'learnpress-woo-payment/learnpress-woo-payment.php' ) && class_exists( 'LP_Addon_Woo_Payment' ) && thim_is_version_addons_woo( 3 ) ) {
 				$instance_addon = LP_Addon_Woo_Payment::instance();
 				remove_action(
 					'learn-press/before-course-buttons', array(
@@ -51,7 +46,7 @@ if ( ! function_exists( 'thim_remove_learnpress_hooks' ) ) {
 				//add_action( 'learn-press/before-single-course', array( $instance_addon, 'purchase_course_notice' ) );
 				//add_action( 'learn-press/before-single-course', array( $instance_addon, 'after_course_buttons' ) );
 			}
-			if ( thim_plugin_active( 'paid-memberships-pro/paid-memberships-pro.php' ) && class_exists( 'LP_Addon_Paid_Memberships_Pro' ) ) {
+			if ( thim_plugin_active( 'learnpress-paid-membership-pro/learnpress-paid-memberships-pro.php' ) && thim_plugin_active( 'paid-memberships-pro/paid-memberships-pro.php' ) && class_exists( 'LP_Addon_Paid_Memberships_Pro' ) ) {
 				$instance_addon = LP_Addon_Paid_Memberships_Pro::instance();
 				remove_action(
 					'learn-press/before-course-buttons', array(
@@ -66,7 +61,7 @@ if ( ! function_exists( 'thim_remove_learnpress_hooks' ) ) {
 				), 8
 				);
 			}
-			if ( class_exists( 'LP_Addon_Assignment' ) ) {
+			if ( thim_plugin_active( 'learnpress-assignments/learnpress-assignments.php' ) && class_exists( 'LP_Addon_Assignment' ) ) {
 				$instance_addon = LP_Addon_Assignment::instance();
 				remove_action(
 					'learn-press/course-section-item/before-lp_assignment-meta', array(
@@ -82,28 +77,28 @@ if ( ! function_exists( 'thim_remove_learnpress_hooks' ) ) {
 							$duration .= 's';
 						}
 						$duration_number = absint( $duration );
-						$time            = trim( str_replace( $duration_number, '', $duration ) );
-						switch ( $time ) {
+						$time = trim( str_replace( $duration_number,'',$duration ) );
+						switch($time){
 							case 'minutes' :
-								$time = _x( "minutes", 'duration', 'eduma' );
+								$time = _x("minutes",'duration','eduma');
 								break;
 							case 'hours' :
-								$time = _x( "hours", 'duration', 'eduma' );
+								$time = _x("hours",'duration','eduma');
 								break;
 							case 'days' :
-								$time = _x( "days", 'duration', 'eduma' );
+								$time = _x("days",'duration','eduma');
 								break;
 							case 'weeks':
-								$time = _x( "weeks", 'duration', 'eduma' );
+								$time = _x("weeks",'duration','eduma');
 								break;
 							case 'minute' :
-								$time = _x( "minute", 'duration', 'eduma' );
+								$time = _x("minute",'duration','eduma');
 								break;
 							default:
-								$time = _x( "week", 'duration', 'eduma' );
+								$time = _x("week",'duration','eduma');
 						}
-						echo '<span class="meta duration">' . $duration_number . ' ' . $time . '</span>';
-					}
+						echo '<span class="meta duration">' . $duration_number.' '.$time  . '</span>';
+ 					}
 				}
 			}
 
@@ -129,7 +124,7 @@ if ( ! function_exists( 'thim_remove_learnpress_hooks' ) ) {
 		}
 		);
 
-		//remove_action( 'learn-press/profile/before-dashboard', LP()->template( 'profile' )->func( 'dashboard_statistic' ), 10 );
+		remove_action( 'learn-press/profile/before-dashboard', LP()->template( 'profile' )->func( 'dashboard_statistic' ), 10 );
 		remove_action( 'learn-press/profile/dashboard-summary', LP()->template( 'profile' )->func( 'dashboard_featured_courses' ), 20 );
 		//		remove_action( 'learn-press/single-item-summary', LP()->template( 'course' )->func( 'popup_header' ), 10 );
 		//		remove_action( 'learn-press/single-item-summary', LP()->template( 'course' )->func( 'popup_sidebar' ), 20 );
@@ -235,40 +230,37 @@ add_action(
 }
 );
 // add cusom field for course
-if ( ! function_exists( 'eduma_add_custom_field_course' ) ) {
-	function eduma_add_custom_field_course() {
-		lp_meta_box_text_input_field(
-			array(
-				'id'          => 'thim_course_duration',
-				'label'       => esc_html__( 'Duration Info', 'eduma' ),
-				'description' => esc_html__( 'Display duration info', 'eduma' ),
-				'default'     => esc_html__( '50 hours', 'eduma' )
-			)
-		);
-		lp_meta_box_text_input_field(
-			array(
-				'id'          => 'thim_course_language',
-				'label'       => esc_html__( 'Languages', 'eduma' ),
-				'description' => esc_html__( 'Language\'s used for studying', 'eduma' ),
-				'default'     => esc_html__( 'English', 'eduma' )
-			)
-		);
+function eduma_add_custom_field_course() {
+	lp_meta_box_text_input_field(
+		array(
+			'id'          => 'thim_course_duration',
+			'label'       => esc_html__( 'Duration Info', 'eduma' ),
+			'description' => esc_html__( 'Display duration info', 'eduma' ),
+			'default'     => esc_html__( '50 hours', 'eduma' )
+		)
+	);
+	lp_meta_box_text_input_field(
+		array(
+			'id'          => 'thim_course_language',
+			'label'       => esc_html__( 'Languages', 'eduma' ),
+			'description' => esc_html__( 'Language\'s used for studying', 'eduma' ),
+			'default'     => esc_html__( 'English', 'eduma' )
+		)
+	);
 
-		lp_meta_box_textarea_field(
-			array(
-				'id'          => 'thim_course_media_intro',
-				'label'       => esc_html__( 'Media Intro', 'eduma' ),
-				'description' => esc_html__( 'Enter media intro', 'eduma' ),
-				'default'     => '',
-			)
-		);
-	}
+	lp_meta_box_textarea_field(
+		array(
+			'id'          => 'thim_course_media_intro',
+			'label'       => esc_html__( 'Media Intro', 'eduma' ),
+			'description' => esc_html__( 'Enter media intro', 'eduma' ),
+			'default'     => '',
+		)
+	);
 }
 
 add_action( 'learnpress/course-settings/after-general', 'eduma_add_custom_field_course' );
 
-add_action(
-	'learnpress_save_lp_course_metabox', function ( $post_id ) {
+add_action('learnpress_save_lp_course_metabox', function ( $post_id ) {
 	$video         = ! empty( $_POST['thim_course_media_intro'] ) ? $_POST['thim_course_media_intro'] : '';
 	$language      = ! empty( $_POST['thim_course_language'] ) ? $_POST['thim_course_language'] : '';
 	$duration_info = ! empty( $_POST['thim_course_duration'] ) ? $_POST['thim_course_duration'] : '';
@@ -293,14 +285,6 @@ function thim_get_remaining_time() {
 	if ( ! $user ) {
 		return false;
 	}
-
-    if ( ! $user->has_enrolled_course( $course->get_id() ) ) {
-        return false;
-    }
-
-    if ( ! $user->can_finish_course( $course->get_id() ) ) {
-        return false;
-    }
 
 	$remaining_time = $user->get_course_remaining_time( $course->get_id() );
 

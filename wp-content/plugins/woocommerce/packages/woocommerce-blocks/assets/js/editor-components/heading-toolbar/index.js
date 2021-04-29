@@ -4,7 +4,7 @@
 import { range } from 'lodash';
 import { __, sprintf } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
-import { ToolbarGroup } from '@wordpress/components';
+import { Toolbar } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -21,7 +21,7 @@ class HeadingToolbar extends Component {
 		const isActive = targetLevel === selectedLevel;
 		return {
 			icon: <HeadingLevelIcon level={ targetLevel } />,
-			/* translators: %s: heading level e.g: "2", "3", "4" */
+			// translators: %s: heading level e.g: "2", "3", "4"
 			title: sprintf( __( 'Heading %d' ), targetLevel ),
 			isActive,
 			onClick: () => onChange( targetLevel ),
@@ -38,7 +38,7 @@ class HeadingToolbar extends Component {
 		} = this.props;
 
 		return (
-			<ToolbarGroup
+			<Toolbar
 				isCollapsed={ isCollapsed }
 				icon={ <HeadingLevelIcon level={ selectedLevel } /> }
 				controls={ range( minLevel, maxLevel ).map( ( index ) =>

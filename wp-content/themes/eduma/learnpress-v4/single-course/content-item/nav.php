@@ -4,7 +4,7 @@
  *
  * @author  ThimPress
  * @package LearnPress/Templates
- * @version 4.0.1
+ * @version 4.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -22,7 +22,7 @@ if ( $prev_item && $next_item ) {
 }
 ?>
 
-<div class="course-item-nav" data-nav="<?php echo esc_attr( $nav ); ?>">
+<div class="course-item-nav" data-nav="<?php echo $nav; ?>">
 	<?php if ( $prev_item ) : ?>
 		<div class="prev">
 			<p><?php echo esc_html_x( 'Prev', 'course-item-navigation', 'eduma' ); ?></p>
